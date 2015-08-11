@@ -1,11 +1,11 @@
 class ErrorItem
 
-  attr_acessor :ErrorCode
+  attr_accessor :ErrorCode
 
-  attr_acessor :ErrorFild
+  attr_accessor :ErrorField
 
-  attr_acessor :Description
+  attr_accessor :Description
 
-  attr_acessor :SeveriryCode
+  attr_accessor :SeverityCode
 
 end

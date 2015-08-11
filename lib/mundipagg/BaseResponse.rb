@@ -1,11 +1,11 @@
 class BaseResponse
 
-  attr_acessor :RequestKey
+  attr_accessor :RequestKey
 
-  attr_acessor :MerchantKey
+  attr_accessor :MerchantKey
 
-  attr_acessor :ErrorReport
+  attr_accessor :ErrorReport
 
-  attr_acessor :InternalTime
+  attr_accessor :InternalTime
 
 end

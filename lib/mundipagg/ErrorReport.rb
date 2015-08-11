@@ -1,8 +1,8 @@
 class ErrorReport
 
-  attr_acessor :Category
+  attr_accessor :Category
 
-  attr_acessor :ErrorItemCollection
+  attr_accessor :ErrorItemCollection
 
 
   def initialize
