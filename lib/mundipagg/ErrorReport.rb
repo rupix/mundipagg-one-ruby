@@ -6,7 +6,7 @@ class ErrorReport
 
 
   def initialize
-    @ErrorItemCollection = ErrorItem.new
+    @ErrorItemCollection = Array.new;
   end
 
 end

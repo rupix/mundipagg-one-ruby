@@ -7,5 +7,5 @@ class ErrorItem
   attr_accessor :Description
 
   attr_accessor :SeverityCode
-
+  
 end
