@@ -23,15 +23,15 @@ class AntiFraudAnalysisResult
   # Nome do serviço de antifraude
   attr_accessor :AntiFraudServiceName
 
-  @@AntiFraudAnalysisStatusEnum {
-    :Undefined = '0',
-    :PendingFraudAnalysisRequirement = '1',
-    :FraudAnalysisRequirementSent = '2',
-    :Approved = '3',
-    :Reproved = '4',
-    :PendingManualAnalysis = '5',
-    :NoTransactionToAnalyse = '6',
-    :FraudAnalysisWithError = '7'
+  @@AntiFraudAnalysisStatusEnum = {
+    :Undefined => '0',
+    :PendingFraudAnalysisRequirement => '1',
+    :FraudAnalysisRequirementSent => '2',
+    :Approved => '3',
+    :Reproved => '4',
+    :PendingManualAnalysis => '5',
+    :NoTransactionToAnalyse => '6',
+    :FraudAnalysisWithError => '7'
   }
 
   def initialize
