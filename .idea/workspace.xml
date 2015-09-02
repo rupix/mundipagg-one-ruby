@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b13ad59e-578a-4308-9026-069fcf345cdd" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/mundipagg/AntiFraud/anti_fraud_analysis_result.rb" afterPath="$PROJECT_DIR$/lib/mundipagg/AntiFraud/anti_fraud_analysis_result.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/mundipagg/AntiFraud/query_sale_anti_fraud_analysis_history_data.rb" afterPath="$PROJECT_DIR$/lib/mundipagg/AntiFraud/query_sale_anti_fraud_analysis_history_data.rb" />
-    </list>
+    <list default="true" id="b13ad59e-578a-4308-9026-069fcf345cdd" name="Default" comment="" />
     <ignored path="mundipagg-one-ruby.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -37,8 +34,8 @@
       <file leaf-file-name="anti_fraud_analysis_result.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/mundipagg/AntiFraud/anti_fraud_analysis_result.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5928009">
-              <caret line="31" column="34" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.32508436">
+              <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -307,8 +304,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/mundipagg/AntiFraud/anti_fraud_analysis_result.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5928009">
-          <caret line="31" column="34" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.32508436">
+          <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
           <folding />
         </state>
       </provider>
