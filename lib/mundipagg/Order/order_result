@@ -1,0 +1,10 @@
+class OrderResult
+  # Referência do pedido no sistema da loja
+  attr_accessor :OrderReference
+
+  # Chave do pedido. Utilizada para identificar um pedido no gateway
+  attr_accessor :OrderKey
+
+  # Data de criação do pedido no gateway
+  attr_accessor :CreateDate
+end

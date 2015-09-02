@@ -1,4 +1,4 @@
-class CreateSale
+class CreateSaleRequest
 
   attr_accessor :CreditCardTransactionCollection
 

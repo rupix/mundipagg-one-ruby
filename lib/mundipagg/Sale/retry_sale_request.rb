@@ -1,4 +1,4 @@
-class RetrySale
+class RetrySaleRequest
 
   attr_accessor :OrderKey
 

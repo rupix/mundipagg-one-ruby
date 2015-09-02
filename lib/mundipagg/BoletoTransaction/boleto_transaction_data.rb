@@ -59,7 +59,7 @@ class BoletoTransactionData
   attr_accessor :NossoNumero
 
   def initialize
-    @BoletoTransactionStatus =self.BoletoTransactionStatusEnum
+    @BoletoTransactionStatus = self.BoletoTransactionStatusEnum
   end
 
 end

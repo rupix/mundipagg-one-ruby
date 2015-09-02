@@ -1,4 +1,4 @@
-require_relative '/../InstantBuy/credit_card_data'
+require_relative '../../mundipagg/InstantBuy/credit_card_data'
 class CreditCardTransactionData
   # Dados do cartão de crédito
   attr_accessor :CreditCard
