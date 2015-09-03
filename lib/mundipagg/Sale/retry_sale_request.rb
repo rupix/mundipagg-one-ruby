@@ -1,3 +1,5 @@
+require 'retry_sale_options'
+
 class RetrySaleRequest
 
   attr_accessor :OrderKey
@@ -8,6 +10,7 @@ class RetrySaleRequest
 
   def initialize
     @RetrySaleCreditCardTransactionCollection = Array.new;
+    @Options = RetrySaleOptions.new
   end
 
 end
