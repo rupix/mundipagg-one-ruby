@@ -1,4 +1,4 @@
-class ManageSale
+class ManageSaleRequest
 
   attr_accessor :CreditCardTransactionCollection
 

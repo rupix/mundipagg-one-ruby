@@ -1,0 +1,108 @@
+require_relative '../../mundipagg/InstantBuy/credit_card_data'
+
+class CreditCardTransactionResult
+  # Dados do cartão de crédito
+  attr_accessor :CreditCard
+
+  # Status da transação
+  attr_accessor :CreditCardTransactionStatus
+
+  @@CreditCardTransactionStatusEnum = {
+      :AuthorizedPendingCapture => '1',
+      :NotAuthorized => '2',
+      :ChargebackPreview => '3',
+      :RefundPreview => '4',
+      :DepositPreview => '5',
+      :Captured => '6',
+      :PartialCapture => '7',
+      :Refunded => '8',
+      :Voided => '9',
+      :Deposited => '10',
+      :Chargeback => '12',
+      :PendingVoid => '13',
+      :Invalid => '14',
+      :PartialAlthorize => '15',
+      :PartialRefunded => '16',
+      :OverCapture => '17',
+      :PartialVoid => '18',
+      :PendingRefund => '19',
+      :UnScheduled => '20',
+      :Created => '21',
+      :PartialAuthorized => '22',
+      :NotFoundInAcquirer => '23',
+      :PendingAuthorize => '24',
+      :WithError => '99'
+  }
+
+  # Tempo de processamento da transação na adquirente
+  attr_accessor :ExternalTime
+
+  # Chave da transação. Utilizada para identificar a transação de cartão de crédito no gateway
+  attr_accessor :TransactionKey
+
+  # Identificador da transação na adquirente
+  attr_accessor :TransactionIdentifier
+
+  # Código de autorização
+  attr_accessor :AuthorizationCode
+
+  # Identificador único gerado pela adquirente
+  attr_accessor :UniqueSequentialNumber
+
+  # Operação da transação de cartão de crédito - Indica se deverá ser realizada uma captura automática da transação
+  attr_accessor :CreditCardOperation
+
+  # Valor total da transação em centavos
+  attr_accessor :AmountInCents
+
+  # Valor autorizado em centavos
+  attr_accessor :AuthorizedAmountInCents
+
+  # Valor capturado em centavos
+  attr_accessor :CapturedAmountInCents
+
+  # Valor estornado em centavos
+  attr_accessor :RefundedAmountInCents
+
+  # Valor cancelado em centavos
+  attr_accessor :VoidedAmountInCents
+
+  # Data da recorrência (poderá ser futura)
+  attr_accessor :DueDate
+
+  # Identificador da transação no sistema da loja
+  attr_accessor :TransactionReference
+
+  # Código de retorno da adquirente
+  attr_accessor :AcquirerReturnCode
+
+  # Mensagem de retorno da adquirente
+  attr_accessor :AcquirerMessage
+
+  # Indica se houve sucesso no processamento
+  attr_accessor :Success
+
+  # Código da filiação da loja na adquirente
+  attr_accessor :AffiliationCode
+
+  # Nome do método de pagamento
+  attr_accessor :PaymentMethodName
+
+  # Nome da adquirente
+  attr_accessor :AcquirerName
+
+  # Chave da transação para adquirente, enviada pelo gateway
+  attr_accessor :TransactionKeyToAcquirer
+
+  @@CreditCardOperationEnum = {
+      :AuthOnly => '1',
+      :AuthAndCapture => '2',
+      :AuthAndCaptureWithDelay => '3'
+  }
+
+  def initialize
+    @CreditCard = CreditCardData.new
+    @CreditCardTransactionStatus = self.CreditCardTransactionStatusEnum
+    @CreditCardOperation = self.CreditCardOperationEnum
+  end
+end

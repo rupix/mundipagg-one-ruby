@@ -1,0 +1,10 @@
+class ManageCreditCardTransaction
+  # Chave da transação. Utilizada para identicar uma transação de cartão de crédito no gateway
+  attr_accessor :TransactionKey
+
+  # Identificador da transação no sistema da loja
+  attr_accessor :TransactionReference
+
+  # Valor da transação em centavos
+  attr_accessor :AmountInCents
+end
