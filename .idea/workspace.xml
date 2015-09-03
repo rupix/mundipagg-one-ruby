@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b13ad59e-578a-4308-9026-069fcf345cdd" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/mundipagg/Person/buyer.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/mundipagg/Sale/create_sale_response.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/mundipagg/Sale/manage_sale_response.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/mundipagg/Merchant/merchant.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/mundipagg/Order/order.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/mundipagg/Order/order_result" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/mundipagg/Person/person.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/mundipagg/Recurrency/recurrency.rb" />
-      <change type="MOVED" beforePath="C:\Users\Munir\Documents\GitHub\mundipagg-one-ruby\lib\mundipagg\Sale\create_sale.rb" afterPath="$PROJECT_DIR$/lib/mundipagg/Sale/create_sale_request.rb" />
-      <change type="MOVED" beforePath="C:\Users\Munir\Documents\GitHub\mundipagg-one-ruby\lib\mundipagg\Sale\manage_sale.rb" afterPath="$PROJECT_DIR$/lib/mundipagg/Sale/manage_sale_request.rb" />
-      <change type="MOVED" beforePath="C:\Users\Munir\Documents\GitHub\mundipagg-one-ruby\lib\mundipagg\Sale\retry_sale.rb" afterPath="$PROJECT_DIR$/lib/mundipagg/Sale/retry_sale_request.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/mundipagg/BoletoTransaction/boleto_transaction_data.rb" afterPath="$PROJECT_DIR$/lib/mundipagg/BoletoTransaction/boleto_transaction_data.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/mundipagg/CreditCardTransaction/credit_card_transaction_data.rb" afterPath="$PROJECT_DIR$/lib/mundipagg/CreditCardTransaction/credit_card_transaction_data.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="b13ad59e-578a-4308-9026-069fcf345cdd" name="Default" comment="" />
     <ignored path="mundipagg-one-ruby.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
