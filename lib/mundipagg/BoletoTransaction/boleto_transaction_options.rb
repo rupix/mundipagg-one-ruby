@@ -28,7 +28,7 @@ class BoletoTransactionOptions
         :PYG => '600'
   }
 
-  def initialize
-    @CurrencyIso = self.CurrencyIsoEnum[:BRL]
+  def self.CurrencyIso
+    @@CurrencyIsoEnum[:BRL]
   end
 end
