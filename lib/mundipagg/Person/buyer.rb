@@ -1,4 +1,5 @@
-require '../../../lib/mundipagg/Person/person'
+require_relative 'person'
+
 class Buyer < Person
   # Chave do comprador. Utilizada para identificar um comprador no gateway
   attr_accessor :BuyerKey

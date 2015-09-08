@@ -1,4 +1,4 @@
-require 'retry_sale_options'
+require_relative 'retry_sale_options'
 
 class RetrySaleRequest
 
@@ -9,7 +9,7 @@ class RetrySaleRequest
   attr_accessor :RetrySaleCreditCardTransactionCollection
 
   def initialize
-    @RetrySaleCreditCardTransactionCollection = Array.new;
+    @RetrySaleCreditCardTransactionCollection = Array.new
     @Options = RetrySaleOptions.new
   end
 

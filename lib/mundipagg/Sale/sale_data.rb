@@ -1,5 +1,5 @@
-require 'sale_order_data'
-require '../../mundipagg/AntiFraud/query_sale_anti_fraud_analysis_data'
+require_relative 'sale_order_data'
+require_relative '../../mundipagg/AntiFraud/query_sale_anti_fraud_analysis_data'
 
 class SaleData
   # Lista transações de cartão de crédito

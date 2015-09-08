@@ -11,15 +11,15 @@ class QuerySaleAntiFraudAnalysisData
   # Status da análise de antifraude
   attr_accessor :AntiFraudAnalysisStatus
 
-  @@AntiFraudAnalysisStatusEnum {
-    :Undefined = '0',
-    :PendingFraudAnalysisRequirement = '1',
-    :FraudAnalysisRequirementSent = '2',
-    :Approved = '3',
-    :Reproved = '4',
-    :PendingManualAnalysis = '5',
-    :NoTransactionToAnalyse = '6',
-    :FraudAnalysisWithError = '7'
+  @@AntiFraudAnalysisStatus = {
+    :Undefined => '0',
+    :PendingFraudAnalysisRequirement => '1',
+    :FraudAnalysisRequirementSent => '2',
+    :Approved => '3',
+    :Reproved => '4',
+    :PendingManualAnalysis => '5',
+    :NoTransactionToAnalyse => '6',
+    :FraudAnalysisWithError => '7'
   }
 
   # Código de retorno do serviço de antifraude
