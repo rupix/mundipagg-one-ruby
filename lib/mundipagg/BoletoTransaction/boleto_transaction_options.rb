@@ -5,30 +5,37 @@ class BoletoTransactionOptions
   # Moeda. Opções: BRL, EUR, USD, ARS, BOB, CLP, COP, UYU, MXN, PYG
   attr_accessor :CurrencyIso
 
-  @@CurrencyIsoEnum = {
-        # Real
-        :BRL => '986',
-        # Euro
-        :EUR => '978',
-        # Dólar
-        :USD => '840',
-        # Argentine peso
-        :ARS => '032',
-        # Boliviano
-        :BOB => '068',
-        # Chilean peso
-        :CLP => '152',
-        # Colombian peso
-        :COP => '170',
-        # Uruguayan peso
-        :UYU => '858',
-        # Peso Mexicano
-        :MXN => '484',
-        # Paraguayan guaraní
-        :PYG => '600'
-  }
+  # @@CurrencyIsoEnum = {
+  #       # Real
+  #       :BRL => 'BRL',
+  #       # Euro
+  #       :EUR => 'EUR',
+  #       # Dólar
+  #       :USD => 'USD',
+  #       # Argentine peso
+  #       :ARS => 'ARS',
+  #       # Boliviano
+  #       :BOB => 'BOB',
+  #       # Chilean peso
+  #       :CLP => 'CLP',
+  #       # Colombian peso
+  #       :COP => 'COP',
+  #       # Uruguayan peso
+  #       :UYU => 'UYU',
+  #       # Peso Mexicano
+  #       :MXN => 'MXN',
+  #       # Paraguayan guaraní
+  #       :PYG => 'PYG'
+  # }
+  #
+  # def initialize
+  #   @CurrencyIso = self.CurrencyIsoEnum[:BRL]
+  # end
 
-  def self.CurrencyIso
-    @@CurrencyIsoEnum[:BRL]
+  def to_json
+    hash = {}
+    instance_variables.each {|var| hash[var.to_s.delete('@')] = instance_variable_get(var) }
+    hash
   end
+
 end

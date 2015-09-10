@@ -20,15 +20,22 @@ class Buyer < Person
   attr_accessor :BuyerCategory
 
   @@BuyerCategoryEnum = {
-      :Normal => '1',
-      :Plus => '1'
+      :Normal => 'Normal',
+      :Plus => 'Plus'
   }
 
   def initialize
-    @AddressCollection = Array.new
+    @AddressCollection = AddressCollection.new
   end
 
   def self.BuyerCategory
     @@BuyerCategoryEnum
   end
+
+  def to_json
+    hash = {}
+    instance_variables.each {|var| hash[var.to_s.delete('@')] = instance_variable_get(var) }
+    hash
+  end
+
 end
