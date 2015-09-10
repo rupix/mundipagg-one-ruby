@@ -16,6 +16,10 @@ class CreditCard
 
   attr_accessor :BillingAddress
 
+  def initialize
+    @BillingAddress = BillingAddress.new
+  end
+
   def to_json
     hash = {}
     instance_variables.each {|var| hash[var.to_s.delete('@')] = instance_variable_get(var) }

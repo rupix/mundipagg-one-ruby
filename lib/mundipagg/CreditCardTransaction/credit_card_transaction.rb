@@ -4,7 +4,7 @@ class CreditCardTransaction
 
   attr_accessor :Options
 
-  attr_accessor :Recurrence
+  attr_accessor :Recurrency
 
   attr_accessor :AmountInCents
 
@@ -19,7 +19,7 @@ class CreditCardTransaction
 
   def initialize
     @Options = CreditCardTransactionOptions.new
-    @ReRecurrence = Recurrency.new
+    @Recurrency = Recurrency.new
     @CreditCard = CreditCard.new
   end
 

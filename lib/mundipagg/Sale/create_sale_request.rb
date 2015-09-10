@@ -21,6 +21,7 @@ class CreateSaleRequest
     @CreditCardTransactionCollection = Array.new
     @BoletoTransactionCollection = Array.new
     @ShoppingCartCollection = Array.new
+    @Buyer = Buyer.new
 
   end
 

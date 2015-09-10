@@ -51,55 +51,118 @@ class Gateway
 
     saleHash['BoletoTransactionCollection'] = []
 
-    begin
-      # transforma o objeto de boleto em json
-      if createSaleRequest.BoletoTransactionCollection != nil
+    saleHash['CreditCardTransactionCollection'] = []
 
+    saleHash['ShoppingCartCollection'] = []
+
+    begin
+      # transforma a colecao de boleto em json
+      if createSaleRequest.BoletoTransactionCollection.any? == false || createSaleRequest.BoletoTransactionCollection.nil?
+        saleHash['BoletoTransactionCollection'] = nil
+
+      else
         createSaleRequest.BoletoTransactionCollection.each_with_index do |boleto, index|
           b = boleto.to_json
           saleHash['BoletoTransactionCollection'] << b
 
-          if boleto.Options != nil
+          if boleto.Options.to_json.any?
             boleto_options = boleto.Options.to_json
             saleHash['BoletoTransactionCollection'][index]['Options'] = boleto_options
+          else
+            saleHash['BoletoTransactionCollection'][index]['Options'] = nil
+          end
+
+          if boleto.BillingAddress.to_json.any?
+            boleto_billing_address = boleto.BillingAddress.to_json
+            saleHash['BoletoTransactionCollection'][index]['BillingAddress'] = boleto_billing_address
+          else
+            saleHash['BoletoTransactionCollection'][index]['BillingAddress'] = nil
           end
         end
       end
 
-      # transforma o objeto de cartao de credito em json
-      if createSaleRequest.CreditCardTransactionCollection.any? == false
+      # transforma a coleacao de cartao de credito em json
+      if createSaleRequest.CreditCardTransactionCollection.any? == false || createSaleRequest.CreditCardTransactionCollection.nil?
         saleHash['CreditCardTransactionCollection'] = nil
       else
-        createSaleRequest.CreditCardTransactionCollection.each do |creditCard|
+        createSaleRequest.CreditCardTransactionCollection.each_with_index do |creditCard, index|
           c = creditCard.to_json
           saleHash['CreditCardTransactionCollection'] << c
+
+          if creditCard.Options.to_json.any?
+            credit_card_options = creditCard.Options.to_json
+            saleHash['CreditCardTransactionCollection'][index]['Options'] = credit_card_options
+          else
+            saleHash['CreditCardTransactionCollection'][index]['Options'] = nil
+          end
+
+          if creditCard.Recurrency.to_json.any?
+            credit_card_recurrency = creditCard.Recurrency.to_json
+            saleHash['CreditCardTransactionCollection'][index]['Recurrency'] = credit_card_recurrency
+          else
+            saleHash['CreditCardTransactionCollection'][index]['Recurrency'] = nil
+          end
+
+          if creditCard.CreditCard.to_json.any?
+            credit_card_item = creditCard.CreditCard.to_json
+            saleHash['CreditCardTransactionCollection'][index]['CreditCard'] = credit_card_item
+
+            if creditCard.CreditCard.BillingAddress.to_json.any?
+              credit_card_billing_address = creditCard.CreditCard.BillingAddress.to_json
+              saleHash['CreditCardTransactionCollection'][index]['CreditCard']['BillingAddress'] = credit_card_billing_address
+            else
+              saleHash['CreditCardTransactionCollection'][index]['CreditCard']['BillingAddress'] = nil
+            end
+
+          else
+            saleHash['CreditCardTransactionCollection'][index]['CreditCard'] = nil
+          end
         end
       end
 
 
-      # transforma o objeto de shoppingcart em json
-      if createSaleRequest.ShoppingCartCollection.any? == false
+      # transforma a colecao de shoppingcart em json
+      if createSaleRequest.ShoppingCartCollection.any? == false || createSaleRequest.ShoppingCartCollection.nil?
         saleHash['ShoppingCartCollection'] = nil
       else
-        createSaleRequest.ShoppingCartCollection.each do |shoppingCart|
+        createSaleRequest.ShoppingCartCollection.each_with_index do |shoppingCart, index|
           s = shoppingCart.to_json
           saleHash['ShoppingCartCollection'] << s
+
+          if shoppingCart.DeliveryAddress.to_json.any?
+            delivery_address = shoppingCart.DeliveryAddress.to_json
+            saleHash['ShoppingCartCollection'][index]['DeliveryAddress'] = delivery_address
+          else
+            saleHash['ShoppingCartCollection'][index]['DeliveryAddress'] = nil
+          end
+
+          if shoppingCart.ShoppingCartItemCollection.any?
+            shoppingCart.ShoppingCartItemCollection.each do |cartItem|
+              item = cartItem.to_json
+              saleHash['ShoppingCartCollection'][index]['ShoppingCartItemCollection'] << item
+            end
+          else
+            saleHash['ShoppingCartCollection'][index]['ShoppingCartItemCollection'] = nil
+          end
         end
       end
 
       # transforma o objeto Buyer em json
-      if createSaleRequest.Buyer != nil
-        createSaleRequest.Buyer.each do |buyer|
-          b = buyer.to_json
-          saleHash['Recurrency'] << b
+      if createSaleRequest.Buyer.to_json.any? && createSaleRequest.Buyer.AddressCollection.any?
 
-          if createSaleRequest.Buyer.AddressCollection != nil
-            createSaleRequest.Buyer.AddressCollection.each do |address|
-              a = address.to_json
-              saleHash['AddressCollection'] << a
-            end
+        b = createSaleRequest.Buyer.to_json
+        saleHash['Buyer'] = b
+
+        if createSaleRequest.Buyer.AddressCollection.any?
+          saleHash['Buyer']['AddressCollection'] = []
+          createSaleRequest.Buyer.AddressCollection.each do |address|
+            a = address.to_json
+            saleHash['Buyer']['AddressCollection'] << a
           end
+        else
+          saleHash['Buyer']['AddressCollection'] = nil
         end
+
       end
     rescue Exception => e
       puts e.message

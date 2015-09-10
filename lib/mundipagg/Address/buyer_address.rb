@@ -26,19 +26,10 @@ class BuyerAddress
   # Tipo de endereço
   attr_accessor :AddressType
 
-  @@AddressTypeEnum = {
-    :Undefined => '0',
-    :Comercial => '1',
-    :Residential => '2'
-  }
-
-  def initialize
-    @AddressType = self.AddressTypeEnum
-  end
 
   def to_json
     hash = {}
-    instance_variables.each {|var| hash[var.to_s.delete('@')] = instance_variable_get(var) }
+    instance_variables.each { |var| hash[var.to_s.delete('@')] = instance_variable_get(var) }
     hash
   end
 

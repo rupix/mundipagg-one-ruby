@@ -19,18 +19,10 @@ class Buyer < Person
   # Categoria do comprador
   attr_accessor :BuyerCategory
 
-  @@BuyerCategoryEnum = {
-      :Normal => 'Normal',
-      :Plus => 'Plus'
-  }
-
   def initialize
-    @AddressCollection = AddressCollection.new
+    @AddressCollection = Array.new
   end
 
-  def self.BuyerCategory
-    @@BuyerCategoryEnum
-  end
 
   def to_json
     hash = {}
