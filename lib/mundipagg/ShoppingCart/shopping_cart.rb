@@ -1,4 +1,4 @@
-class ShoppingCart
+class ShoppingCartCollection
 
   attr_accessor :FreighCostInCents
 
@@ -13,7 +13,8 @@ class ShoppingCart
   attr_accessor :ShoppingCartItemCollection
 
   def initialize
-    @ShoppingCartItemCollection = Array.new;
+    @ShoppingCartItemCollection = Array.new
+    @DeliveryAddress = DeliveryAddress.new
   end
 
   def to_json

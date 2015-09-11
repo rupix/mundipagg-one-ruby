@@ -156,7 +156,7 @@ class Gateway
 
       # transforma objeto order em json
       if createSaleRequest.Order.to_json.any?
-        order = createSaleRequest.Order
+        order = createSaleRequest.Order.to_json
         saleHash['Order'] = order
       else
         saleHash['Order'] = nil

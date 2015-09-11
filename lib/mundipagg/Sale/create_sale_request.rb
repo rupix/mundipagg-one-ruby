@@ -16,6 +16,8 @@ class CreateSaleRequest
 
   attr_accessor :RequestData
 
+  attr_accessor :RequestKey
+
   def initialize
     @CreditCardTransactionCollection = Array.new
     @BoletoTransactionCollection = Array.new
