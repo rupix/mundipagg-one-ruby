@@ -2,9 +2,9 @@ require_relative 'retry_sale_options'
 
 class RetrySaleRequest
 
-  attr_accessor :OrderKey
-
   attr_accessor :Options
+
+  attr_accessor :OrderKey
 
   attr_accessor :RetrySaleCreditCardTransactionCollection
 

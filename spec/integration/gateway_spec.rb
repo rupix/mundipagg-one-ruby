@@ -13,16 +13,15 @@ RSpec.describe Gateway do
     boletoTransaction.BankNumber = '237'
     boletoTransaction.DocumentNumber = '12345678901'
     boletoTransaction.Instructions = 'Pagar antes do vencimento'
-    boletoTransaction.BillingAddress = nil
     boletoTransaction.TransactionReference = 'BoletoTest#Ruby01'
     boletoTransaction.Options.CurrencyIso = 'BRL'
     boletoTransaction.Options.DaysToAddInBoletoExpirationDate = 5
 
     createSaleRequest.BoletoTransactionCollection << boletoTransaction
 
-    # response = gateway.CreateSale(createSaleRequest)
-    # puts response
-    # expect(response[:ErrorReport]).to eq nil
+    response = gateway.CreateSale(createSaleRequest)
+    puts response
+    expect(response[:ErrorReport]).to eq nil
   end
 
   it 'should create a Sale with CreditCard' do
@@ -174,7 +173,6 @@ RSpec.describe Gateway do
     shoppingCartCollectionItem.ShoppingCartItemCollection << shoppingCartItem
 
     createSaleRequest = CreateSaleRequest.new
-    createSaleRequest.RequestKey = '1627aea5-8e0a-4371-9022-9b504344e724'
     createSaleRequest.Buyer.Birthdate = Date.new(1990, 3, 3).strftime("%Y-%m-%dT%H:%M:%S")
     createSaleRequest.Buyer.DocumentNumber = '12345678901'
     createSaleRequest.Buyer.DocumentType = 'CPF'
@@ -231,5 +229,51 @@ RSpec.describe Gateway do
 
     puts orderReference
     expect(orderReference).to eq querySaleRequest.OrderReference
+  end
+
+  it 'should do a retry method' do
+    retrySaleRequest = RetrySaleRequest.new
+    retrySaleCreditCardTransactionItem = RetrySaleCreditCardTransaction.new
+
+    createSaleRequest = CreateSaleRequest.new
+    creditCardTransactionItem = CreditCardTransaction.new
+    creditCardTransactionItem.AmountInCents = 100
+    creditCardTransactionItem.CreditCard.CreditCardBrand = 'Visa'
+    creditCardTransactionItem.CreditCard.CreditCardNumber = '41111111111111'
+    creditCardTransactionItem.CreditCard.ExpMonth = 10
+    creditCardTransactionItem.CreditCard.ExpYear = 19
+    creditCardTransactionItem.CreditCard.HolderName = 'Maria do Carmo'
+    creditCardTransactionItem.CreditCard.SecurityCode = '123'
+    creditCardTransactionItem.CreditCardOperation = 'AuthAndCapture'
+    creditCardTransactionItem.InstallmentCount = 1
+    creditCardTransactionItem.Options.CurrencyIso = 'BRL'
+    creditCardTransactionItem.Options.PaymentMethodCode = 1
+    creditCardTransactionItem.TransactionReference = 'RubySDK-RetryTest'
+
+    createSaleRequest.CreditCardTransactionCollection << creditCardTransactionItem
+    createSaleRequest.Order.OrderReference = 'RubySDK-RetryTest'
+
+    # cria o pedido que sera usado para retentativa
+    responseCreate = gateway.CreateSale(createSaleRequest)
+
+    # pega o orderkey e o transaction key da resposta que sao necessarios para fazer a retentativa
+    orderKey = responseCreate["OrderResult"]["OrderKey"]
+    transactionKey = responseCreate['CreditCardTransactionResultCollection'][0]['TransactionKey']
+
+    # monta o objeto de retentativa
+    retrySaleCreditCardTransactionItem.SecurityCode = '123'
+    retrySaleCreditCardTransactionItem.TransactionKey = transactionKey
+    retrySaleRequest.OrderKey = orderKey
+    retrySaleRequest.RetrySaleCreditCardTransactionCollection << retrySaleCreditCardTransactionItem
+
+    # faz a requisicao de retentativa
+    response = gateway.Retry(retrySaleRequest)
+
+    puts response
+    # espera que o transaction key seja igual, significa que foi tudo ok no teste
+    responseTransactionKey = response['CreditCardTransactionResultCollection'][0]['TransactionKey']
+
+    expect(responseTransactionKey).to eq transactionKey
+
   end
 end

@@ -47,7 +47,7 @@ class Gateway
   # criar uma transacao na plataforma One utilizando um ou mais meios de pagamento
   def CreateSale(createSaleRequest)
 
-    saleHash = createSaleRequest.to_hash
+    saleHash = createSaleRequest.to_json
 
     saleHash['BoletoTransactionCollection'] = []
 
@@ -209,7 +209,7 @@ class Gateway
 
   # permite forcar a retentativa manualmente de uma transacao (podendo ser tambem uma recorrencia) nao autorizada
   def Retry(retrySaleRequest)
-    saleHash = retrySaleRequest.to_hash
+    saleHash = retrySaleRequest.to_json
     saleHash['RetrySaleCreditCardTransactionCollection'] = []
 
     begin
@@ -217,6 +217,13 @@ class Gateway
         retrySaleRequest.RetrySaleCreditCardTransactionCollection.each do |retrySale|
           r = retrySale.to_json
           saleHash['RetrySaleCreditCardTransactionCollection'] << r
+
+          if retrySaleRequest.Options.to_json.any?
+            retry_options = retrySaleRequest.Options.to_json
+            saleHash['Options'] = retry_options
+          else
+            saleHash['Options'] = nil
+          end
         end
       end
     rescue Exception => e
@@ -232,7 +239,7 @@ class Gateway
 
   # eh uma forma de desfazer uma transação com cartao de credito mesmo a transacao sendo capturada
   def Cancel(cancelSaleRequest)
-    saleHash = cancelSaleRequest.to_hash
+    saleHash = cancelSaleRequest.to_json
     saleHash['CreditCardTransactionCollection'] = []
 
     begin
@@ -255,7 +262,7 @@ class Gateway
 
   # confirmacao de uma transacao de cartao de credito que ja fora autorizada
   def Capture(captureRequest)
-    saleHash = captureRequest.to_hash
+    saleHash = captureRequest.to_json
     saleHash['CreditCardTransactionCollection'] = []
 
     begin

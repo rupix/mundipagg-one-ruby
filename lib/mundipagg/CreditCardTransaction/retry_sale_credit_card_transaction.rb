@@ -1,6 +1,6 @@
 class RetrySaleCreditCardTransaction
 
-  attr_accessor :transactionKey
+  attr_accessor :TransactionKey
 
   attr_accessor :SecurityCode
 

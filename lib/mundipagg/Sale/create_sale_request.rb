@@ -16,8 +16,6 @@ class CreateSaleRequest
 
   attr_accessor :RequestData
 
-  attr_accessor :RequestKey
-
   def initialize
     @CreditCardTransactionCollection = Array.new
     @BoletoTransactionCollection = Array.new
@@ -29,7 +27,7 @@ class CreateSaleRequest
     @Order = Order.new
   end
 
-  def to_hash
+  def to_json
     hash = {}
     instance_variables.each {|var| hash[var.to_s.delete('@')] = instance_variable_get(var) }
     hash
