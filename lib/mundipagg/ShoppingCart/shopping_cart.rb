@@ -13,7 +13,7 @@ class ShoppingCart
   attr_accessor :ShoppingCartItemCollection
 
   def initialize
-    @ShoppingCartItemCollection = ShoppingCartItem.new;
+    @ShoppingCartItemCollection = Array.new;
   end
 
   def to_json

@@ -21,13 +21,15 @@ require_relative 'mundipagg/CreditCardTransaction/credit_card_transaction_data'
 require_relative 'mundipagg/CreditCardTransaction/credit_card_transaction_options'
 require_relative 'mundipagg/CreditCardTransaction/retry_sale_credit_card_transaction'
 
+require_relative 'mundipagg/InstantBuy/credit_card_data'
 require_relative 'mundipagg/InstantBuy/get_instant_buy_data_response'
 
 require_relative 'mundipagg/Merchant/merchant'
+
 require_relative 'mundipagg/Order/order'
 
 require_relative 'mundipagg/Person/buyer'
-
+require_relative 'mundipagg/Person/person'
 
 require_relative 'mundipagg/Recurrency/recurrency'
 
@@ -38,6 +40,9 @@ require_relative 'mundipagg/Sale/request_data'
 require_relative 'mundipagg/Sale/retry_sale_options'
 require_relative 'mundipagg/Sale/retry_sale_request'
 require_relative 'mundipagg/Sale/sale_data'
+
+require_relative 'mundipagg/ShoppingCart/shopping_cart'
+require_relative 'mundipagg/ShoppingCart/shopping_cart_item'
 
 require_relative 'mundipagg/SalesOption'
 

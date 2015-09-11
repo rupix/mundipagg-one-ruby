@@ -1,4 +1,4 @@
-class ShoppingCartItem
+class ShoppingCartItemCollection
 
   attr_accessor :ItemReference
 

@@ -77,14 +77,140 @@ RSpec.describe Gateway do
     createSaleRequest.Buyer.PersonType = 'Person'
     createSaleRequest.Buyer.AddressCollection << buyerAddress
 
-    puts createSaleRequest
-
     response = gateway.CreateSale(createSaleRequest)
     puts response
     expect(response[:ErrorReport]).to eq nil
 
   end
 
+  it 'should create a sale with all types of transactions and all fields filled' do
+    buyerAddressItem = BuyerAddress.new
+    buyerAddressItem.AddressType = 'Comercial'
+    buyerAddressItem.City = 'Rio de Janeiro'
+    buyerAddressItem.Complement = '10 Andar'
+    buyerAddressItem.Country = 'Brazil'
+    buyerAddressItem.District = 'Centro'
+    buyerAddressItem.Number = '199'
+    buyerAddressItem.State = 'RJ'
+    buyerAddressItem.Street = 'Rua da Quitanda'
+    buyerAddressItem.ZipCode = '20091005'
+
+    boletoTransactionItem = BoletoTransaction.new
+    boletoTransactionItem.AmountInCents = 350
+    boletoTransactionItem.BankNumber = '237'
+    boletoTransactionItem.BillingAddress.City = 'Rio de Janeiro'
+    boletoTransactionItem.BillingAddress.Complement = '10º andar'
+    boletoTransactionItem.BillingAddress.Country = 'Brazil'
+    boletoTransactionItem.BillingAddress.District = 'Centro'
+    boletoTransactionItem.BillingAddress.Number = '199'
+    boletoTransactionItem.BillingAddress.State = 'RJ'
+    boletoTransactionItem.BillingAddress.Street = 'Rua da Quitanda'
+    boletoTransactionItem.BillingAddress.ZipCode = '20091005'
+    boletoTransactionItem.DocumentNumber = '12345678901'
+    boletoTransactionItem.Instructions = 'Pagar antes do vencimento'
+    boletoTransactionItem.Options.CurrencyIso = 'BRL'
+    boletoTransactionItem.Options.DaysToAddInBoletoExpirationDate = 7
+    boletoTransactionItem.TransactionDateInMerchant = Date.new(2014, 11, 5).strftime("%Y-%m-%dT%H:%M:%S")
+    boletoTransactionItem.TransactionReference = 'RubySDK-BoletoTransactionTest'
+
+    creditCardTransactionItem = CreditCardTransaction.new
+    creditCardTransactionItem.AmountInCents = 750
+    creditCardTransactionItem.CreditCardOperation = 'AuthAndCapture'
+    creditCardTransactionItem.InstallmentCount = 1
+    creditCardTransactionItem.TransactionDateInMerchant = Date.new(2014, 11, 5).strftime("%Y-%m-%dT%H:%M:%S")
+    creditCardTransactionItem.TransactionReference = 'RubySDK-CreditCardTransactionTest'
+    creditCardTransactionItem.Options.CaptureDelayInMinutes = 0
+    creditCardTransactionItem.Options.CurrencyIso = 'BRL'
+    creditCardTransactionItem.Options.ExtendedLimitCode = nil
+    creditCardTransactionItem.Options.ExtendedLimitEnabled = false
+    creditCardTransactionItem.Options.IataAmountInCents = 0
+    creditCardTransactionItem.Options.InterestRate = 0
+    creditCardTransactionItem.Options.MerchantCategoryCode = nil
+    creditCardTransactionItem.Options.PaymentMethodCode = 1
+    creditCardTransactionItem.Options.SoftDescriptorText = 'Nome da Loja'
+    creditCardTransactionItem.Recurrency.DateToStartBilling = (Date.parse(Time.now.to_s)).strftime("%Y-%m-%dT%H:%M:%S")
+    creditCardTransactionItem.Recurrency.Frequency = 'Monthly'
+    creditCardTransactionItem.Recurrency.Interval = 1
+    creditCardTransactionItem.Recurrency.OneDollarAuth = false
+    creditCardTransactionItem.Recurrency.Recurrences = 2
+    creditCardTransactionItem.CreditCard.BillingAddress.City = 'Rio de Janeiro'
+    creditCardTransactionItem.CreditCard.BillingAddress.Complement = '10º andar'
+    creditCardTransactionItem.CreditCard.BillingAddress.Country = 'Brazil'
+    creditCardTransactionItem.CreditCard.BillingAddress.District = 'Centro'
+    creditCardTransactionItem.CreditCard.BillingAddress.Number = '199'
+    creditCardTransactionItem.CreditCard.BillingAddress.State = 'RJ'
+    creditCardTransactionItem.CreditCard.BillingAddress.Street = 'Ruda da Quitanda'
+    creditCardTransactionItem.CreditCard.BillingAddress.ZipCode = '20091005'
+    creditCardTransactionItem.CreditCard.CreditCardBrand = 'Visa'
+    creditCardTransactionItem.CreditCard.CreditCardNumber = '4111111111111111'
+    creditCardTransactionItem.CreditCard.ExpMonth = 10
+    creditCardTransactionItem.CreditCard.ExpYear = 19
+    creditCardTransactionItem.CreditCard.HolderName = 'Maria do Carmo'
+    creditCardTransactionItem.CreditCard.InstantBuyerKey = '00000000-0000-0000-0000-000000000000'
+    creditCardTransactionItem.CreditCard.SecurityCode = '123'
+
+    shoppingCartItem = ShoppingCartItemCollection.new
+    shoppingCartItem.Description = 'Descricao do Produto'
+    shoppingCartItem.DiscountAmountInCents = 120
+    shoppingCartItem.ItemReference = 'product#666'
+    shoppingCartItem.Name = 'Nome do produto'
+    shoppingCartItem.Quantity = 1
+    shoppingCartItem.TotalCostInCents = 1100
+    shoppingCartItem.UnitCostInCents = 1220
+
+    shoppingCartCollectionItem = ShoppingCartCollection.new
+    shoppingCartCollectionItem.DeliveryAddress.City = 'Rio de Janeiro'
+    shoppingCartCollectionItem.DeliveryAddress.Complement = '10º andar'
+    shoppingCartCollectionItem.DeliveryAddress.Country = 'Brazil'
+    shoppingCartCollectionItem.DeliveryAddress.District = 'Centro'
+    shoppingCartCollectionItem.DeliveryAddress.Number = '199'
+    shoppingCartCollectionItem.DeliveryAddress.State = 'RJ'
+    shoppingCartCollectionItem.DeliveryAddress.Street = 'Rua da Quitanda'
+    shoppingCartCollectionItem.DeliveryAddress.ZipCode = '20091005'
+    shoppingCartCollectionItem.DeliveryDeadline = Date.new(2014, 12, 5).strftime("%Y-%m-%dT%H:%M:%S")
+    shoppingCartCollectionItem.EstimatedDeliveryDate = Date.new(2014, 11, 25).strftime("%Y-%m-%dT%H:%M:%S")
+    shoppingCartCollectionItem.FreighCostInCents = 0
+    shoppingCartCollectionItem.ShippingCompany = 'Nome da empresa responsável pela entrega'
+    shoppingCartCollectionItem.ShoppingCartItemCollection << shoppingCartItem
+
+    createSaleRequest = CreateSaleRequest.new
+    createSaleRequest.RequestKey = '1627aea5-8e0a-4371-9022-9b504344e724'
+    createSaleRequest.Buyer.Birthdate = Date.new(1990, 3, 3).strftime("%Y-%m-%dT%H:%M:%S")
+    createSaleRequest.Buyer.DocumentNumber = '12345678901'
+    createSaleRequest.Buyer.DocumentType = 'CPF'
+    createSaleRequest.Buyer.Email = 'someone@example.com'
+    createSaleRequest.Buyer.EmailType = 'Personal'
+    createSaleRequest.Buyer.FacebookId = ''
+    createSaleRequest.Buyer.Gender = 'M'
+    createSaleRequest.Buyer.HomePhone = '2112345678'
+    createSaleRequest.Buyer.MobilePhone = '21987654321'
+    createSaleRequest.Buyer.Name = 'Someone'
+    createSaleRequest.Buyer.PersonType = 'Person'
+    createSaleRequest.Buyer.TwitterId = ''
+    createSaleRequest.Buyer.WorkPhone = '2178563412'
+    createSaleRequest.Buyer.BuyerCategory = 'Normal'
+    createSaleRequest.Buyer.BuyerKey = '00000000-0000-0000-0000-000000000000'
+    createSaleRequest.Buyer.BuyerReference = 'RubyBuyer#JohnConnor'
+    createSaleRequest.Buyer.CreateDateInMerchant = Date.new(2014, 4, 15).strftime("%Y-%m-%dT%H:%M:%S")
+    createSaleRequest.Buyer.LastBuyerUpdateInMerchant = Date.new(2014, 4, 15).strftime("%Y-%m-%dT%H:%M:%S")
+    createSaleRequest.Buyer.AddressCollection << buyerAddressItem
+    createSaleRequest.Merchant.MerchantReference = 'Nome da Loja'
+    createSaleRequest.Options.AntiFraudServiceCode = 0
+    createSaleRequest.Options.CurrencyIso = 'BRL'
+    createSaleRequest.Options.IsAntiFraudEnabled = false
+    createSaleRequest.Options.Retries = 3
+    createSaleRequest.Order.OrderReference = 'RubySDK-TestOrder'
+    createSaleRequest.RequestData.EcommerceCategory = 'B2B'
+    createSaleRequest.RequestData.IpAddress = '127.0.0.1'
+    createSaleRequest.RequestData.Origin = ''
+    createSaleRequest.RequestData.SessionId = ''
+    createSaleRequest.BoletoTransactionCollection << boletoTransactionItem
+    createSaleRequest.CreditCardTransactionCollection << creditCardTransactionItem
+
+    response = gateway.CreateSale(createSaleRequest)
+    puts response
+    expect(response[:ErrorReport]).to eq nil
+  end
 
   querySaleRequest = QuerySaleRequest.new
   it 'should consult the order with ordekey' do

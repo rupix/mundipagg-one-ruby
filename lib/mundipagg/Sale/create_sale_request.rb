@@ -17,12 +17,14 @@ class CreateSaleRequest
   attr_accessor :RequestData
 
   def initialize
-
     @CreditCardTransactionCollection = Array.new
     @BoletoTransactionCollection = Array.new
     @ShoppingCartCollection = Array.new
     @Buyer = Buyer.new
-
+    @RequestData = RequestData.new
+    @Options = SalesOption.new
+    @Merchant = Merchant.new
+    @Order = Order.new
   end
 
   def to_hash

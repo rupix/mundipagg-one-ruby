@@ -120,7 +120,6 @@ class Gateway
         end
       end
 
-
       # transforma a colecao de shoppingcart em json
       if createSaleRequest.ShoppingCartCollection.any? == false || createSaleRequest.ShoppingCartCollection.nil?
         saleHash['ShoppingCartCollection'] = nil
@@ -147,9 +146,40 @@ class Gateway
         end
       end
 
+      # transforma objeto options em json
+      if createSaleRequest.Options.to_json.any?
+        o = createSaleRequest.Options.to_json
+        saleHash['Options'] = o
+      else
+        saleHash['Options'] = nil
+      end
+
+      # transforma objeto order em json
+      if createSaleRequest.Order.to_json.any?
+        order = createSaleRequest.Order
+        saleHash['Order'] = order
+      else
+        saleHash['Order'] = nil
+      end
+
+      # transforma objeto merchant em json
+      if createSaleRequest.Merchant.to_json.any?
+        merchant = createSaleRequest.Merchant.to_json
+        saleHash['Merchant'] = merchant
+      else
+        saleHash['Merchant'] = nil
+      end
+
+      # transforma objeto request data em json
+      if createSaleRequest.RequestData.to_json.any?
+        request_data = createSaleRequest.RequestData.to_json
+        saleHash['RequestData'] = request_data
+      else
+        saleHash['RequestData'] = nil
+      end
+
       # transforma o objeto Buyer em json
       if createSaleRequest.Buyer.to_json.any? && createSaleRequest.Buyer.AddressCollection.any?
-
         b = createSaleRequest.Buyer.to_json
         saleHash['Buyer'] = b
 
@@ -162,7 +192,8 @@ class Gateway
         else
           saleHash['Buyer']['AddressCollection'] = nil
         end
-
+      else
+        saleHash['Buyer'] = nil
       end
     rescue Exception => e
       puts e.message

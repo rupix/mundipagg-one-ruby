@@ -18,7 +18,7 @@ class BoletoTransaction
   attr_accessor :TransactionReference
 
   # Data da criação da transação no sistema da loja
-  attr_accessor :TransactionDateTimeInMerchant
+  attr_accessor :TransactionDateInMerchant
 
   # Opções da transação de boleto
   attr_accessor :Options

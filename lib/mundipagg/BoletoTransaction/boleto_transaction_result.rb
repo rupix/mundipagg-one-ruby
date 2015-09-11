@@ -8,29 +8,6 @@ class BoletoTransactionResult
   # Status do boleto
   attr_accessor :BoletoTransactionStatus
 
-  @@BoletoTransactionStatusEnum = {
-      # Gerado
-      :Generated => '1',
-
-      # Visualizado
-      :Viewed => '2',
-
-      # Pago com valor abaixo
-      :Underpaid => '3',
-
-      # Pago com valor maior
-      :Overpaid => '4',
-
-      # Pago
-      :Paid => '5',
-
-      # Cancelado
-      :Voided => '6',
-
-      # Com erro
-      :WithError => '99'
-  }
-
   # Chave da transação. Utilizada para identificar a transação de boleto no gateway
   attr_accessor :TransactionKey
 
@@ -48,10 +25,6 @@ class BoletoTransactionResult
 
   # Número de identificação do boleto
   attr_accessor :NossoNumero
-
-  def initialize
-    @BoletoTransactionStatus = self.BoletoTransactionStatusEnum
-  end
 
   def to_json
     hash = {}

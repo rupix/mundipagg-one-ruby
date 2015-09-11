@@ -11,18 +11,9 @@ class RequestData
   # Categoria da venda e-commerce. B2B ou B2C
   attr_accessor :EcommerceCategory
 
-  @@EcommerceCategoryEnum = {
-      :B2B => '1',
-      :B2C => '2'
-  }
-
-  def self.EcommerceCategory
-    @@EcommerceCategoryEnum
-  end
-
   def to_json
     hash = {}
-    instance_variables.each {|var| hash[var.to_s.delete('@')] = instance_variable_get(var) }
+    instance_variables.each { |var| hash[var.to_s.delete('@')] = instance_variable_get(var) }
     hash
   end
 

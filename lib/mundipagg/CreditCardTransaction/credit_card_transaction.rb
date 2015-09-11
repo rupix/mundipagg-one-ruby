@@ -10,7 +10,7 @@ class CreditCardTransaction
 
   attr_accessor :InstallmentCount
 
-  attr_accessor :CreditCardOperationEnum
+  attr_accessor :CreditCardOperation
 
   attr_accessor :TransactionReference
 
