@@ -81,7 +81,7 @@ class Gateway
         end
       end
 
-      # transforma a coleacao de cartao de credito em json
+      # transforma a colecao de cartao de credito em json
       if createSaleRequest.CreditCardTransactionCollection.any? == false || createSaleRequest.CreditCardTransactionCollection.nil?
         saleHash['CreditCardTransactionCollection'] = nil
       else

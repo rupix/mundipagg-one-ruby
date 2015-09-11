@@ -19,6 +19,7 @@ require_relative 'mundipagg/CreditCardTransaction/credit_card'
 require_relative 'mundipagg/CreditCardTransaction/credit_card_transaction'
 require_relative 'mundipagg/CreditCardTransaction/credit_card_transaction_data'
 require_relative 'mundipagg/CreditCardTransaction/credit_card_transaction_options'
+require_relative 'mundipagg/CreditCardTransaction/manage_credit_card_transaction'
 require_relative 'mundipagg/CreditCardTransaction/retry_sale_credit_card_transaction'
 
 require_relative 'mundipagg/InstantBuy/credit_card_data'

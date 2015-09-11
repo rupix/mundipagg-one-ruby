@@ -276,4 +276,51 @@ RSpec.describe Gateway do
     expect(responseTransactionKey).to eq transactionKey
 
   end
+
+  it 'should cancel a transaction' do
+    createSaleRequest = CreateSaleRequest.new
+    creditCardTransactionItem = CreditCardTransaction.new
+    creditCardTransactionItem.AmountInCents = 100
+    creditCardTransactionItem.CreditCard.CreditCardBrand = 'Visa'
+    creditCardTransactionItem.CreditCard.CreditCardNumber = '41111111111111'
+    creditCardTransactionItem.CreditCard.ExpMonth = 10
+    creditCardTransactionItem.CreditCard.ExpYear = 19
+    creditCardTransactionItem.CreditCard.HolderName = 'Maria do Carmo'
+    creditCardTransactionItem.CreditCard.SecurityCode = '123'
+    creditCardTransactionItem.CreditCardOperation = 'AuthAndCapture'
+    creditCardTransactionItem.InstallmentCount = 1
+    creditCardTransactionItem.Options.CurrencyIso = 'BRL'
+    creditCardTransactionItem.Options.PaymentMethodCode = 1
+    creditCardTransactionItem.TransactionReference = 'RubySDK-CancelTest'
+
+    createSaleRequest.CreditCardTransactionCollection << creditCardTransactionItem
+    createSaleRequest.Order.OrderReference = 'RubySDK-RetryTest'
+
+    # cria o pedido que sera usado para cancelamento
+    responseCreate = gateway.CreateSale(createSaleRequest)
+
+    # pega o orderkey e o transaction key da resposta que sao necessarios para fazer o cancelamento
+    orderKey = responseCreate["OrderResult"]["OrderKey"]
+    transactionKey = responseCreate['CreditCardTransactionResultCollection'][0]['TransactionKey']
+
+    # itens necessarios para cancelamento da transacao de cartao de credito
+    cancelCreditCardTransactionItem = ManageCreditCardTransaction.new
+    cancelCreditCardTransactionItem.AmountInCents = 100
+    cancelCreditCardTransactionItem.TransactionKey = transactionKey
+    cancelCreditCardTransactionItem.TransactionReference = 'RubySDK-CancelTest'
+
+    # monta o objeto para cancelamento de transacao
+    cancelSaleRequest = ManageSaleRequest.new
+    cancelSaleRequest.OrderKey = orderKey
+    cancelSaleRequest.CreditCardTransactionCollection << cancelCreditCardTransactionItem
+
+    response = gateway.Cancel(cancelSaleRequest)
+
+    puts response
+
+    # espera que o transaction key seja igual, significa que foi tudo ok no teste
+    responseTransactionKey = response['CreditCardTransactionResultCollection'][0]['TransactionKey']
+
+    expect(responseTransactionKey).to eq transactionKey
+  end
 end

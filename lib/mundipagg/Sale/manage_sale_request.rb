@@ -4,8 +4,6 @@ class ManageSaleRequest
 
   attr_accessor :OrderKey
 
-  attr_accessor :RequestKey
-
   def initialize
     @CreditCardTransactionCollection = Array.new;
   end
