@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b13ad59e-578a-4308-9026-069fcf345cdd" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/mundipagg/CreditCardTransaction/manage_credit_card_transaction.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/mundipagg/gateway.rb" afterPath="$PROJECT_DIR$/lib/mundipagg/gateway.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/integration/gateway_spec.rb" afterPath="$PROJECT_DIR$/spec/integration/gateway_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/mundipagg/Sale/manage_sale_request.rb" afterPath="$PROJECT_DIR$/lib/mundipagg/Sale/manage_sale_request.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/mundipagg-one-ruby.iml" afterPath="$PROJECT_DIR$/.idea/mundipagg-one-ruby.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/mundipagg.rb" afterPath="$PROJECT_DIR$/lib/mundipagg.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/mundipagg/CreditCardTransaction/manage_credit_card_transaction.rb" afterPath="$PROJECT_DIR$/lib/mundipagg/CreditCardTransaction/manage_credit_card_transaction.rb" />
     </list>
     <ignored path="mundipagg-one-ruby.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,7 +23,7 @@
     <SUITE FILE_PATH="coverage/mundipagg-one-ruby@boleto_transaction.coverage" NAME="boleto_transaction Coverage Results" MODIFIED="1441379767880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib/mundipagg/BoletoTransaction" MODULE_NAME="mundipagg-one-ruby" />
     <SUITE FILE_PATH="coverage/mundipagg-one-ruby@_should_do_a_retry_method__mundipagg_one_ruby.coverage" NAME=" should do a retry method: mundipagg-one-ruby Coverage Results" MODIFIED="1442003344413" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="mundipagg-one-ruby" />
     <SUITE FILE_PATH="coverage/mundipagg-one-ruby@gateway.coverage" NAME="gateway Coverage Results" MODIFIED="1441733115280" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib/mundipagg" MODULE_NAME="mundipagg-one-ruby" />
-    <SUITE FILE_PATH="coverage/mundipagg-one-ruby@_should_cancel_a_transaction__mundipagg_one_ruby.coverage" NAME=" should cancel a transaction: mundipagg-one-ruby Coverage Results" MODIFIED="1442008269643" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="mundipagg-one-ruby" />
+    <SUITE FILE_PATH="coverage/mundipagg-one-ruby@_should_cancel_a_transaction__mundipagg_one_ruby.coverage" NAME=" should cancel a transaction: mundipagg-one-ruby Coverage Results" MODIFIED="1442016875996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="mundipagg-one-ruby" />
     <SUITE FILE_PATH="coverage/mundipagg-one-ruby@_should_create_a_sale_with_all_types_of_transactions_and_all_fields_filled__mundipagg_one_ruby.coverage" NAME=" should create a sale with all types of transactions and all fields filled: mundipagg-one-ruby Coverage Results" MODIFIED="1442000209813" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="mundipagg-one-ruby" />
     <SUITE FILE_PATH="coverage/mundipagg-one-ruby@SalesOption.coverage" NAME="SalesOption Coverage Results" MODIFIED="1441290156932" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib/mundipagg" MODULE_NAME="mundipagg-one-ruby" />
   </component>
@@ -42,10 +36,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="gateway.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="gateway.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/mundipagg/gateway.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6996403">
+            <state vertical-scroll-proportion="0.0">
               <caret line="248" column="0" selection-start-line="248" selection-start-column="0" selection-end-line="248" selection-end-column="0" />
               <folding>
                 <element signature="e#120#374#0" expanded="false" />
@@ -63,7 +57,7 @@
         <entry file="file://$PROJECT_DIR$/lib/mundipagg/Sale/retry_sale_request.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+              <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="19" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -79,11 +73,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gateway_spec.rb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="gateway_spec.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/spec/integration/gateway_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="316" column="48" selection-start-line="316" selection-start-column="48" selection-end-line="316" selection-end-column="48" />
+            <state vertical-scroll-proportion="0.6445498">
+              <caret line="316" column="48" selection-start-line="305" selection-start-column="4" selection-end-line="316" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -162,10 +156,10 @@
         <option value="$PROJECT_DIR$/lib/mundipagg/Sale/retry_sale_request.rb" />
         <option value="$PROJECT_DIR$/lib/mundipagg/Sale/create_sale_request.rb" />
         <option value="$PROJECT_DIR$/lib/mundipagg/Sale/manage_sale_request.rb" />
-        <option value="$PROJECT_DIR$/lib/mundipagg/CreditCardTransaction/manage_credit_card_transaction.rb" />
         <option value="$PROJECT_DIR$/lib/mundipagg.rb" />
         <option value="$PROJECT_DIR$/spec/integration/gateway_spec.rb" />
         <option value="$PROJECT_DIR$/lib/mundipagg/gateway.rb" />
+        <option value="$PROJECT_DIR$/lib/mundipagg/CreditCardTransaction/manage_credit_card_transaction.rb" />
       </list>
     </option>
   </component>
@@ -177,10 +171,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1912" />
+    <option name="x" value="1358" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -804,16 +798,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <frame x="1358" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18489583" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39979446" sideWeight="0.49791667" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25475842" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3192133" sideWeight="0.49791667" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299075" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39979446" sideWeight="0.50208336" order="10" side_tool="true" content_ui="tabs" />
@@ -1216,14 +1210,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/mundipagg/Sale/retry_sale_request.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/mundipagg/CreditCardTransaction/credit_card_transaction_data.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.7516026">
@@ -1248,14 +1234,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/mundipagg/CreditCardTransaction/manage_credit_card_transaction.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="50" selection-start-line="0" selection-start-column="50" selection-end-line="0" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/mundipagg/Sale/manage_sale_request.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1264,17 +1242,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/integration/gateway_spec.rb">
+    <entry file="file://$PROJECT_DIR$/lib/mundipagg/Sale/retry_sale_request.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="316" column="48" selection-start-line="316" selection-start-column="48" selection-end-line="316" selection-end-column="48" />
+          <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="19" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/mundipagg/CreditCardTransaction/manage_credit_card_transaction.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38636363">
+          <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/mundipagg/gateway.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6996403">
+        <state vertical-scroll-proportion="0.0">
           <caret line="248" column="0" selection-start-line="248" selection-start-column="0" selection-end-line="248" selection-end-column="0" />
           <folding>
             <element signature="e#120#374#0" expanded="false" />
@@ -1284,6 +1270,14 @@
             <element signature="e#10319#10348#0" expanded="false" />
             <element signature="e#10352#10386#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/integration/gateway_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6445498">
+          <caret line="316" column="48" selection-start-line="305" selection-start-column="4" selection-end-line="316" selection-end-column="48" />
+          <folding />
         </state>
       </provider>
     </entry>
