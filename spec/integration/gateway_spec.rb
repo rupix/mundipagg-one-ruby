@@ -1,5 +1,5 @@
 require_relative '../../lib/mundipagg'
-
+require_relative 'test_helper'
 
 merchantKey = '8A2DD57F-1ED9-4153-B4CE-69683EFADAD5'
 gateway = Gateway.new(:production, merchantKey)
@@ -294,7 +294,7 @@ RSpec.describe Gateway do
     creditCardTransactionItem.TransactionReference = 'RubySDK-CancelTest'
 
     createSaleRequest.CreditCardTransactionCollection << creditCardTransactionItem
-    createSaleRequest.Order.OrderReference = 'RubySDK-RetryTest'
+    createSaleRequest.Order.OrderReference = 'RubySDK-CancelTest'
 
     # cria o pedido que sera usado para cancelamento
     responseCreate = gateway.CreateSale(createSaleRequest)
@@ -322,5 +322,98 @@ RSpec.describe Gateway do
     responseTransactionKey = response['CreditCardTransactionResultCollection'][0]['TransactionKey']
 
     expect(responseTransactionKey).to eq transactionKey
+  end
+
+  it 'should capture a transaction' do
+    createSaleRequest = CreateSaleRequest.new
+    creditCardTransactionItem = CreditCardTransaction.new
+    creditCardTransactionItem.AmountInCents = 100
+    creditCardTransactionItem.CreditCard.CreditCardBrand = 'Visa'
+    creditCardTransactionItem.CreditCard.CreditCardNumber = '41111111111111'
+    creditCardTransactionItem.CreditCard.ExpMonth = 10
+    creditCardTransactionItem.CreditCard.ExpYear = 19
+    creditCardTransactionItem.CreditCard.HolderName = 'Maria do Carmo'
+    creditCardTransactionItem.CreditCard.SecurityCode = '123'
+    creditCardTransactionItem.CreditCardOperation = 'AuthAndCapture'
+    creditCardTransactionItem.InstallmentCount = 1
+    creditCardTransactionItem.Options.CurrencyIso = 'BRL'
+    creditCardTransactionItem.Options.PaymentMethodCode = 1
+    creditCardTransactionItem.TransactionReference = 'RubySDK-CaptureTest'
+
+    createSaleRequest.CreditCardTransactionCollection << creditCardTransactionItem
+    createSaleRequest.Order.OrderReference = 'RubySDK-CaptureTest'
+
+    # cria o pedido que sera usado para captura
+    responseCreate = gateway.CreateSale(createSaleRequest)
+
+    # pega o orderkey e o transaction key da resposta que sao necessarios para fazer a captura
+    orderKey = responseCreate["OrderResult"]["OrderKey"]
+    transactionKey = responseCreate['CreditCardTransactionResultCollection'][0]['TransactionKey']
+
+    # itens necessarios para captura da transacao de cartao de credito
+    captureCreditCardTransactionItem = ManageCreditCardTransaction.new
+    captureCreditCardTransactionItem.AmountInCents = 100
+    captureCreditCardTransactionItem.TransactionKey = transactionKey
+    captureCreditCardTransactionItem.TransactionReference = 'RubySDK-CaptureTest'
+
+    # monta o objeto para cancelamento de transacao
+    captureSaleRequest = ManageSaleRequest.new
+    captureSaleRequest.OrderKey = orderKey
+    captureSaleRequest.CreditCardTransactionCollection << captureCreditCardTransactionItem
+
+    response = gateway.Capture(captureSaleRequest)
+
+    # espera que o ErrorReport seja nulo, significa que foi tudo ok na transação
+    expect(response['ErrorReport']).to eq nil
+  end
+
+  it 'should do a PostNotification interpretation' do
+    creditCardTransactionItem = CreditCardTransaction.new
+    creditCardTransactionItem.AmountInCents = 100
+    creditCardTransactionItem.TransactionReference = 'Ruby PostNotification Test'
+    creditCardTransactionItem.InstallmentCount = 1
+    creditCardTransactionItem.CreditCardOperation = 'AuthOnly'
+    creditCardTransactionItem.CreditCard.CreditCardBrand = 'Visa'
+    creditCardTransactionItem.CreditCard.CreditCardNumber = '4111111111111111'
+    creditCardTransactionItem.CreditCard.HolderName = 'Bruce Wayne'
+    creditCardTransactionItem.CreditCard.SecurityCode = '123'
+    creditCardTransactionItem.CreditCard.ExpMonth = 5
+    creditCardTransactionItem.CreditCard.ExpYear = 20
+    creditCardTransactionItem.Options.PaymentMethodCode = 1
+
+    createSaleRequest = CreateSaleRequest.new
+    createSaleRequest.CreditCardTransactionCollection << creditCardTransactionItem
+
+    response_hash = gateway.CreateSale(createSaleRequest)
+
+    credit_card_result = response_hash['CreditCardTransactionResultCollection'][0]
+
+    expect(credit_card_result['Success']).to eq true
+    expect(credit_card_result['CreditCardOperation']).to eq 'AuthOnly'
+    expect(credit_card_result['CreditCardTransactionStatus']).to eq 'AuthorizedPendingCapture'
+
+    captureCreditCardTransactionItem = ManageCreditCardTransaction.new
+    captureCreditCardTransactionItem.AmountInCents = creditCardTransactionItem.AmountInCents
+    captureCreditCardTransactionItem.TransactionKey = credit_card_result['TransactionKey']
+    captureCreditCardTransactionItem.TransactionReference = creditCardTransactionItem.TransactionReference
+
+    captureSale = ManageSaleRequest.new
+    captureSale.OrderKey = response_hash['OrderResult']['OrderKey']
+    captureSale.CreditCardTransactionCollection << captureCreditCardTransactionItem
+
+    captureResponse = gateway.Capture(captureSale)
+
+    expect(captureResponse['ErrorReport']).to eq nil
+
+
+    xml = TestHelper.CreateFakePostNotification(response_hash, captureResponse)
+
+    notification_hash = Mundipagg::PostNotification.ParseNotification(xml)
+
+    pp notification_hash, :ident => true
+
+    notification_hash.should_not == nil
+    notification_hash.should > 0
+
   end
 end

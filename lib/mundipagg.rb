@@ -1,5 +1,6 @@
 require 'json'
 require 'rest-client'
+require 'nori'
 
 require_relative 'mundipagg/address'
 require_relative 'mundipagg/Address/billing_address'
@@ -46,6 +47,6 @@ require_relative 'mundipagg/ShoppingCart/shopping_cart'
 require_relative 'mundipagg/ShoppingCart/shopping_cart_item'
 
 require_relative 'mundipagg/SalesOption'
-
+require_relative 'mundipagg/post_notification'
 require_relative 'mundipagg/gateway'
 
