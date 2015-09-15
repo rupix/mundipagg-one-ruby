@@ -1,6 +1,8 @@
 require 'json'
 require 'rest-client'
 require 'nori'
+require 'rspec'
+require 'rexml/document'
 
 require_relative 'mundipagg/address'
 require_relative 'mundipagg/Address/billing_address'

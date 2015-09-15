@@ -408,12 +408,9 @@ RSpec.describe Gateway do
 
     xml = TestHelper.CreateFakePostNotification(response_hash, captureResponse)
 
-    notification_hash = Mundipagg::PostNotification.ParseNotification(xml)
+    notification_hash = PostNotification.ParseNotification(xml)
 
-    pp notification_hash, :ident => true
-
-    notification_hash.should_not == nil
-    notification_hash.should > 0
-
+    puts notification_hash
+    expect(notification_hash.nil?).to eq false
   end
 end
