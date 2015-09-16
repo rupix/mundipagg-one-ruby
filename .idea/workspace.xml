@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b13ad59e-578a-4308-9026-069fcf345cdd" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/mundipagg/gateway.rb" afterPath="$PROJECT_DIR$/lib/mundipagg/gateway.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/integration/gateway_spec.rb" afterPath="$PROJECT_DIR$/spec/integration/gateway_spec.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/mundipagg-one-ruby.iml" afterPath="$PROJECT_DIR$/.idea/mundipagg-one-ruby.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/integration/test_helper.rb" afterPath="$PROJECT_DIR$/spec/integration/test_helper.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mundipagg-one-ruby.iws" />
@@ -22,7 +23,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/mundipagg-one-ruby@Run_spec__gateway_spec___mundipagg_one_ruby.coverage" NAME="Run spec 'gateway_spec': mundipagg-one-ruby Coverage Results" MODIFIED="1442375321017" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="mundipagg-one-ruby" />
+    <SUITE FILE_PATH="coverage/mundipagg-one-ruby@Run_spec__gateway_spec___mundipagg_one_ruby.coverage" NAME="Run spec 'gateway_spec': mundipagg-one-ruby Coverage Results" MODIFIED="1442376703999" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="mundipagg-one-ruby" />
     <SUITE FILE_PATH="coverage/mundipagg-one-ruby@_should_capture_a_transaction__mundipagg_one_ruby.coverage" NAME=" should capture a transaction: mundipagg-one-ruby Coverage Results" MODIFIED="1442247874956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="mundipagg-one-ruby" />
     <SUITE FILE_PATH="coverage/mundipagg-one-ruby@boleto_transaction.coverage" NAME="boleto_transaction Coverage Results" MODIFIED="1441379767880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib/mundipagg/BoletoTransaction" MODULE_NAME="mundipagg-one-ruby" />
     <SUITE FILE_PATH="coverage/mundipagg-one-ruby@_should_cancel_a_transaction__mundipagg_one_ruby.coverage" NAME=" should cancel a transaction: mundipagg-one-ruby Coverage Results" MODIFIED="1442016875996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="mundipagg-one-ruby" />
@@ -31,6 +32,7 @@
     <SUITE FILE_PATH="coverage/mundipagg-one-ruby@_should_create_a_sale_with_all_types_of_transactions_and_all_fields_filled__mundipagg_one_ruby.coverage" NAME=" should create a sale with all types of transactions and all fields filled: mundipagg-one-ruby Coverage Results" MODIFIED="1442000209813" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="mundipagg-one-ruby" />
     <SUITE FILE_PATH="coverage/mundipagg-one-ruby@_should_do_a_PostNotification_interpretation__mundipagg_one_ruby.coverage" NAME=" should do a PostNotification interpretation: mundipagg-one-ruby Coverage Results" MODIFIED="1442375290192" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="mundipagg-one-ruby" />
     <SUITE FILE_PATH="coverage/mundipagg-one-ruby@gateway.coverage" NAME="gateway Coverage Results" MODIFIED="1441733115280" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib/mundipagg" MODULE_NAME="mundipagg-one-ruby" />
+    <SUITE FILE_PATH="coverage/mundipagg-one-ruby@_should_bring_the_transaction_report_file__mundipagg_one_ruby.coverage" NAME=" should bring the transaction report file: mundipagg-one-ruby Coverage Results" MODIFIED="1442377422158" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="mundipagg-one-ruby" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -41,11 +43,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="gateway_spec.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="gateway_spec.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spec/integration/gateway_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.74698794">
-              <caret line="402" column="0" selection-start-line="402" selection-start-column="0" selection-end-line="402" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="420" column="15" selection-start-line="420" selection-start-column="15" selection-end-line="420" selection-end-column="15" />
               <folding>
                 <element signature="e#239#911#0" expanded="false" />
                 <element signature="e#957#3846#0" expanded="false" />
@@ -55,6 +57,8 @@
                 <element signature="e#12254#14403#0" expanded="false" />
                 <element signature="e#14440#16708#0" expanded="false" />
                 <element signature="e#16746#18881#0" expanded="false" />
+                <element signature="e#18934#21066#0" expanded="false" />
+                <marker date="1442376691227" expanded="true" signature="2808:2829" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -64,7 +68,35 @@
         <entry file="file://$PROJECT_DIR$/lib/mundipagg/post_notification.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="10" selection-start-line="0" selection-start-column="10" selection-end-line="0" selection-end-column="10" />
+              <caret line="11" column="71" selection-start-line="11" selection-start-column="71" selection-end-line="11" selection-end-column="71" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gateway.rb" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/mundipagg/gateway.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.33333334">
+              <caret line="295" column="0" selection-start-line="295" selection-start-column="0" selection-end-line="295" selection-end-column="0" />
+              <folding>
+                <element signature="e#120#374#0" expanded="false" />
+                <element signature="e#1600#7727#0" expanded="false" />
+                <element signature="e#4792#5876#0" expanded="false" />
+                <element signature="e#7845#8780#0" expanded="false" />
+                <element signature="e#8883#9563#0" expanded="false" />
+                <element signature="e#9644#10315#0" expanded="false" />
+                <element signature="e#10319#10348#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="restclient.rb" pinned="false" current-in-tab="false">
+        <entry file="file://C:/Ruby21-x64/lib/ruby/gems/2.1.0/gems/rest-client-1.8.0/lib/restclient.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -74,7 +106,7 @@
         <entry file="file://$PROJECT_DIR$/spec/integration/test_helper.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="47" column="37" selection-start-line="47" selection-start-column="37" selection-end-line="47" selection-end-column="37" />
+              <caret line="49" column="52" selection-start-line="49" selection-start-column="52" selection-end-line="49" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -140,13 +172,13 @@
         <option value="$PROJECT_DIR$/lib/mundipagg/Sale/retry_sale_request.rb" />
         <option value="$PROJECT_DIR$/lib/mundipagg/Sale/create_sale_request.rb" />
         <option value="$PROJECT_DIR$/lib/mundipagg/Sale/manage_sale_request.rb" />
-        <option value="$PROJECT_DIR$/lib/mundipagg/gateway.rb" />
         <option value="$PROJECT_DIR$/lib/mundipagg/CreditCardTransaction/manage_credit_card_transaction.rb" />
         <option value="$PROJECT_DIR$/lib/mundipagg/post_notification.rb" />
         <option value="$PROJECT_DIR$/lib/mundipagg.rb" />
+        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/spec/integration/test_helper.rb" />
         <option value="$PROJECT_DIR$/spec/integration/gateway_spec.rb" />
-        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/lib/mundipagg/gateway.rb" />
       </list>
     </option>
   </component>
@@ -282,7 +314,7 @@
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.ruby.settings.RubyActiveModuleSdkConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
-  <component name="RunManager" selected="RSpec.Run spec 'gateway_spec': mundipagg-one-ruby">
+  <component name="RunManager" selected="RSpec. should bring the transaction report file: mundipagg-one-ruby">
     <configuration default="false" name="Run spec 'gateway_spec': mundipagg-one-ruby" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
       <predefined_log_file id="RUBY_RSPEC" enabled="true" />
       <module name="mundipagg-one-ruby" />
@@ -303,36 +335,6 @@
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ZEUS" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPRING" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name=" should do a retry method: mundipagg-one-ruby" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
-      <predefined_log_file id="RUBY_RSPEC" enabled="true" />
-      <module name="mundipagg-one-ruby" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$MODULE_DIR$" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
-      <envs>
-        <env name="JRUBY_OPTS" value="-X+O" />
-      </envs>
-      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
-      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
-      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$MODULE_DIR$/spec/integration/gateway_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE=" should do a retry method" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
@@ -423,6 +425,36 @@
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE=" should do a PostNotification interpretation" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ZEUS" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPRING" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name=" should bring the transaction report file: mundipagg-one-ruby" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
+      <predefined_log_file id="RUBY_RSPEC" enabled="true" />
+      <module name="mundipagg-one-ruby" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$MODULE_DIR$" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs>
+        <env name="JRUBY_OPTS" value="-X+O" />
+      </envs>
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov" />
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$MODULE_DIR$/spec/integration/gateway_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE=" should bring the transaction report file" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
@@ -546,18 +578,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="RSpec.Run spec 'gateway_spec': mundipagg-one-ruby" />
-      <item index="1" class="java.lang.String" itemvalue="RSpec. should do a retry method: mundipagg-one-ruby" />
-      <item index="2" class="java.lang.String" itemvalue="RSpec. should cancel a transaction: mundipagg-one-ruby" />
-      <item index="3" class="java.lang.String" itemvalue="RSpec. should capture a transaction: mundipagg-one-ruby" />
-      <item index="4" class="java.lang.String" itemvalue="RSpec. should do a PostNotification interpretation: mundipagg-one-ruby" />
+      <item index="1" class="java.lang.String" itemvalue="RSpec. should cancel a transaction: mundipagg-one-ruby" />
+      <item index="2" class="java.lang.String" itemvalue="RSpec. should capture a transaction: mundipagg-one-ruby" />
+      <item index="3" class="java.lang.String" itemvalue="RSpec. should do a PostNotification interpretation: mundipagg-one-ruby" />
+      <item index="4" class="java.lang.String" itemvalue="RSpec. should bring the transaction report file: mundipagg-one-ruby" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="RSpec.Run spec 'gateway_spec': mundipagg-one-ruby" />
-        <item index="1" class="java.lang.String" itemvalue="RSpec. should do a PostNotification interpretation: mundipagg-one-ruby" />
-        <item index="2" class="java.lang.String" itemvalue="RSpec. should capture a transaction: mundipagg-one-ruby" />
-        <item index="3" class="java.lang.String" itemvalue="RSpec. should cancel a transaction: mundipagg-one-ruby" />
-        <item index="4" class="java.lang.String" itemvalue="RSpec. should do a retry method: mundipagg-one-ruby" />
+        <item index="0" class="java.lang.String" itemvalue="RSpec. should bring the transaction report file: mundipagg-one-ruby" />
+        <item index="1" class="java.lang.String" itemvalue="RSpec.Run spec 'gateway_spec': mundipagg-one-ruby" />
+        <item index="2" class="java.lang.String" itemvalue="RSpec. should do a PostNotification interpretation: mundipagg-one-ruby" />
+        <item index="3" class="java.lang.String" itemvalue="RSpec. should capture a transaction: mundipagg-one-ruby" />
+        <item index="4" class="java.lang.String" itemvalue="RSpec. should cancel a transaction: mundipagg-one-ruby" />
       </list>
     </recent_temporary>
   </component>
@@ -576,7 +608,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -584,8 +616,8 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14860907" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31860226" sideWeight="0.49791667" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32980332" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31770045" sideWeight="0.49791667" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39939487" sideWeight="0.50208336" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299075" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -642,11 +674,16 @@
           <line>37</line>
           <option name="timeStamp" value="103" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/lib/mundipagg/gateway.rb</url>
+          <line>291</line>
+          <option name="timeStamp" value="105" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="104" />
+      <option name="time" value="106" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -664,6 +701,8 @@
             <element signature="e#12254#14403#0" expanded="false" />
             <element signature="e#14440#16708#0" expanded="false" />
             <element signature="e#16746#18881#0" expanded="false" />
+            <element signature="e#18934#21066#0" expanded="false" />
+            <marker date="1442376691227" expanded="true" signature="2808:2829" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -697,6 +736,8 @@
             <element signature="e#12254#14403#0" expanded="false" />
             <element signature="e#14440#16708#0" expanded="false" />
             <element signature="e#16746#18881#0" expanded="false" />
+            <element signature="e#18934#21066#0" expanded="false" />
+            <marker date="1442376691227" expanded="true" signature="2808:2829" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -938,24 +979,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/mundipagg/gateway.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="47" column="16" selection-start-line="47" selection-start-column="6" selection-end-line="47" selection-end-column="16" />
-          <folding>
-            <element signature="e#120#374#0" expanded="false" />
-            <element signature="e#662#1513#0" expanded="false" />
-            <element signature="e#1600#7727#0" expanded="false" />
-            <element signature="e#4792#5876#0" expanded="false" />
-            <element signature="e#7845#8780#0" expanded="false" />
-            <element signature="e#8883#9563#0" expanded="false" />
-            <element signature="e#9644#10315#0" expanded="false" />
-            <element signature="e#10319#10348#0" expanded="false" />
-            <element signature="e#10352#10386#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/mundipagg.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -985,22 +1008,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/integration/test_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="47" column="37" selection-start-line="47" selection-start-column="37" selection-end-line="47" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/mundipagg/post_notification.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="10" selection-start-line="0" selection-start-column="10" selection-end-line="0" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6572165">
@@ -1009,10 +1016,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/spec/integration/test_helper.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="49" column="52" selection-start-line="49" selection-start-column="52" selection-end-line="49" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/mundipagg/post_notification.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="71" selection-start-line="11" selection-start-column="71" selection-end-line="11" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/spec/integration/gateway_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.74698794">
-          <caret line="402" column="0" selection-start-line="402" selection-start-column="0" selection-end-line="402" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="420" column="15" selection-start-line="420" selection-start-column="15" selection-end-line="420" selection-end-column="15" />
           <folding>
             <element signature="e#239#911#0" expanded="false" />
             <element signature="e#957#3846#0" expanded="false" />
@@ -1022,6 +1045,32 @@
             <element signature="e#12254#14403#0" expanded="false" />
             <element signature="e#14440#16708#0" expanded="false" />
             <element signature="e#16746#18881#0" expanded="false" />
+            <element signature="e#18934#21066#0" expanded="false" />
+            <marker date="1442376691227" expanded="true" signature="2808:2829" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Ruby21-x64/lib/ruby/gems/2.1.0/gems/rest-client-1.8.0/lib/restclient.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/mundipagg/gateway.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="295" column="0" selection-start-line="295" selection-start-column="0" selection-end-line="295" selection-end-column="0" />
+          <folding>
+            <element signature="e#120#374#0" expanded="false" />
+            <element signature="e#1600#7727#0" expanded="false" />
+            <element signature="e#4792#5876#0" expanded="false" />
+            <element signature="e#7845#8780#0" expanded="false" />
+            <element signature="e#8883#9563#0" expanded="false" />
+            <element signature="e#9644#10315#0" expanded="false" />
+            <element signature="e#10319#10348#0" expanded="false" />
           </folding>
         </state>
       </provider>

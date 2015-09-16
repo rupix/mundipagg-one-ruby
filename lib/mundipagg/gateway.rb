@@ -287,7 +287,13 @@ class Gateway
 
   end
 
-  def TransactionReportFile()
+  def TransactionReportFile(date)
+    begin
+      response = RestClient.get('https://api.mundipaggone.com/TransactionReportFile/GetStream?fileDate=' + date.strftime("%Y%m%d"), headers=@@SERVICE_HEADERS)
+    rescue RestClient::ExceptionWithResponse => err
+      return err.message
+    end
+    response
 
   end
 

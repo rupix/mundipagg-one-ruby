@@ -37,7 +37,6 @@ class TestHelper
 
     parser = Nori.new(:convert_tags_to => lambda { |tag| tag })
     hash = parser.parse(xml)
-    # hash = REXML::Document.new(xml)
 
     credit_card_result = create_order_result['CreditCardTransactionResultCollection'][0]
     manage_transaction_reuslt = manage_order_result['CreditCardTransactionResultCollection'][0]

@@ -413,4 +413,11 @@ RSpec.describe Gateway do
     puts notification_hash
     expect(notification_hash.nil?).to eq false
   end
+
+  it 'should bring the transaction report file' do
+    date = Date.new(2015, 3, 21)
+    local_gateway = Gateway.new('41BE3484-9CD4-4332-98B1-145DAEBE7CCB')
+    result = local_gateway.TransactionReportFile(date)
+    puts result
+  end
 end
