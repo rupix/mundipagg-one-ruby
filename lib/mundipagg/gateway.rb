@@ -283,13 +283,19 @@ class Gateway
     postRequest(saleHash.to_json, url)
   end
 
-  def PostNotification()
+  def PostNotification(xml)
+    begin
+      response = PostNotification.ParseNotification(xml)
+    rescue Exception=>err
+      return err.message
+    end
 
+    return response
   end
 
   def TransactionReportFile(date)
     begin
-      response = RestClient.get('https://api.mundipaggone.com/TransactionReportFile/GetStream?fileDate=' + date.strftime("%Y%m%d"), headers=@@SERVICE_HEADERS)
+      response = RestClient.get('https://api.mundipaggone.com/TransactionReportFile/GetStream?fileDate=' + date.strftime("%Y%m%d"), headers={:MerchantKey => "#{@merchantKey}"})
     rescue RestClient::ExceptionWithResponse => err
       return err.message
     end

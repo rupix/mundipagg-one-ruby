@@ -408,10 +408,11 @@ RSpec.describe Gateway do
 
     xml = TestHelper.CreateFakePostNotification(response_hash, captureResponse)
 
-    notification_hash = PostNotification.ParseNotification(xml)
+    response = gateway.PostNotification(xml)
 
-    puts notification_hash
-    expect(notification_hash.nil?).to eq false
+    puts response
+
+    expect(response.nil?).to eq false
   end
 
   it 'should bring the transaction report file' do
