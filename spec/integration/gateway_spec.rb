@@ -1,8 +1,8 @@
 require_relative '../../lib/mundipagg'
 require_relative 'test_helper'
 
-merchantKey = '8A2DD57F-1ED9-4153-B4CE-69683EFADAD5'
-gateway = Gateway.new(:production, merchantKey)
+merchantKey = 'be43cb17-3637-44d0-a45e-d68aaee29f47'
+gateway = Gateway.new(merchantKey)
 
 RSpec.describe Gateway do
   it 'should Create a Sale with Boleto' do
@@ -417,7 +417,7 @@ RSpec.describe Gateway do
 
   it 'should bring the transaction report file' do
     date = Date.new(2015, 3, 21)
-    local_gateway = Gateway.new('41BE3484-9CD4-4332-98B1-145DAEBE7CCB')
+    local_gateway = Gateway.new('be43cb17-3637-44d0-a45e-d68aaee29f47')
     result = local_gateway.TransactionReportFile(date)
     puts result
   end

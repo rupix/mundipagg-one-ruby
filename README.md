@@ -14,3 +14,6 @@ Para que todas as gemas funcionem corretamente é necessário realizar o seguinte 
 - gem install gyoku
 - gem install nokogiri
 - gem install ffi
+
+### Bundler
+- gem install bundler
