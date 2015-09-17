@@ -33,10 +33,8 @@ class Gateway
       end
 
         # se der algum erro, trata aqui
-    rescue Exception => e
-      #errorReport.Category = e.message
-      #errorReport.ErrorItemCollection = e.to_s
-      return e
+    rescue RestClient::ExceptionWithResponse => err
+      return err.response
     end
 
     # se n�o houver erros, trata o json e retorna o objeto
@@ -283,15 +281,21 @@ class Gateway
     postRequest(saleHash.to_json, url)
   end
 
-  def PostNotification()
+  def PostNotification(xml)
+    begin
+      response = PostNotification.ParseNotification(xml)
+    rescue Exception => err
+      return err.response
+    end
 
+    return response
   end
 
   def TransactionReportFile(date)
     begin
-      response = RestClient.get('https://api.mundipaggone.com/TransactionReportFile/GetStream?fileDate=' + date.strftime("%Y%m%d"), headers=@@SERVICE_HEADERS)
+      response = RestClient.get('https://api.mundipaggone.com/TransactionReportFile/GetStream?fileDate=' + date.strftime("%Y%m%d"), headers={:MerchantKey => "#{@merchantKey}"})
     rescue RestClient::ExceptionWithResponse => err
-      return err.message
+      return err.response
     end
     response
 
@@ -302,7 +306,7 @@ class Gateway
     begin
       response = RestClient.post(url, payload, headers=@@SERVICE_HEADERS)
     rescue RestClient::ExceptionWithResponse => err
-      return err.message #err.response
+      return err.response #err.response
     end
     json_response = JSON.load response
     json_response
