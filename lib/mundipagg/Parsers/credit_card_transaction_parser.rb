@@ -30,10 +30,10 @@ class CreditCardTransactionParser
     credit_card_transaction.VoidedAmountInCents = (elements[20].to_s == '') == false ? elements[20].to_i : 0
     credit_card_transaction.RefundedAmountInCents = (elements[21].to_s == '') == false ? elements[21].to_i : 0
     credit_card_transaction.AcquirerAuthorizationReturnCode = elements[22]
-    credit_card_transaction.AuthorizedDate = (elements[23].to_s == '') == false ? Date.parse(elements[23]).strftime(@@DATETIME_FORMAT) : nil
-    credit_card_transaction.CapturedDate = (elements[24].to_s == '') == false ? Date.parse(elements[24]).strftime(@@DATETIME_FORMAT) : nil
-    credit_card_transaction.VoidedDate = (elements[25].to_s == '') == false ? Date.parse(elements[25]).strftime(@@DATETIME_FORMAT) : nil
-    credit_card_transaction.LastProbeDate = (elements[26].chomp.to_s == '') == false ? Date.parse(elements[26]).strftime(@@DATETIME_FORMAT) : nil
+    credit_card_transaction.AuthorizedDate = (elements[23].to_s == '') == false ? DateTime.strptime(elements[23], '%Y-%m-%dT%H:%M:%S').strftime(@@DATETIME_FORMAT) : nil
+    credit_card_transaction.CapturedDate = (elements[24].to_s == '') == false ? DateTime.strptime(elements[24], '%Y-%m-%dT%H:%M:%S').strftime(@@DATETIME_FORMAT) : nil
+    credit_card_transaction.VoidedDate = (elements[25].to_s == '') == false ? DateTime.strptime(elements[25], '%Y-%m-%dT%H:%M:%S').strftime(@@DATETIME_FORMAT) : nil
+    credit_card_transaction.LastProbeDate = (elements[26].chomp.to_s == '') == false ? DateTime.strptime(elements[26], '%Y-%m-%dT%H:%M:%S').strftime(@@DATETIME_FORMAT) : nil
 
     return credit_card_transaction
   end

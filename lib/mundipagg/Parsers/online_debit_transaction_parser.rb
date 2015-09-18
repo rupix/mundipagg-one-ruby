@@ -19,7 +19,7 @@ class OnlineDebitTransactionParser
     online_debit_transaction.Status = elements[8]
     online_debit_transaction.AmountInCents = elements[9].to_i
     online_debit_transaction.AmountPaidInCents = (elements[10].to_s == '') == false ? elements[10].to_i : 0
-    online_debit_transaction.PaymentDate = (elements[11].to_s == '') == false ? Date.parse(elements[11]).strftime(@@DATETIME_FORMAT) : nil
+    online_debit_transaction.PaymentDate = (elements[11].to_s == '') == false ? DateTime.strptime(elements[11],'%m/%d/%Y %H:%M:%S').strftime(@@DATETIME_FORMAT) : nil
     online_debit_transaction.BankReturnCode = elements[12]
     online_debit_transaction.BankPaymentDate = elements[13]
     online_debit_transaction.Signature = elements[14]

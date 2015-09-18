@@ -308,6 +308,7 @@ class Gateway
       response_splited = api_response.split("\n")
 
       response_splited.each do |item|
+
         to_parse_item = item.split(',')
         if to_parse_item[0] == '01'
           response['Header'] = header_parser.Parse(to_parse_item)

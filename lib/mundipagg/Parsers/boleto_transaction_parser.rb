@@ -20,11 +20,11 @@ class BoletoTransactionParser
     boleto_transaction.Agency = elements[10]
     boleto_transaction.Account = elements[11]
     boleto_transaction.BarCode = elements[12]
-    boleto_transaction.ExpirationDate = Date.parse(elements[13]).strftime(@@DATETIME_FORMAT)
+    boleto_transaction.ExpirationDate = DateTime.strptime(elements[13],'%m/%d/%Y %H:%M:%S').strftime(@@DATETIME_FORMAT)
     boleto_transaction.AmountInCents = elements[14].to_i
     boleto_transaction.AmountPaidInCents = (elements[15].to_s == '') == false ? elements[15].to_i : 0
-    boleto_transaction.PaymentDate = (elements[16].to_s == '') == false ? Date.parse(elements[16]).strftime(@@DATETIME_FORMAT) : nil
-    boleto_transaction.CreditDate = (elements[17].chomp.to_s == '') == false ? Date.parse(elements[17]).strftime(@@DATETIME_FORMAT) : nil
+    boleto_transaction.PaymentDate = (elements[16].to_s == '') == false ? DateTime.strptime(elements[16], '%m/%d/%Y %H:%M:%S').strftime(@@DATETIME_FORMAT) : nil
+    boleto_transaction.CreditDate = (elements[17].chomp.to_s == '') == false ? DateTime.strptime(elements[17], '%m/%d/%Y %H:%M:%S').strftime(@@DATETIME_FORMAT) : nil
 
     return boleto_transaction
   end
