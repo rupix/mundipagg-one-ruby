@@ -292,12 +292,47 @@ class Gateway
   end
 
   def TransactionReportFile(date)
+    response = {}
+    response['CreditCardTransaction'] = []
+    response['OnlineDebitTransaction'] = []
+    response['BoletoTransaction'] = []
+
+    header_parser = HeaderParser.new
+    credit_card_parser = CreditCardTransactionParser.new
+    boleto_parser = BoletoTransactionParser.new
+    online_debit_parser = OnlineDebitTransactionParser.new
+    trailer_parser = TrailerParser.new
     begin
-      response = RestClient.get('https://api.mundipaggone.com/TransactionReportFile/GetStream?fileDate=' + date.strftime("%Y%m%d"), headers={:MerchantKey => "#{@merchantKey}"})
+      api_response = RestClient.get('https://api.mundipaggone.com/TransactionReportFile/GetStream?fileDate=' + date.strftime("%Y%m%d"), headers={:MerchantKey => "#{@merchantKey}"})
+
+      response_splited = api_response.split("\n")
+
+      response_splited.each do |item|
+        to_parse_item = item.split(',')
+        if to_parse_item[0] == '01'
+          response['Header'] = header_parser.Parse(to_parse_item)
+        end
+
+        if to_parse_item[0] == '20'
+          response['CreditCardTransaction'] << credit_card_parser.Parse(to_parse_item)
+        end
+
+        if to_parse_item[0] == '40'
+          response['OnlineDebitTransaction'] << online_debit_parser.Parse(to_parse_item)
+        end
+
+        if to_parse_item[0] == '30'
+          response['BoletoTransaction'] << boleto_parser.Parse(to_parse_item)
+        end
+
+        if to_parse_item[0] == '99'
+          response['Trailer'] = trailer_parser.Parse(to_parse_item)
+        end
+      end
     rescue RestClient::ExceptionWithResponse => err
       return err.response
     end
-    response
+    return response
 
   end
 

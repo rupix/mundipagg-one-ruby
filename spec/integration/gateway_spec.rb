@@ -416,8 +416,8 @@ RSpec.describe Gateway do
   end
 
   it 'should bring the transaction report file' do
-    date = Date.new(2015, 3, 21)
-    local_gateway = Gateway.new('be43cb17-3637-44d0-a45e-d68aaee29f47')
+    date = Date.new(2015, 9, 15)
+    local_gateway = Gateway.new('---')
     result = local_gateway.TransactionReportFile(date)
     puts result
   end
