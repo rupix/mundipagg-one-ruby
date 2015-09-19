@@ -281,6 +281,7 @@ class Gateway
     postRequest(saleHash.to_json, url)
   end
 
+  # faz um parse do xml de post notificaton
   def PostNotification(xml)
     begin
       response = PostNotification.ParseNotification(xml)
@@ -291,50 +292,25 @@ class Gateway
     return response
   end
 
+  # faz uma requisicao e retorna uma string com o transaction report file
   def TransactionReportFile(date)
-    response = {}
-    response['CreditCardTransaction'] = []
-    response['OnlineDebitTransaction'] = []
-    response['BoletoTransaction'] = []
-
-    header_parser = HeaderParser.new
-    credit_card_parser = CreditCardTransactionParser.new
-    boleto_parser = BoletoTransactionParser.new
-    online_debit_parser = OnlineDebitTransactionParser.new
-    trailer_parser = TrailerParser.new
     begin
-      api_response = RestClient.get('https://api.mundipaggone.com/TransactionReportFile/GetStream?fileDate=' + date.strftime("%Y%m%d"), headers={:MerchantKey => "#{@merchantKey}"})
-
-      response_splited = api_response.split("\n")
-
-      response_splited.each do |item|
-
-        to_parse_item = item.split(',')
-        if to_parse_item[0] == '01'
-          response['Header'] = header_parser.Parse(to_parse_item)
-        end
-
-        if to_parse_item[0] == '20'
-          response['CreditCardTransaction'] << credit_card_parser.Parse(to_parse_item)
-        end
-
-        if to_parse_item[0] == '40'
-          response['OnlineDebitTransaction'] << online_debit_parser.Parse(to_parse_item)
-        end
-
-        if to_parse_item[0] == '30'
-          response['BoletoTransaction'] << boleto_parser.Parse(to_parse_item)
-        end
-
-        if to_parse_item[0] == '99'
-          response['Trailer'] = trailer_parser.Parse(to_parse_item)
-        end
-      end
+      response = RestClient.get('https://api.mundipaggone.com/TransactionReportFile/GetStream?fileDate=' + date.strftime("%Y%m%d"), headers={:MerchantKey => "#{@merchantKey}"})
     rescue RestClient::ExceptionWithResponse => err
       return err.response
     end
     return response
+  end
 
+  # faz o parse da string recebida do transaction report file e retorna um hash
+  def TransactionReportFileParser(file_to_parse)
+    transaction_report_file = TransactionReportFile.new
+    begin
+      response = transaction_report_file.TransactionReportFileParser(file_to_parse)
+    rescue Exception=>err
+      return err
+    end
+    return response
   end
 
   def postRequest(payload, url)

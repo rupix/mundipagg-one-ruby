@@ -416,9 +416,20 @@ RSpec.describe Gateway do
   end
 
   it 'should bring the transaction report file' do
-    date = Date.new(2015, 9, 10)
-    local_gateway = Gateway.new('MERCHANT KEY')
+    date = Date.new(2014, 12, 10)
+    local_gateway = Gateway.new('merchantkey')
     result = local_gateway.TransactionReportFile(date)
+    split_commas = result.split(',')
 
+    expect(split_commas[1]).to eq '20141210'
+  end
+
+  it 'should parse the transaction report file received' do
+    date = Date.new(2014, 12, 10)
+    local_gateway = Gateway.new('merchantkey')
+    request_to_parse = local_gateway.TransactionReportFile(date)
+    result = local_gateway.TransactionReportFileParser(request_to_parse)
+
+    expect(result['Header'].TransactionProcessedDate).to eq '20141210'
   end
 end
