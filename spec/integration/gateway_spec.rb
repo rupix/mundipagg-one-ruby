@@ -1,7 +1,7 @@
 require_relative '../../lib/mundipagg'
 require_relative 'test_helper'
 
-merchantKey = 'be43cb17-3637-44d0-a45e-d68aaee29f47'
+merchantKey = 'merchantKey'
 gateway = Gateway.new(merchantKey)
 
 RSpec.describe Gateway do
@@ -212,7 +212,22 @@ RSpec.describe Gateway do
 
   querySaleRequest = QuerySaleRequest.new
   it 'should consult the order with ordekey' do
-    querySaleRequest.OrderKey = '17950b36-eafd-4871-8be9-d45f09627d34'
+    createSaleRequest = CreateSaleRequest.new
+
+    boletoTransaction = BoletoTransaction.new
+    boletoTransaction.AmountInCents = 100
+    boletoTransaction.BankNumber = '237'
+    boletoTransaction.DocumentNumber = '12345678901'
+    boletoTransaction.Instructions = 'Pagar antes do vencimento'
+    boletoTransaction.TransactionReference = 'BoletoTest#Ruby01'
+    boletoTransaction.Options.CurrencyIso = 'BRL'
+    boletoTransaction.Options.DaysToAddInBoletoExpirationDate = 5
+
+    createSaleRequest.BoletoTransactionCollection << boletoTransaction
+
+    boleto_response = gateway.CreateSale(createSaleRequest)
+
+    querySaleRequest.OrderKey = boleto_response['OrderResult']['OrderKey']
     responseQuery = gateway.Query(QuerySaleRequest.QuerySaleRequestEnum[:OrderKey], querySaleRequest.OrderKey)
     puts responseQuery
     orderKey = responseQuery["SaleDataCollection"][0]["OrderData"]["OrderKey"]
@@ -222,7 +237,23 @@ RSpec.describe Gateway do
   end
 
   it 'should consult the order with orderReference' do
-    querySaleRequest.OrderReference = '5e6ea780'
+    createSaleRequest = CreateSaleRequest.new
+
+    boletoTransaction = BoletoTransaction.new
+    boletoTransaction.AmountInCents = 100
+    boletoTransaction.BankNumber = '237'
+    boletoTransaction.DocumentNumber = '12345678901'
+    boletoTransaction.Instructions = 'Pagar antes do vencimento'
+    boletoTransaction.TransactionReference = 'BoletoTest#Ruby01'
+    boletoTransaction.Options.CurrencyIso = 'BRL'
+    boletoTransaction.Options.DaysToAddInBoletoExpirationDate = 5
+
+    createSaleRequest.Order.OrderReference = 'RubyOrderReferenceUnitTest'
+    createSaleRequest.BoletoTransactionCollection << boletoTransaction
+
+    boleto_response = gateway.CreateSale(createSaleRequest)
+
+    querySaleRequest.OrderReference = boleto_response['OrderResult']['OrderReference']
     responseQuery = gateway.Query(QuerySaleRequest.QuerySaleRequestEnum[:OrderReference], querySaleRequest.OrderReference)
     puts responseQuery
     orderReference = responseQuery["SaleDataCollection"][0]["OrderData"]["OrderReference"]
@@ -318,10 +349,7 @@ RSpec.describe Gateway do
 
     puts response
 
-    # espera que o transaction key seja igual, significa que foi tudo ok no teste
-    responseTransactionKey = response['CreditCardTransactionResultCollection'][0]['TransactionKey']
-
-    expect(responseTransactionKey).to eq transactionKey
+    expect(response[:ErrorReport]).to eq nil
   end
 
   it 'should capture a transaction' do
@@ -417,7 +445,7 @@ RSpec.describe Gateway do
 
   it 'should bring the transaction report file' do
     date = Date.new(2014, 12, 10)
-    local_gateway = Gateway.new('merchantkey')
+    local_gateway = Gateway.new('merchantKey')
     result = local_gateway.TransactionReportFile(date)
     split_commas = result.split(',')
 
@@ -426,7 +454,7 @@ RSpec.describe Gateway do
 
   it 'should parse the transaction report file received' do
     date = Date.new(2014, 12, 10)
-    local_gateway = Gateway.new('merchantkey')
+    local_gateway = Gateway.new('merchantKey')
     request_to_parse = local_gateway.TransactionReportFile(date)
     result = local_gateway.TransactionReportFileParser(request_to_parse)
 
