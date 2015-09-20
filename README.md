@@ -198,7 +198,7 @@ querySaleRequest.OrderKey = 'sua OrderKey'
 responseQuery = gateway.Query(QuerySaleRequest.QuerySaleRequestEnum[:OrderKey], querySaleRequest.OrderKey)
 
 # se a requisição for por OrderReference ela é bem parecida com a de cima, mudando apenas algumas coisas:
-querySaleRequest.OrderKey = 'sua OrderReference'
+querySaleRequest.OrderReference = 'sua OrderReference'
 
 responseQuery = gateway.Query(QuerySaleRequest.QuerySaleRequestEnum[:OrderReference], querySaleRequest.OrderReference)
 ```
