@@ -18,12 +18,12 @@ Para que todas as gemas funcionem corretamente é necessário realizar o seguinte 
 - gem install nokogiri
 - gem install ffi
 
-### Bundler (not yet supported)
+### Bundler (not supported yet)
 - gem install bundler
 
-### Code Examples
+## Code Examples
 
-##### Create a Credit Card Transaction
+### Create a Credit Card Transaction
 ```ruby
 require_relative '../../lib/mundipagg'
 
@@ -56,7 +56,8 @@ createSaleRequest.CreditCardTransactionCollection << creditCardTransaction
 response = gateway.CreateSale(createSaleRequest)
 ```
 
-##### Create a BoletoTransaction
+
+### Create a BoletoTransaction
 ```ruby
 require_relative '../../lib/mundipagg'
 
@@ -87,7 +88,8 @@ createSaleRequest.BoletoTransactionCollection << boletoTransaction
 response = gateway.CreateSale(createSaleRequest)
 ```
 
-##### Cancel Method
+
+### Cancel Method
 ```ruby
 require_relative '../../lib/mundipagg'
 
@@ -115,7 +117,8 @@ retrySaleRequest.RetrySaleCreditCardTransactionCollection << retrySaleCreditCard
 response = gateway.Cancel(cancelSaleRequest)
 ```
 
-##### Capture Method
+
+### Capture Method
 ```ruby
 require_relative '../../lib/mundipagg'
 
@@ -143,7 +146,8 @@ captureSaleRequest.CreditCardTransactionCollection << captureCreditCardTransacti
 response = gateway.Capture(captureSaleRequest)
 ```
 
-##### Retry Method
+
+### Retry Method
 ```ruby
 require_relative '../../lib/mundipagg'
 
@@ -170,7 +174,8 @@ retrySaleRequest.RetrySaleCreditCardTransactionCollection << retrySaleCreditCard
 response = gateway.Retry(retrySaleRequest)
 ```
 
-##### Query Method
+
+### Query Method
 ```ruby
 require_relative '../../lib/mundipagg'
 
@@ -198,7 +203,8 @@ querySaleRequest.OrderKey = 'sua OrderReference'
 responseQuery = gateway.Query(QuerySaleRequest.QuerySaleRequestEnum[:OrderReference], querySaleRequest.OrderReference)
 ```
 
-##### Post Notification
+
+### Post Notification
 The Post Notification is a Parse Method, it takes an XML and convert it to a hash variable.
 
 ```ruby
@@ -217,7 +223,8 @@ xml = 'xml que será passsado na variável'
 response = gateway.PostNotification(xml)
 ```
 
-##### TransactionReportFile Method
+
+### TransactionReportFile Method
 ```ruby
 require_relative '../../lib/mundipagg'
 
@@ -235,7 +242,8 @@ date = Date.new(2014, 12, 10)
 response = GatewayTransactionReportFile(date)
 ```
 
-###### TransactionReportFileParser
+
+##### TransactionReportFileParser
 If you want the string that is received from TransactionReportFile Method to be parsed, there is a method for that.
 ```ruby
 require_relative '../../lib/mundipagg'
