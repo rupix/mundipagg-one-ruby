@@ -18,8 +18,17 @@ Para que todas as gemas funcionem corretamente é necessário realizar o seguinte 
 - gem install nokogiri
 - gem install ffi
 
-### Bundler (not supported yet)
-- gem install bundler
+### Bundler
+Run the following commands to install gems:
+```ruby
+$ gem install bundler
+$ bundle install
+```
+
+Running tests:
+```ruby
+$ bundle exec rspec spec/integration/gateway_spec.rb
+```
 
 ## Code Examples
 
