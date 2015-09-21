@@ -281,7 +281,8 @@ class Gateway
     postRequest(saleHash.to_json, url)
   end
 
-  def PostNotification(xml)
+  # faz um parse do xml de post notificaton
+  def ParseXmlToNotification(xml)
     begin
       response = PostNotification.ParseNotification(xml)
     rescue Exception => err
@@ -291,14 +292,35 @@ class Gateway
     return response
   end
 
+  # faz uma requisicao e retorna uma string com o transaction report file
   def TransactionReportFile(date)
     begin
       response = RestClient.get('https://api.mundipaggone.com/TransactionReportFile/GetStream?fileDate=' + date.strftime("%Y%m%d"), headers={:MerchantKey => "#{@merchantKey}"})
     rescue RestClient::ExceptionWithResponse => err
       return err.response
     end
-    response
+    return response
+  end
 
+  def TransactionReportFileDownloader(date, file_name, path)
+    begin
+      path = path + file_name + '.txt'
+      response = RestClient.get('https://api.mundipaggone.com/TransactionReportFile/GetStream?fileDate=' + date.strftime("%Y%m%d"), headers={:MerchantKey => "#{@merchantKey}"})
+      File.write(path, response)
+    rescue RestClient::ExceptionWithResponse => err
+      return err.response
+    end
+  end
+
+  # faz o parse da string recebida do transaction report file e retorna um hash
+  def TransactionReportFileParser(file_to_parse)
+    transaction_report_file = TransactionReportFile.new
+    begin
+      response = transaction_report_file.TransactionReportFileParser(file_to_parse)
+    rescue Exception=>err
+      return err
+    end
+    return response
   end
 
   def postRequest(payload, url)
