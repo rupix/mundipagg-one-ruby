@@ -204,8 +204,8 @@ responseQuery = gateway.Query(QuerySaleRequest.QuerySaleRequestEnum[:OrderRefere
 ```
 
 
-### Post Notification
-The Post Notification is a Parse Method, it takes an XML and convert it to a hash variable.
+### ParseXmlToNotification
+The ParseXmlToNotification takes an XML and convert it to a hash variable.
 
 ```ruby
 require_relative '../../lib/mundipagg'
@@ -219,8 +219,8 @@ gateway = Gateway.new(merchantKey)
 
 xml = 'xml que será passsado na variável'
 
-# faz a requisição de PostNotification e retorna um hahs do XML passado
-response = gateway.PostNotification(xml)
+# faz a requisição de PostNotification (parse do XML) e retorna um hash do XML passado
+response = gateway.ParseXmlToNotification(xml)
 ```
 
 
@@ -239,7 +239,7 @@ gateway = Gateway.new(merchantKey)
 date = Date.new(2014, 12, 10)
 
 # faz a requisição do TransactionReportFile e retorna uma string com os dados do report
-response = GatewayTransactionReportFile(date)
+response = gateway.TransactionReportFile(date)
 ```
 
 
@@ -259,8 +259,29 @@ gateway = Gateway.new(merchantKey)
 date = Date.new(2014, 12, 10)
 
 # faz a requisição do TransactionReportFile e retorna uma string com os dados do report
-request_to_parse = Gateway.TransactionReportFile(date)
+request_to_parse = gateway.TransactionReportFile(date)
 
 # faz um parse da string do TransactionReportFile e retorna um hash com a resposta
-response = Gateway.TransactionReportFileParser(request_to_parse)
+response = gateway.TransactionReportFileParser(request_to_parse)
+```
+
+##### TransactionReportFileDownloader
+This method download and save the TransactionReportFile to a '.txt' file.
+```ruby
+require_relative '../../lib/mundipagg'
+
+# merchant key 
+merchantKey = 'sua merchantKey'
+
+# inicializa a classe com métodos de requisição
+# :staging ou nada para ambiente de sandbox e :production para ambiente de produção
+gateway = Gateway.new(merchantKey)
+
+# cria uma variável do tipo Date, passando apenas o ano, mês e dia (nessa ordem)
+date = Date.new(2015, 9, 15)
+
+# faz a requisição do transaction report file e salva no destino passado como parâmetro
+# o segundo parâmetro é o nome do arquivo, e o terceiro é o local onde será salvo o arquivo
+# é salvo um arquivo em .txt no local indicado
+response = gateway.TransactionReportFileDownloader(date, 'Teste', "C:\\Users\\YourUser\\Desktop\\")
 ```
