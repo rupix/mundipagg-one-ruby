@@ -1,4 +1,4 @@
-require_relative '../../lib/mundipagg'
+require_relative '../../lib/mundipagg-api'
 
 class Gateway
 

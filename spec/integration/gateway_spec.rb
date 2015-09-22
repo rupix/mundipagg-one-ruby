@@ -1,8 +1,8 @@
-require_relative '../../lib/mundipagg'
+require_relative '../../lib/mundipagg-api'
 require_relative 'test_helper'
 
-merchantKey = 'merchantKey'
-gateway = Gateway.new(merchantKey)
+merchant_key = 'merchant key'
+gateway = Gateway.new(:production, merchant_key)
 
 RSpec.describe Gateway do
   it 'should create a sale with boleto' do
@@ -20,7 +20,7 @@ RSpec.describe Gateway do
     createSaleRequest.BoletoTransactionCollection << boletoTransaction
 
     response = gateway.CreateSale(createSaleRequest)
-    puts response
+
     expect(response[:ErrorReport]).to eq nil
   end
 
@@ -77,7 +77,7 @@ RSpec.describe Gateway do
     createSaleRequest.Buyer.AddressCollection << buyerAddress
 
     response = gateway.CreateSale(createSaleRequest)
-    puts response
+
     expect(response[:ErrorReport]).to eq nil
 
   end
@@ -206,11 +206,11 @@ RSpec.describe Gateway do
     createSaleRequest.CreditCardTransactionCollection << creditCardTransactionItem
 
     response = gateway.CreateSale(createSaleRequest)
-    puts response
+
     expect(response[:ErrorReport]).to eq nil
   end
 
-  it 'should consult the order with ordekey' do
+  it 'should consult the order with order key' do
     querySaleRequest = QuerySaleRequest.new
     createSaleRequest = CreateSaleRequest.new
 
@@ -229,10 +229,9 @@ RSpec.describe Gateway do
 
     querySaleRequest.OrderKey = boleto_response['OrderResult']['OrderKey']
     responseQuery = gateway.Query(QuerySaleRequest.QuerySaleRequestEnum[:OrderKey], querySaleRequest.OrderKey)
-    puts responseQuery
+
     orderKey = responseQuery["SaleDataCollection"][0]["OrderData"]["OrderKey"]
 
-    puts orderKey
     expect(orderKey).to eq querySaleRequest.OrderKey
   end
 
@@ -256,10 +255,9 @@ RSpec.describe Gateway do
 
     querySaleRequest.OrderReference = boleto_response['OrderResult']['OrderReference']
     responseQuery = gateway.Query(QuerySaleRequest.QuerySaleRequestEnum[:OrderReference], querySaleRequest.OrderReference)
-    puts responseQuery
+
     orderReference = responseQuery["SaleDataCollection"][0]["OrderData"]["OrderReference"]
 
-    puts orderReference
     expect(orderReference).to eq querySaleRequest.OrderReference
   end
 
@@ -301,7 +299,6 @@ RSpec.describe Gateway do
     # faz a requisicao de retentativa
     response = gateway.Retry(retrySaleRequest)
 
-    puts response
     # espera que o transaction key seja igual, significa que foi tudo ok no teste
     responseTransactionKey = response['CreditCardTransactionResultCollection'][0]['TransactionKey']
 
@@ -347,8 +344,6 @@ RSpec.describe Gateway do
     cancelSaleRequest.CreditCardTransactionCollection << cancelCreditCardTransactionItem
 
     response = gateway.Cancel(cancelSaleRequest)
-
-    puts response
 
     expect(response[:ErrorReport]).to eq nil
   end
@@ -439,8 +434,6 @@ RSpec.describe Gateway do
 
     response = gateway.ParseXmlToNotification(xml)
 
-    puts response
-
     expect(response.nil?).to eq false
   end
 
@@ -495,8 +488,6 @@ RSpec.describe Gateway do
 </StatusNotification>'
 
     response = gateway.ParseXmlToNotification(xml)
-
-    puts response
 
     expect(response.nil?).to eq false
   end
