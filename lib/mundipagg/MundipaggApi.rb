@@ -1,6 +1,6 @@
-require_relative '../../lib/mundipagg'
+require_relative '../../lib/mundipagg_api'
 
-class Gateway
+class MundipaggApi
 
   attr_reader :serviceEnvironment
 
