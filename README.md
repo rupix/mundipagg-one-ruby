@@ -4,28 +4,34 @@
 The recommended Windows version of Ruby is Ruby 2.1.
 For gems work correctly it'll be necessary run the following commands:
 
-No Windows a vers„o do Ruby recomendada È a 2.1.
-Para que todas as gemas funcionem corretamente È necess·rio realizar o seguinte processo:
-- gem install rubygems-update
-- update_rubygems
-- gem update --system
-
+No Windows a vers√£o do Ruby recomendada √© a 2.1.
+Para que todas as gemas funcionem corretamente √© necess√°rio realizar o seguinte processo:
+```ruby
+$ gem install rubygems-update
+$ update_rubygems
+$ gem update --system
+```
 ### Required Gems
-- gem install rest-client
-- gem install rspec
-- gem install nori
-- gem install gyoku
-- gem install nokogiri
-- gem install ffi
-
+```ruby
+$ gem install rest-client
+$ gem install rspec
+$ gem install nori
+$ gem install gyoku
+$ gem install nokogiri
+$ gem install ffi
+```
 ### Bundler
 Run the following commands to install gems:
+
+Rode os seguintes comandos para instalar as gems:
 ```ruby
 $ gem install bundler
 $ bundle install
 ```
 
 Running tests:
+
+Rodando testes:
 ```ruby
 $ bundle exec rspec spec/integration/gateway_spec.rb
 ```
@@ -36,14 +42,14 @@ $ bundle exec rspec spec/integration/gateway_spec.rb
 ```ruby
 require_relative '../../lib/mundipagg'
 
-# passa a merchantKey na vari·vel
+# passa a merchantKey na vari√°vel
 merchantKey = 'sua merchantKey'
 
-# instancia classe com mÈtodos de requisiÁ„o
-# :staging ou nada para ambiente sandbox e :production para ambiente de produÁ„o
+# instancia classe com m√©todos de requisi√ß√£o
+# :staging ou nada para ambiente sandbox e :production para ambiente de produ√ß√£o
 gateway = Gateway.new(:production, merchantKey)
 
-# coleta dados do cart„o
+# coleta dados do cart√£o
 creditCardTransaction = CreditCardTransaction.new
 creditCardTransaction.AmountInCents = 100
 creditCardTransaction.InstallmentCount = 1
@@ -57,11 +63,11 @@ creditCardTransaction.CreditCard.HolderName = 'Maria do Carmo'
 creditCardTransaction.CreditCard.SecurityCode = '123'
 creditCardTransaction.CreditCard.CreditCardBrand = 'Mastercard'
 
-# cria a transaÁ„o
+# cria a transa√ß√£o
 createSaleRequest = CreateSaleRequest.new
 createSaleRequest.CreditCardTransactionCollection << creditCardTransaction
 
-# faz a requisiÁ„o de criaÁ„o de transaÁ„o, retorna um hash com a resposta
+# faz a requisi√ß√£o de cria√ß√£o de transa√ß√£o, retorna um hash com a resposta
 response = gateway.CreateSale(createSaleRequest)
 ```
 
@@ -70,14 +76,14 @@ response = gateway.CreateSale(createSaleRequest)
 ```ruby
 require_relative '../../lib/mundipagg'
 
-# passa a merchantKey na vari·vel
+# passa a merchantKey na vari√°vel
 merchantKey = 'sua merchantKey'
 
-# instancia classe com mÈtodos de requisiÁ„o
-# :staging ou nada para ambiente sandbox e :production para ambiente de produÁ„o
+# instancia classe com m√©todos de requisi√ß√£o
+# :staging ou nada para ambiente sandbox e :production para ambiente de produ√ß√£o
 gateway = Gateway.new(:production, merchantKey)
 
-# instancia um objeto de transaÁ„o de boleto
+# instancia um objeto de transa√ß√£o de boleto
 boletoTransaction = BoletoTransaction.new
 boletoTransaction.AmountInCents = 100
 boletoTransaction.BankNumber = '237'
@@ -87,13 +93,13 @@ boletoTransaction.TransactionReference = 'BoletoTest#Ruby01'
 boletoTransaction.Options.CurrencyIso = 'BRL'
 boletoTransaction.Options.DaysToAddInBoletoExpirationDate = 5
 
-# instancia um objeto de request para fazer a criaÁ„o de transaÁ„o
+# instancia um objeto de request para fazer a cria√ß√£o de transa√ß√£o
 createSaleRequest = CreateSaleRequest.new
 
-# incrementa na coleÁ„o de boletos a transaÁ„o de boleto criada
+# incrementa na cole√ß√£o de boletos a transa√ß√£o de boleto criada
 createSaleRequest.BoletoTransactionCollection << boletoTransaction
 
-# faz a requisiÁ„o de criaÁ„o de transaÁ„o, retorna um hash com a resposta
+# faz a requisi√ß√£o de cria√ß√£o de transa√ß√£o, retorna um hash com a resposta
 response = gateway.CreateSale(createSaleRequest)
 ```
 
@@ -104,25 +110,25 @@ require_relative '../../lib/mundipagg'
 
 merchantKey = 'Sua Merchant Key'
 
-# instancia classe com mÈtodos de requisiÁ„o
-# :staging para ambiente sandbox e :production para ambiente de produÁ„o
+# instancia classe com m√©todos de requisi√ß√£o
+# :staging para ambiente sandbox e :production para ambiente de produ√ß√£o
 gateway = Gateway.new(:staging, merchantKey)
 
 # preenche um item de colecao, necessario para cancelamento da transacao de cartao de credito
 cancelCreditCardTransactionItem = ManageCreditCardTransaction.new
 cancelCreditCardTransactionItem.AmountInCents = 100
-cancelCreditCardTransactionItem.TransactionKey = 'TransactionKey da transaÁ„o'
+cancelCreditCardTransactionItem.TransactionKey = 'TransactionKey da transa√ß√£o'
 cancelCreditCardTransactionItem.TransactionReference = 'RubySDK-CancelTest'
 
-# monta o objeto para cancelamento de transaÁ„o
+# monta o objeto para cancelamento de transa√ß√£o
 cancelSaleRequest = ManageSaleRequest.new
 cancelSaleRequest.OrderKey = 'OrderKey AQUI'
 cancelSaleRequest.CreditCardTransactionCollection << cancelCreditCardTransactionItem
 
-# incrementa na coleÁ„o o item de retry
+# incrementa na cole√ß√£o o item de retry
 retrySaleRequest.RetrySaleCreditCardTransactionCollection << retrySaleCreditCardTransactionItem
 
-# faz a requisiÁ„o de cancelamento, retorna um hash com a resposta
+# faz a requisi√ß√£o de cancelamento, retorna um hash com a resposta
 response = gateway.Cancel(cancelSaleRequest)
 ```
 
@@ -134,24 +140,24 @@ require_relative '../../lib/mundipagg'
 # merchant key 
 merchantKey = 'sua merchantKey'
 
-# inicializa a classe com mÈtodos de requisiÁ„o
-# :staging ou nada para ambiente de sandbox e :production para ambiente de produÁ„o
+# inicializa a classe com m√©todos de requisi√ß√£o
+# :staging ou nada para ambiente de sandbox e :production para ambiente de produ√ß√£o
 gateway = Gateway.new(merchantKey)
 
-# itens necess·rios para captura da transac„o
+# itens necess√°rios para captura da transac√£o
 captureCreditCardTransactionItem = ManageCreditCardTransaction.new
 captureCreditCardTransactionItem.AmountInCents = 100
-captureCreditCardTransactionItem.TransactionKey = 'transactionKey da transaÁ„o'
-captureCreditCardTransactionItem.TransactionReference = 'RubySDK-CaptureTest (referÍncia da transaÁ„o)'
+captureCreditCardTransactionItem.TransactionKey = 'transactionKey da transa√ß√£o'
+captureCreditCardTransactionItem.TransactionReference = 'RubySDK-CaptureTest (refer√™ncia da transa√ß√£o)'
 
-# monta o objeto para captura de transaÁ„o
+# monta o objeto para captura de transa√ß√£o
 captureSaleRequest = ManageSaleRequest.new
-captureSaleRequest.OrderKey = 'orderkey da transaÁ„o'
+captureSaleRequest.OrderKey = 'orderkey da transa√ß√£o'
 
-# incrementa na coleÁ„o de CreditCardTransactionCollection
+# incrementa na cole√ß√£o de CreditCardTransactionCollection
 captureSaleRequest.CreditCardTransactionCollection << captureCreditCardTransactionItem
 
-# faz a requisiÁ„o de captura e salva na vari·vel response
+# faz a requisi√ß√£o de captura e salva na vari√°vel response
 response = gateway.Capture(captureSaleRequest)
 ```
 
@@ -162,24 +168,24 @@ require_relative '../../lib/mundipagg'
 
 merchantKey = 'Sua Merchant Key'
 
-# instancia classe com mÈtodos de requisiÁ„o
-# :staging para ambiente sandbox e :production para ambiente de produÁ„o
+# instancia classe com m√©todos de requisi√ß√£o
+# :staging para ambiente sandbox e :production para ambiente de produ√ß√£o
 gateway = Gateway.new(:staging, merchantKey)
 
 retrySaleRequest = RetrySaleRequest.new
 retrySaleCreditCardTransactionItem = RetrySaleCreditCardTransaction.new
 
-# preenche um item de coleÁ„o
+# preenche um item de cole√ß√£o
 retrySaleCreditCardTransactionItem.SecurityCode = '123'
 retrySaleCreditCardTransactionItem.TransactionKey = 'Transaction Key AQUI'
 
 # monta o objeto de retentativa
 retrySaleRequest.OrderKey = 'OrderKey AQUI'
 
-# incrementa na coleÁ„o o item de retry
+# incrementa na cole√ß√£o o item de retry
 retrySaleRequest.RetrySaleCreditCardTransactionCollection << retrySaleCreditCardTransactionItem
 
-# faz a requisiÁ„o de retentativa, retorna um hash com a resposta
+# faz a requisi√ß√£o de retentativa, retorna um hash com a resposta
 response = gateway.Retry(retrySaleRequest)
 ```
 
@@ -191,8 +197,8 @@ require_relative '../../lib/mundipagg'
 # merchant key 
 merchantKey = 'sua merchantKey'
 
-# inicializa a classe com mÈtodos de requisiÁ„o
-# :staging ou nada para ambiente de sandbox e :production para ambiente de produÁ„o
+# inicializa a classe com m√©todos de requisi√ß√£o
+# :staging ou nada para ambiente de sandbox e :production para ambiente de produ√ß√£o
 gateway = Gateway.new(merchantKey)
 
 # inicializa a QuerySaleRequest
@@ -201,12 +207,12 @@ querySaleRequest = QuerySaleRequest.new
 # preenche o campo de OrderKey para enviar um request de OrderKey
 querySaleRequest.OrderKey = 'sua OrderKey'
 
-# faz a requisiÁ„o de Query passando QuerySaleRequest.QuerySaleRequestEnum[:OrderKey] para indicar
-# que o mÈtodo ir· procurar por OrderKey e passa a OrderKey como segundo par‚metro
+# faz a requisi√ß√£o de Query passando QuerySaleRequest.QuerySaleRequestEnum[:OrderKey] para indicar
+# que o m√©todo ir√° procurar por OrderKey e passa a OrderKey como segundo par√¢metro
 # retorna um hash com a resposta
 responseQuery = gateway.Query(QuerySaleRequest.QuerySaleRequestEnum[:OrderKey], querySaleRequest.OrderKey)
 
-# se a requisiÁ„o for por OrderReference ela È bem parecida com a de cima, mudando apenas algumas coisas:
+# se a requisi√ß√£o for por OrderReference ela √© bem parecida com a de cima, mudando apenas algumas coisas:
 querySaleRequest.OrderReference = 'sua OrderReference'
 
 responseQuery = gateway.Query(QuerySaleRequest.QuerySaleRequestEnum[:OrderReference], querySaleRequest.OrderReference)
@@ -216,19 +222,21 @@ responseQuery = gateway.Query(QuerySaleRequest.QuerySaleRequestEnum[:OrderRefere
 ### ParseXmlToNotification
 The ParseXmlToNotification takes an XML and convert it to a hash variable.
 
+O ParseXmlToNotification converte um XML para uma vari√°vel hash.
+
 ```ruby
 require_relative '../../lib/mundipagg'
 
 # merchant key 
 merchantKey = 'sua merchantKey'
 
-# inicializa a classe com mÈtodos de requisiÁ„o
-# :staging ou nada para ambiente de sandbox e :production para ambiente de produÁ„o
+# inicializa a classe com m√©todos de requisi√ß√£o
+# :staging ou nada para ambiente de sandbox e :production para ambiente de produ√ß√£o
 gateway = Gateway.new(merchantKey)
 
-xml = 'xml que ser· passsado na vari·vel'
+xml = 'xml que ser√° passsado na vari√°vel'
 
-# faz a requisiÁ„o de PostNotification (parse do XML) e retorna um hash do XML passado
+# faz a requisi√ß√£o de PostNotification (parse do XML) e retorna um hash do XML passado
 response = gateway.ParseXmlToNotification(xml)
 ```
 
@@ -240,34 +248,36 @@ require_relative '../../lib/mundipagg'
 # merchant key 
 merchantKey = 'sua merchantKey'
 
-# inicializa a classe com mÈtodos de requisiÁ„o
-# :staging ou nada para ambiente de sandbox e :production para ambiente de produÁ„o
+# inicializa a classe com m√©todos de requisi√ß√£o
+# :staging ou nada para ambiente de sandbox e :production para ambiente de produ√ß√£o
 gateway = Gateway.new(merchantKey)
 
-# cria uma vari·vel do tipo Date, passando apenas o ano, mÍs e dia (nessa ordem)
+# cria uma vari√°vel do tipo Date, passando apenas o ano, m√™s e dia (nessa ordem)
 date = Date.new(2014, 12, 10)
 
-# faz a requisiÁ„o do TransactionReportFile e retorna uma string com os dados do report
+# faz a requisi√ß√£o do TransactionReportFile e retorna uma string com os dados do report
 response = gateway.TransactionReportFile(date)
 ```
 
 
 ##### TransactionReportFileParser
 If you want the string that is received from TransactionReportFile Method to be parsed, there is a method for that.
+
+Este m√©todo faz um parse na string recebida do m√©todo TransactionReportFile e retorna um hash.
 ```ruby
 require_relative '../../lib/mundipagg'
 
 # merchant key 
 merchantKey = 'sua merchantKey'
 
-# inicializa a classe com mÈtodos de requisiÁ„o
-# :staging ou nada para ambiente de sandbox e :production para ambiente de produÁ„o
+# inicializa a classe com m√©todos de requisi√ß√£o
+# :staging ou nada para ambiente de sandbox e :production para ambiente de produ√ß√£o
 gateway = Gateway.new(merchantKey)
 
-# cria uma vari·vel do tipo Date, passando apenas o ano, mÍs e dia (nessa ordem)
+# cria uma vari√°vel do tipo Date, passando apenas o ano, m√™s e dia (nessa ordem)
 date = Date.new(2014, 12, 10)
 
-# faz a requisiÁ„o do TransactionReportFile e retorna uma string com os dados do report
+# faz a requisi√ß√£o do TransactionReportFile e retorna uma string com os dados do report
 request_to_parse = gateway.TransactionReportFile(date)
 
 # faz um parse da string do TransactionReportFile e retorna um hash com a resposta
@@ -276,21 +286,23 @@ response = gateway.TransactionReportFileParser(request_to_parse)
 
 ##### TransactionReportFileDownloader
 This method download and save the TransactionReportFile to a '.txt' file.
+
+Este m√©todo faz o download e salva o TransactionReportFile em um arquivo '.txt' no local indicado.
 ```ruby
 require_relative '../../lib/mundipagg'
 
 # merchant key 
 merchantKey = 'sua merchantKey'
 
-# inicializa a classe com mÈtodos de requisiÁ„o
-# :staging ou nada para ambiente de sandbox e :production para ambiente de produÁ„o
+# inicializa a classe com m√©todos de requisi√ß√£o
+# :staging ou nada para ambiente de sandbox e :production para ambiente de produ√ß√£o
 gateway = Gateway.new(merchantKey)
 
-# cria uma vari·vel do tipo Date, passando apenas o ano, mÍs e dia (nessa ordem)
+# cria uma vari√°vel do tipo Date, passando apenas o ano, m√™s e dia (nessa ordem)
 date = Date.new(2015, 9, 15)
 
-# faz a requisiÁ„o do transaction report file e salva no destino passado como par‚metro
-# o segundo par‚metro È o nome do arquivo, e o terceiro È o local onde ser· salvo o arquivo
-# È salvo um arquivo em .txt no local indicado
+# faz a requisi√ß√£o do transaction report file e salva no destino passado como par√¢metro
+# o segundo par√¢metro √© o nome do arquivo, e o terceiro √© o local onde ser√° salvo o arquivo
+# √© salvo um arquivo em .txt no local indicado
 response = gateway.TransactionReportFileDownloader(date, 'Teste', "C:\\Users\\YourUser\\Desktop\\")
 ```
