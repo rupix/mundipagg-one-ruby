@@ -1,5 +1,16 @@
 # mundipagg-one-ruby
 
+### Mundipagg Gem Download
+https://rubygems.org/gems/mundipagg_api
+
+```ruby
+$ gem install mundipagg_api
+```
+
+```ruby
+require 'mundipagg_api'
+```
+
 ### About Windows
 The recommended Windows version of Ruby is Ruby 2.1.
 For gems work correctly it'll be necessary run the following commands:
@@ -29,25 +40,33 @@ $ gem install bundler
 $ bundle install
 ```
 
-Running tests:
+Running tests with `bundle exec`:
 
-Rodando testes:
+Rodando testes com `bundle exec`:
 ```ruby
 $ bundle exec rspec spec/integration/gateway_spec.rb
+```
+
+Running tests with `rake`:
+
+Rodando testes com `rake`:
+
+```ruby
+$ rake
 ```
 
 ## Code Examples
 
 ### Create a Credit Card Transaction
 ```ruby
-require_relative '../../lib/mundipagg'
+require 'mundipagg_api'
 
 # passa a merchantKey na variável
 merchantKey = 'sua merchantKey'
 
 # instancia classe com métodos de requisição
 # :staging ou nada para ambiente sandbox e :production para ambiente de produção
-gateway = Gateway.new(:production, merchantKey)
+gateway = MundipaggApi.new(:production, merchantKey)
 
 # coleta dados do cartão
 creditCardTransaction = CreditCardTransaction.new
@@ -74,14 +93,14 @@ response = gateway.CreateSale(createSaleRequest)
 
 ### Create a BoletoTransaction
 ```ruby
-require_relative '../../lib/mundipagg'
+require 'mundipagg_api'
 
 # passa a merchantKey na variável
 merchantKey = 'sua merchantKey'
 
 # instancia classe com métodos de requisição
 # :staging ou nada para ambiente sandbox e :production para ambiente de produção
-gateway = Gateway.new(:production, merchantKey)
+gateway = MundipaggApi.new(:production, merchantKey)
 
 # instancia um objeto de transação de boleto
 boletoTransaction = BoletoTransaction.new
@@ -106,13 +125,13 @@ response = gateway.CreateSale(createSaleRequest)
 
 ### Cancel Method
 ```ruby
-require_relative '../../lib/mundipagg'
+require 'mundipagg_api'
 
 merchantKey = 'Sua Merchant Key'
 
 # instancia classe com métodos de requisição
 # :staging para ambiente sandbox e :production para ambiente de produção
-gateway = Gateway.new(:staging, merchantKey)
+gateway = MundipaggApi.new(:staging, merchantKey)
 
 # preenche um item de colecao, necessario para cancelamento da transacao de cartao de credito
 cancelCreditCardTransactionItem = ManageCreditCardTransaction.new
@@ -135,14 +154,14 @@ response = gateway.Cancel(cancelSaleRequest)
 
 ### Capture Method
 ```ruby
-require_relative '../../lib/mundipagg'
+require 'mundipagg_api'
 
 # merchant key 
 merchantKey = 'sua merchantKey'
 
 # inicializa a classe com métodos de requisição
 # :staging ou nada para ambiente de sandbox e :production para ambiente de produção
-gateway = Gateway.new(merchantKey)
+gateway = MundipaggApi.new(merchantKey)
 
 # itens necessários para captura da transacão
 captureCreditCardTransactionItem = ManageCreditCardTransaction.new
@@ -164,13 +183,13 @@ response = gateway.Capture(captureSaleRequest)
 
 ### Retry Method
 ```ruby
-require_relative '../../lib/mundipagg'
+require 'mundipagg_api'
 
 merchantKey = 'Sua Merchant Key'
 
 # instancia classe com métodos de requisição
 # :staging para ambiente sandbox e :production para ambiente de produção
-gateway = Gateway.new(:staging, merchantKey)
+gateway = MundipaggApi.new(:staging, merchantKey)
 
 retrySaleRequest = RetrySaleRequest.new
 retrySaleCreditCardTransactionItem = RetrySaleCreditCardTransaction.new
@@ -192,14 +211,14 @@ response = gateway.Retry(retrySaleRequest)
 
 ### Query Method
 ```ruby
-require_relative '../../lib/mundipagg'
+require 'mundipagg_api'
 
 # merchant key 
 merchantKey = 'sua merchantKey'
 
 # inicializa a classe com métodos de requisição
 # :staging ou nada para ambiente de sandbox e :production para ambiente de produção
-gateway = Gateway.new(merchantKey)
+gateway = MundipaggApi.new(merchantKey)
 
 # inicializa a QuerySaleRequest
 querySaleRequest = QuerySaleRequest.new
@@ -225,14 +244,14 @@ The ParseXmlToNotification takes an XML and convert it to a hash variable.
 O ParseXmlToNotification converte um XML para uma variável hash.
 
 ```ruby
-require_relative '../../lib/mundipagg'
+require 'mundipagg_api'
 
 # merchant key 
 merchantKey = 'sua merchantKey'
 
 # inicializa a classe com métodos de requisição
 # :staging ou nada para ambiente de sandbox e :production para ambiente de produção
-gateway = Gateway.new(merchantKey)
+gateway = MundipaggApi.new(merchantKey)
 
 xml = 'xml que será passsado na variável'
 
@@ -243,14 +262,14 @@ response = gateway.ParseXmlToNotification(xml)
 
 ### TransactionReportFile Method
 ```ruby
-require_relative '../../lib/mundipagg'
+require 'mundipagg_api'
 
 # merchant key 
 merchantKey = 'sua merchantKey'
 
 # inicializa a classe com métodos de requisição
 # :staging ou nada para ambiente de sandbox e :production para ambiente de produção
-gateway = Gateway.new(merchantKey)
+gateway = MundipaggApi.new(merchantKey)
 
 # cria uma variável do tipo Date, passando apenas o ano, mês e dia (nessa ordem)
 date = Date.new(2014, 12, 10)
@@ -265,14 +284,14 @@ If you want the string that is received from TransactionReportFile Method to be 
 
 Este método faz um parse na string recebida do método TransactionReportFile e retorna um hash.
 ```ruby
-require_relative '../../lib/mundipagg'
+require 'mundipagg_api'
 
 # merchant key 
 merchantKey = 'sua merchantKey'
 
 # inicializa a classe com métodos de requisição
 # :staging ou nada para ambiente de sandbox e :production para ambiente de produção
-gateway = Gateway.new(merchantKey)
+gateway = MundipaggApi.new(merchantKey)
 
 # cria uma variável do tipo Date, passando apenas o ano, mês e dia (nessa ordem)
 date = Date.new(2014, 12, 10)
@@ -289,14 +308,14 @@ This method download and save the TransactionReportFile to a '.txt' file.
 
 Este método faz o download e salva o TransactionReportFile em um arquivo '.txt' no local indicado.
 ```ruby
-require_relative '../../lib/mundipagg'
+require 'mundipagg_api'
 
 # merchant key 
 merchantKey = 'sua merchantKey'
 
 # inicializa a classe com métodos de requisição
 # :staging ou nada para ambiente de sandbox e :production para ambiente de produção
-gateway = Gateway.new(merchantKey)
+gateway = MundipaggApi.new(merchantKey)
 
 # cria uma variável do tipo Date, passando apenas o ano, mês e dia (nessa ordem)
 date = Date.new(2015, 9, 15)
