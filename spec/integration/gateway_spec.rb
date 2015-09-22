@@ -1,10 +1,10 @@
-require_relative '../../lib/mundipagg-api'
+require_relative '../../lib/mundipagg_api'
 require_relative 'test_helper'
 
-merchant_key = 'merchant key'
-gateway = Gateway.new(:production, merchant_key)
+merchant_key = 'merchantKey'
+gateway = MundipaggApi.new(:production, merchant_key)
 
-RSpec.describe Gateway do
+RSpec.describe MundipaggApi do
   it 'should create a sale with boleto' do
     createSaleRequest = CreateSaleRequest.new
 

@@ -2,10 +2,10 @@ class SaleOrderData
   # Número do pedido no sistema da loja
   attr_accessor :OrderReference
 
-  # Chave do pedido. Utilizado para identificar o pedido no Gateway
+  # Chave do pedido. Utilizado para identificar o pedido no MundipaggApi
   attr_accessor :OrderKey
 
-  # Data de criação do pedido no Gateway
+  # Data de criação do pedido no MundipaggApi
   attr_accessor :CreateDate
 
   def to_json

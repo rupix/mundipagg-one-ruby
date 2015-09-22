@@ -64,7 +64,7 @@ require_relative 'mundipagg/ShoppingCart/shopping_cart_item'
 
 require_relative 'mundipagg/SalesOption'
 require_relative 'mundipagg/post_notification'
-require_relative 'mundipagg/gateway'
+require_relative 'mundipagg/MundipaggApi'
 require_relative 'mundipagg/header'
 require_relative 'mundipagg/Trailer'
 require_relative 'mundipagg/transaction_report_file'

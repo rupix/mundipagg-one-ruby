@@ -1,4 +1,4 @@
-require_relative '../../lib/mundipagg-api'
+require_relative '../../lib/mundipagg_api'
 require 'gyoku'
 class TestHelper
 
