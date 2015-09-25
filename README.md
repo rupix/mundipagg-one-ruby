@@ -144,9 +144,6 @@ cancelSaleRequest = ManageSaleRequest.new
 cancelSaleRequest.OrderKey = 'OrderKey AQUI'
 cancelSaleRequest.CreditCardTransactionCollection << cancelCreditCardTransactionItem
 
-# incrementa na coleção o item de retry
-retrySaleRequest.RetrySaleCreditCardTransactionCollection << retrySaleCreditCardTransactionItem
-
 # faz a requisição de cancelamento, retorna um hash com a resposta
 response = gateway.Cancel(cancelSaleRequest)
 ```
