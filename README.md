@@ -11,6 +11,8 @@ $ gem install mundipagg_api
 require 'mundipagg_api'
 ```
 
+Ruby DevKit is required.
+
 ### About Windows
 The recommended Windows version of Ruby is Ruby 2.1.
 For gems work correctly it'll be necessary run the following commands:
@@ -73,6 +75,7 @@ creditCardTransaction = CreditCardTransaction.new
 creditCardTransaction.AmountInCents = 100
 creditCardTransaction.InstallmentCount = 1
 creditCardTransaction.TransactionReference = 'CreditCard One RubySDK Test'
+creditCardTransaction.CreditCardOperation = 'AuthOnly'
 creditCardTransaction.Options.PaymentMethodCode = 1
 creditCardTransaction.Options.SoftDescriptorText = 'My Store Name'
 creditCardTransaction.CreditCard.CreditCardNumber = '5453010000066167'
@@ -143,9 +146,6 @@ cancelCreditCardTransactionItem.TransactionReference = 'RubySDK-CancelTest'
 cancelSaleRequest = ManageSaleRequest.new
 cancelSaleRequest.OrderKey = 'OrderKey AQUI'
 cancelSaleRequest.CreditCardTransactionCollection << cancelCreditCardTransactionItem
-
-# incrementa na coleção o item de retry
-retrySaleRequest.RetrySaleCreditCardTransactionCollection << retrySaleCreditCardTransactionItem
 
 # faz a requisição de cancelamento, retorna um hash com a resposta
 response = gateway.Cancel(cancelSaleRequest)
