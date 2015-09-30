@@ -1,7 +1,7 @@
 require_relative '../../lib/mundipagg_api'
 require_relative 'test_helper'
 
-merchant_key = 'merchantKey'
+merchant_key = '8A2DD57F-1ED9-4153-B4CE-69683EFADAD5'
 gateway = MundipaggApi.new(:production, merchant_key)
 
 RSpec.describe MundipaggApi do
@@ -517,5 +517,17 @@ RSpec.describe MundipaggApi do
     file_path = file_path +  file_name + '.txt'
     file_exist = File.exist?(file_path)
     expect(file_exist).to eq true
+  end
+
+  it 'should consult transaction with instant buy key' do
+    response = gateway.InstantBuyKey('2B2894E2-6767-4FE4-9A37-5F3E60EF9814')
+
+    expect(response['ErrorReport']).to eq nil
+  end
+
+  it 'should consult transaction with buyer key' do
+    response = gateway.BuyerKey('EF42EDE1-D482-4A13-84F2-637A201AA4F2')
+    
+    expect(response['ErrorReport']).to eq nil
   end
 end

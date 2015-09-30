@@ -32,6 +32,7 @@ $ gem install nori
 $ gem install gyoku
 $ gem install nokogiri
 $ gem install ffi
+$ gem install bundler
 ```
 ### Bundler
 Run the following commands to install gems:

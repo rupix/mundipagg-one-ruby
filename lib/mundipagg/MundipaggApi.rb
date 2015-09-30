@@ -12,11 +12,13 @@ class MundipaggApi
     @@SERVICE_HEADERS = {:MerchantKey => "#{@merchantKey}", :Accept => 'application/json', :"Content-Type" => 'application/json'}
   end
 
-  # URL de production
+  # URL de producao
   @@SERVICE_URL_PRODUCTION = 'https://transactionv2.mundipaggone.com/Sale/'
+  @@SERVICE_URL_PRODUCTION_CREDIT_CARD = 'https://transactionv2.mundipaggone.com/CreditCard/'
 
-  # URL de homologation
+  # URL de homologacao
   @@SERVICE_URL_STAGING = 'https://stagingv2.mundipaggone.com/Sale/'
+  @@SERVICE_URL_STAGING_CREDIT_CARD = 'https://stagingv2.mundipaggone.com/CreditCard/'
 
   # permite que o integrador adicione uma busca por transacoes utilizando alguns criterios
   def Query(querySaleRequestEnum, key)
@@ -37,7 +39,7 @@ class MundipaggApi
       return err.response
     end
 
-    # se n�o houver erros, trata o json e retorna o objeto
+    # se nao houver erros, trata o json e retorna o objeto
     querySaleResponse = JSON.load response
     querySaleResponse
   end
@@ -302,6 +304,7 @@ class MundipaggApi
     return response
   end
 
+  # ffaz o download do transaction report file e salva no computador em .txt
   def TransactionReportFileDownloader(date, file_name, path)
     begin
       path = path + file_name + '.txt'
@@ -323,6 +326,53 @@ class MundipaggApi
     return response
   end
 
+  def InstantBuyKey(instant_buy_key)
+    # try, tenta fazer o request
+    begin
+
+      # se for homologacao faz a chamada por aqui
+      if @serviceEnvironment == :staging
+        response = RestClient.get @@SERVICE_URL_STAGING_CREDIT_CARD + instant_buy_key, headers=@@SERVICE_HEADERS
+
+        # se for producao, faz a chamada por aqui
+      elsif @serviceEnvironment == :production
+        response = RestClient.get @@SERVICE_URL_PRODUCTION_CREDIT_CARD + instant_buy_key, headers=@@SERVICE_HEADERS
+      end
+
+        # se der algum erro, trata aqui
+    rescue RestClient::ExceptionWithResponse => err
+      return err.response
+    end
+
+    # se nao houver erros, trata o json e retorna o objeto
+    instant_buy_response = JSON.load response
+    instant_buy_response
+  end
+
+  def BuyerKey(buyer_key)
+    # try, tenta fazer o request
+    begin
+
+      # se for homologacao faz a chamada por aqui
+      if @serviceEnvironment == :staging
+        response = RestClient.get @@SERVICE_URL_STAGING_CREDIT_CARD + buyer_key + '/BuyerKey', headers=@@SERVICE_HEADERS
+
+        # se for producao, faz a chamada por aqui
+      elsif @serviceEnvironment == :production
+        response = RestClient.get @@SERVICE_URL_PRODUCTION_CREDIT_CARD + buyer_key + '/BuyerKey', headers=@@SERVICE_HEADERS
+      end
+
+    # se der algum erro, trata aqui
+    rescue RestClient::ExceptionWithResponse => err
+      return err.response
+    end
+
+    # se nao houver erros, trata o json e retorna o objeto
+    buyer_response = JSON.load response
+    buyer_response
+  end
+
+  # funcao de post generica
   def postRequest(payload, url)
     response = nil
     begin
