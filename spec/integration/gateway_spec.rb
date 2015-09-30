@@ -1,7 +1,7 @@
 require_relative '../../lib/mundipagg_api'
 require_relative 'test_helper'
 
-merchant_key = '8A2DD57F-1ED9-4153-B4CE-69683EFADAD5'
+merchant_key = 'merchantKey'
 gateway = MundipaggApi.new(:production, merchant_key)
 
 RSpec.describe MundipaggApi do
