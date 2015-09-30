@@ -145,7 +145,7 @@ RSpec.describe MundipaggApi do
     creditCardTransactionItem.CreditCard.ExpMonth = 10
     creditCardTransactionItem.CreditCard.ExpYear = 19
     creditCardTransactionItem.CreditCard.HolderName = 'Maria do Carmo'
-    creditCardTransactionItem.CreditCard.InstantBuyerKey = '00000000-0000-0000-0000-000000000000'
+    creditCardTransactionItem.CreditCard.InstantBuyKey = '00000000-0000-0000-0000-000000000000'
     creditCardTransactionItem.CreditCard.SecurityCode = '123'
 
     shoppingCartItem = ShoppingCartItemCollection.new
@@ -530,4 +530,21 @@ RSpec.describe MundipaggApi do
     
     expect(response['ErrorReport']).to eq nil
   end
+
+  it 'should do a credit card transaction with instant buy key' do
+    # coleta dados do cartao
+    creditCardTransaction = CreditCardTransaction.new
+    creditCardTransaction.AmountInCents = 100
+    creditCardTransaction.CreditCard.InstantBuyKey = '1A045F96-B640-44E6-95F3-FFFC5A2F7D18'
+
+    # cria a transacao
+    createSaleRequest = CreateSaleRequest.new
+    createSaleRequest.CreditCardTransactionCollection << creditCardTransaction
+
+    # faz a requisicao de criação de transacao, retorna um hash com a resposta
+    response = gateway.CreateSale(createSaleRequest)
+
+    expect(response['ErrorReport']).to eq nil
+  end
+
 end

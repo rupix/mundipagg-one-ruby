@@ -1,6 +1,6 @@
 class CreditCard
 
-  attr_accessor :InstantBuyerKey
+  attr_accessor :InstantBuyKey
 
   attr_accessor :CreditCardNumber
 
