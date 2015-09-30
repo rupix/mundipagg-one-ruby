@@ -326,3 +326,33 @@ date = Date.new(2015, 9, 15)
 # é salvo um arquivo em .txt no local indicado
 response = gateway.TransactionReportFileDownloader(date, 'Teste', "C:\\Users\\YourUser\\Desktop\\")
 ```
+
+### InstantBuyKey Method
+```ruby
+require 'mundipagg_api'
+
+# passa a merchantKey na variável
+merchantKey = 'merchantKey'
+
+# instancia classe com métodos de requisição
+# :staging ou nada para ambiente sandbox e :production para ambiente de produção
+gateway = MundipaggApi.new(:production, merchantKey)
+
+# faz a consulta com instant buy key, retorna um hash
+response = gateway.InstantBuyKey('2B2894E2-6767-4FE4-9A37-5F3E60EF9814')
+```
+
+### BuyerKey Method
+```ruby
+require 'mundipagg_api'
+
+# passa a merchantKey na variável
+merchantKey = 'merchantKey'
+
+# instancia classe com métodos de requisição
+# :staging ou nada para ambiente sandbox e :production para ambiente de produção
+gateway = MundipaggApi.new(:production, merchantKey)
+
+# faz a consulta com buyer key, retorna um hash
+response = gateway.BuyerKey('EF42EDE1-D482-4A13-84F2-637A201AA4F2')
+```

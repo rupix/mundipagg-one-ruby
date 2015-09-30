@@ -530,6 +530,7 @@ RSpec.describe MundipaggApi do
     
     expect(response['ErrorReport']).to eq nil
   end
+<<<<<<< HEAD
 
   it 'should do a credit card transaction with instant buy key' do
     # coleta dados do cartao
@@ -548,3 +549,6 @@ RSpec.describe MundipaggApi do
   end
 
 end
+=======
+end
+>>>>>>> origin/master
