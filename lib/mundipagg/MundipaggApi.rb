@@ -13,12 +13,10 @@ class MundipaggApi
   end
 
   # URL de producao
-  @@SERVICE_URL_PRODUCTION = 'https://transactionv2.mundipaggone.com/Sale/'
-  @@SERVICE_URL_PRODUCTION_CREDIT_CARD = 'https://transactionv2.mundipaggone.com/CreditCard/'
+  @@SERVICE_URL_PRODUCTION = 'https://transactionv2.mundipaggone.com'
 
   # URL de homologacao
-  @@SERVICE_URL_STAGING = 'https://stagingv2.mundipaggone.com/Sale/'
-  @@SERVICE_URL_STAGING_CREDIT_CARD = 'https://stagingv2.mundipaggone.com/CreditCard/'
+  @@SERVICE_URL_STAGING = 'https://stagingv2.mundipaggone.com'
 
   # permite que o integrador adicione uma busca por transacoes utilizando alguns criterios
   def Query(querySaleRequestEnum, key)
@@ -27,11 +25,11 @@ class MundipaggApi
 
       # se for homologacao faz a chamada por aqui
       if @serviceEnvironment == :staging
-        response = RestClient.get @@SERVICE_URL_STAGING + '/Query/' + querySaleRequestEnum + '=' + key, headers=@@SERVICE_HEADERS
+        response = RestClient.get @@SERVICE_URL_STAGING + '/Sale/Query/' + querySaleRequestEnum + '=' + key, headers=@@SERVICE_HEADERS
 
         # se for producao, faz a chamada por aqui
       elsif @serviceEnvironment == :production
-        response = RestClient.get @@SERVICE_URL_PRODUCTION + '/Query/' + querySaleRequestEnum + '=' + key, headers=@@SERVICE_HEADERS
+        response = RestClient.get @@SERVICE_URL_PRODUCTION + '/Sale/Query/' + querySaleRequestEnum + '=' + key, headers=@@SERVICE_HEADERS
       end
 
         # se der algum erro, trata aqui
@@ -200,9 +198,9 @@ class MundipaggApi
     end
 
     if @serviceEnvironment == :staging
-      url = @@SERVICE_URL_STAGING
+      url = @@SERVICE_URL_STAGING + '/Sale/'
     elsif @serviceEnvironment == :production
-      url = @@SERVICE_URL_PRODUCTION
+      url = @@SERVICE_URL_PRODUCTION + '/Sale/'
     end
     postRequest(saleHash.to_json, url)
   end
@@ -230,9 +228,9 @@ class MundipaggApi
       puts e.message
     end
     if @serviceEnvironment == :staging
-      url = @@SERVICE_URL_STAGING + '/Retry'
+      url = @@SERVICE_URL_STAGING + '/Sale/Retry'
     elsif @serviceEnvironment == :production
-      url = @@SERVICE_URL_PRODUCTION + '/Retry'
+      url = @@SERVICE_URL_PRODUCTION + '/Sale/Retry'
     end
     postRequest(saleHash.to_json, url)
   end
@@ -253,9 +251,9 @@ class MundipaggApi
       puts e.message
     end
     if @serviceEnvironment == :staging
-      url = @@SERVICE_URL_STAGING + '/Cancel'
+      url = @@SERVICE_URL_STAGING + '/Sale/Cancel'
     elsif @serviceEnvironment == :production
-      url = @@SERVICE_URL_PRODUCTION + '/Cancel'
+      url = @@SERVICE_URL_PRODUCTION + '/Sale/Cancel'
     end
     postRequest(saleHash.to_json, url)
   end
@@ -276,9 +274,32 @@ class MundipaggApi
       puts e.message
     end
     if @serviceEnvironment == :staging
-      url = @@SERVICE_URL_STAGING + '/Capture'
+      url = @@SERVICE_URL_STAGING + '/Sale/Capture'
     elsif @serviceEnvironment == :production
-      url = @@SERVICE_URL_PRODUCTION + '/Capture'
+      url = @@SERVICE_URL_PRODUCTION + '/Sale/Capture'
+    end
+    postRequest(saleHash.to_json, url)
+  end
+
+  # autorizacao de uma transacao de cartao de credito
+  def Authorize(authorize_request)
+    saleHash = authorize_request.to_json
+    saleHash['CreditCardTransactionCollection'] = []
+
+    begin
+      if authorize_request.CreditCardTransactionCollection != nil
+        authorize_request.CreditCardTransactionCollection.each do |creditCard|
+          c = creditCard.to_json
+          saleHash['CreditCardTransactionCollection'] << c
+        end
+      end
+    rescue Exception => e
+      puts e.message
+    end
+    if @serviceEnvironment == :staging
+      url = @@SERVICE_URL_STAGING + '/Sale/Authorize'
+    elsif @serviceEnvironment == :production
+      url = @@SERVICE_URL_PRODUCTION + '/Sale/Authorize'
     end
     postRequest(saleHash.to_json, url)
   end
@@ -304,7 +325,7 @@ class MundipaggApi
     return response
   end
 
-  # ffaz o download do transaction report file e salva no computador em .txt
+  # faz o download do transaction report file e salva no computador em .txt
   def TransactionReportFileDownloader(date, file_name, path)
     begin
       path = path + file_name + '.txt'
@@ -326,17 +347,18 @@ class MundipaggApi
     return response
   end
 
+  # faz uma requisicao com instant buy key
   def InstantBuyKey(instant_buy_key)
     # try, tenta fazer o request
     begin
 
       # se for homologacao faz a chamada por aqui
       if @serviceEnvironment == :staging
-        response = RestClient.get @@SERVICE_URL_STAGING_CREDIT_CARD + instant_buy_key, headers=@@SERVICE_HEADERS
+        response = RestClient.get @@SERVICE_URL_STAGING + '/CreditCard/' + instant_buy_key, headers=@@SERVICE_HEADERS
 
         # se for producao, faz a chamada por aqui
       elsif @serviceEnvironment == :production
-        response = RestClient.get @@SERVICE_URL_PRODUCTION_CREDIT_CARD + instant_buy_key, headers=@@SERVICE_HEADERS
+        response = RestClient.get @@SERVICE_URL_PRODUCTION + '/CreditCard/' + instant_buy_key, headers=@@SERVICE_HEADERS
       end
 
         # se der algum erro, trata aqui
@@ -349,17 +371,18 @@ class MundipaggApi
     instant_buy_response
   end
 
+  # faz uma requisicao com buyer key
   def BuyerKey(buyer_key)
     # try, tenta fazer o request
     begin
 
       # se for homologacao faz a chamada por aqui
       if @serviceEnvironment == :staging
-        response = RestClient.get @@SERVICE_URL_STAGING_CREDIT_CARD + buyer_key + '/BuyerKey', headers=@@SERVICE_HEADERS
+        response = RestClient.get @@SERVICE_URL_STAGING + '/CreditCard/' + buyer_key + '/BuyerKey', headers=@@SERVICE_HEADERS
 
         # se for producao, faz a chamada por aqui
       elsif @serviceEnvironment == :production
-        response = RestClient.get @@SERVICE_URL_PRODUCTION_CREDIT_CARD + buyer_key + '/BuyerKey', headers=@@SERVICE_HEADERS
+        response = RestClient.get @@SERVICE_URL_PRODUCTION + '/CreditCard/' + buyer_key + '/BuyerKey', headers=@@SERVICE_HEADERS
       end
 
     # se der algum erro, trata aqui

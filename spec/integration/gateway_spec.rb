@@ -391,6 +391,49 @@ RSpec.describe MundipaggApi do
     expect(response['ErrorReport']).to eq nil
   end
 
+  it 'should authorize a transaction' do
+    createSaleRequest = CreateSaleRequest.new
+    creditCardTransactionItem = CreditCardTransaction.new
+    creditCardTransactionItem.AmountInCents = 100
+    creditCardTransactionItem.CreditCard.CreditCardBrand = 'Visa'
+    creditCardTransactionItem.CreditCard.CreditCardNumber = '41111111111111'
+    creditCardTransactionItem.CreditCard.ExpMonth = 10
+    creditCardTransactionItem.CreditCard.ExpYear = 19
+    creditCardTransactionItem.CreditCard.HolderName = 'Maria do Carmo'
+    creditCardTransactionItem.CreditCard.SecurityCode = '123'
+    creditCardTransactionItem.CreditCardOperation = 'AuthOnly'
+    creditCardTransactionItem.InstallmentCount = 1
+    creditCardTransactionItem.Options.CurrencyIso = 'BRL'
+    creditCardTransactionItem.Options.PaymentMethodCode = 1
+    creditCardTransactionItem.TransactionReference = 'RubySDK-CaptureTest'
+
+    createSaleRequest.CreditCardTransactionCollection << creditCardTransactionItem
+    createSaleRequest.Order.OrderReference = 'RubySDK-AuthorizeTest'
+
+    # cria o pedido que sera usado para captura
+    responseCreate = gateway.CreateSale(createSaleRequest)
+
+    # pega o orderkey e o transaction key da resposta que sao necessarios para fazer a captura
+    orderKey = responseCreate["OrderResult"]["OrderKey"]
+    transactionKey = responseCreate['CreditCardTransactionResultCollection'][0]['TransactionKey']
+
+    # itens necessarios para captura da transacao de cartao de credito
+    captureCreditCardTransactionItem = ManageCreditCardTransaction.new
+    captureCreditCardTransactionItem.AmountInCents = 100
+    captureCreditCardTransactionItem.TransactionKey = transactionKey
+    captureCreditCardTransactionItem.TransactionReference = 'RubySDK-CaptureTest'
+
+    # monta o objeto para cancelamento de transacao
+    authorize_sale_request = ManageSaleRequest.new
+    authorize_sale_request.OrderKey = orderKey
+    authorize_sale_request.CreditCardTransactionCollection << captureCreditCardTransactionItem
+
+    response = gateway.Authorize(authorize_sale_request)
+
+    # espera que o ErrorReport seja nulo, significa que foi tudo ok na transação
+    expect(response['ErrorReport']).to eq nil
+  end
+
   it 'should do a parse xml to notification interpretation' do
     creditCardTransactionItem = CreditCardTransaction.new
     creditCardTransactionItem.AmountInCents = 100
