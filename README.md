@@ -60,4 +60,4 @@ $ rake
 
 ## Code Examples
 
-You can access all the code examples (HERE, the Wiki page!)[https://github.com/mundipagg/mundipagg-one-ruby/wiki]
+You can access all the code examples [HERE, the Wiki page!](https://github.com/mundipagg/mundipagg-one-ruby/wiki)
