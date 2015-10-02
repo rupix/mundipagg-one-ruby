@@ -281,29 +281,6 @@ class MundipaggApi
     postRequest(saleHash.to_json, url)
   end
 
-  # autorizacao de uma transacao de cartao de credito
-  def Authorize(authorize_request)
-    saleHash = authorize_request.to_json
-    saleHash['CreditCardTransactionCollection'] = []
-
-    begin
-      if authorize_request.CreditCardTransactionCollection != nil
-        authorize_request.CreditCardTransactionCollection.each do |creditCard|
-          c = creditCard.to_json
-          saleHash['CreditCardTransactionCollection'] << c
-        end
-      end
-    rescue Exception => e
-      puts e.message
-    end
-    if @serviceEnvironment == :staging
-      url = @@SERVICE_URL_STAGING + '/Sale/Authorize'
-    elsif @serviceEnvironment == :production
-      url = @@SERVICE_URL_PRODUCTION + '/Sale/Authorize'
-    end
-    postRequest(saleHash.to_json, url)
-  end
-
   # faz um parse do xml de post notificaton
   def ParseXmlToNotification(xml)
     begin
