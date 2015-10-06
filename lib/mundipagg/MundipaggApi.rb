@@ -18,28 +18,30 @@ class MundipaggApi
   # URL de homologacao
   @@SERVICE_URL_STAGING = 'https://stagingv2.mundipaggone.com'
 
+  # URL de sandbox
+  @@SERVICE_URL_SANDBOX = 'https://sandbox.mundipaggone.com'
+
   # permite que o integrador adicione uma busca por transacoes utilizando alguns criterios
   def Query(querySaleRequestEnum, key)
     # try, tenta fazer o request
     begin
-
       # se for homologacao faz a chamada por aqui
       if @serviceEnvironment == :staging
-        response = RestClient.get @@SERVICE_URL_STAGING + '/Sale/Query/' + querySaleRequestEnum + '=' + key, headers=@@SERVICE_HEADERS
+        getRequest(@@SERVICE_URL_STAGING + '/Sale/Query/' + querySaleRequestEnum + '=' + key)
 
         # se for producao, faz a chamada por aqui
       elsif @serviceEnvironment == :production
-        response = RestClient.get @@SERVICE_URL_PRODUCTION + '/Sale/Query/' + querySaleRequestEnum + '=' + key, headers=@@SERVICE_HEADERS
+        getRequest(@@SERVICE_URL_PRODUCTION + '/Sale/Query/' + querySaleRequestEnum + '=' + key)
+
+        # se for sandbox
+      elsif @serviceEnvironment == :sandbox
+        getRequest(@@SERVICE_URL_SANDBOX + '/Sale/Query/' + querySaleRequestEnum + '=' + key)
       end
 
         # se der algum erro, trata aqui
-    rescue RestClient::ExceptionWithResponse => err
-      return err.response
+    rescue Exception => e
+      return e.message
     end
-
-    # se nao houver erros, trata o json e retorna o objeto
-    querySaleResponse = JSON.load response
-    querySaleResponse
   end
 
   # criar uma transacao na plataforma One utilizando um ou mais meios de pagamento
@@ -177,30 +179,37 @@ class MundipaggApi
       end
 
       # transforma o objeto Buyer em json
-      if createSaleRequest.Buyer.to_json.any? && createSaleRequest.Buyer.AddressCollection.any?
+      if createSaleRequest.Buyer.AddressCollection.any?
         b = createSaleRequest.Buyer.to_json
         saleHash['Buyer'] = b
 
-        if createSaleRequest.Buyer.AddressCollection.any?
-          saleHash['Buyer']['AddressCollection'] = []
-          createSaleRequest.Buyer.AddressCollection.each do |address|
-            a = address.to_json
-            saleHash['Buyer']['AddressCollection'] << a
-          end
-        else
-          saleHash['Buyer']['AddressCollection'] = nil
+        saleHash['Buyer']['AddressCollection'] = []
+        createSaleRequest.Buyer.AddressCollection.each do |address|
+          a = address.to_json
+          saleHash['Buyer']['AddressCollection'] << a
         end
       else
-        saleHash['Buyer'] = nil
+        buyer_hash = createSaleRequest.Buyer.to_json
+        buyer_hash.delete('AddressCollection')
+        if buyer_hash.blank? == false
+          b = createSaleRequest.Buyer.to_json
+          saleHash['Buyer'] = b
+          saleHash['Buyer']['AddressCollection'] = nil
+        else
+          saleHash['Buyer'] = nil
+        end
       end
+
     rescue Exception => e
-      puts e.message
+      return e.message
     end
 
     if @serviceEnvironment == :staging
       url = @@SERVICE_URL_STAGING + '/Sale/'
     elsif @serviceEnvironment == :production
       url = @@SERVICE_URL_PRODUCTION + '/Sale/'
+    elsif @serviceEnvironment == :sandbox
+      url = @@SERVICE_URL_SANDBOX + '/Sale/'
     end
     postRequest(saleHash.to_json, url)
   end
@@ -225,12 +234,14 @@ class MundipaggApi
         end
       end
     rescue Exception => e
-      puts e.message
+      return e.message
     end
     if @serviceEnvironment == :staging
       url = @@SERVICE_URL_STAGING + '/Sale/Retry'
     elsif @serviceEnvironment == :production
       url = @@SERVICE_URL_PRODUCTION + '/Sale/Retry'
+    elsif @serviceEnvironment == :sandbox
+      url = @@SERVICE_URL_SANDBOX + '/Sale/Retry'
     end
     postRequest(saleHash.to_json, url)
   end
@@ -248,12 +259,14 @@ class MundipaggApi
         end
       end
     rescue Exception => e
-      puts e.message
+      return e.message
     end
     if @serviceEnvironment == :staging
       url = @@SERVICE_URL_STAGING + '/Sale/Cancel'
     elsif @serviceEnvironment == :production
       url = @@SERVICE_URL_PRODUCTION + '/Sale/Cancel'
+    elsif @serviceEnvironment == :sandbox
+      url = @@SERVICE_URL_SANDBOX + '/Sale/Cancel'
     end
     postRequest(saleHash.to_json, url)
   end
@@ -271,12 +284,14 @@ class MundipaggApi
         end
       end
     rescue Exception => e
-      puts e.message
+      return e.message
     end
     if @serviceEnvironment == :staging
       url = @@SERVICE_URL_STAGING + '/Sale/Capture'
     elsif @serviceEnvironment == :production
       url = @@SERVICE_URL_PRODUCTION + '/Sale/Capture'
+    elsif @serviceEnvironment == :sandbox
+      url = @@SERVICE_URL_SANDBOX + '/Sale/Capture'
     end
     postRequest(saleHash.to_json, url)
   end
@@ -286,7 +301,7 @@ class MundipaggApi
     begin
       response = PostNotification.ParseNotification(xml)
     rescue Exception => err
-      return err.response
+      return err.message
     end
 
     return response
@@ -318,7 +333,7 @@ class MundipaggApi
     transaction_report_file = TransactionReportFile.new
     begin
       response = transaction_report_file.TransactionReportFileParser(file_to_parse)
-    rescue Exception=>err
+    rescue Exception => err
       return err
     end
     return response
@@ -331,21 +346,21 @@ class MundipaggApi
 
       # se for homologacao faz a chamada por aqui
       if @serviceEnvironment == :staging
-        response = RestClient.get @@SERVICE_URL_STAGING + '/CreditCard/' + instant_buy_key, headers=@@SERVICE_HEADERS
+        getRequest(@@SERVICE_URL_STAGING + '/CreditCard/' + instant_buy_key)
 
         # se for producao, faz a chamada por aqui
       elsif @serviceEnvironment == :production
-        response = RestClient.get @@SERVICE_URL_PRODUCTION + '/CreditCard/' + instant_buy_key, headers=@@SERVICE_HEADERS
+        getRequest(@@SERVICE_URL_PRODUCTION + '/CreditCard/' + instant_buy_key)
+
+        # se for sandbox
+      elsif @serviceEnvironment == :sandbox
+        getRequest(@@SERVICE_URL_SANDBOX + '/CreditCard/' + instant_buy_key)
       end
 
         # se der algum erro, trata aqui
-    rescue RestClient::ExceptionWithResponse => err
-      return err.response
+    rescue Exception => e
+      return e.message
     end
-
-    # se nao houver erros, trata o json e retorna o objeto
-    instant_buy_response = JSON.load response
-    instant_buy_response
   end
 
   # faz uma requisicao com buyer key
@@ -355,21 +370,24 @@ class MundipaggApi
 
       # se for homologacao faz a chamada por aqui
       if @serviceEnvironment == :staging
-        response = RestClient.get @@SERVICE_URL_STAGING + '/CreditCard/' + buyer_key + '/BuyerKey', headers=@@SERVICE_HEADERS
+        response = getRequest(@@SERVICE_URL_STAGING + '/CreditCard/' + buyer_key + '/BuyerKey')
 
         # se for producao, faz a chamada por aqui
       elsif @serviceEnvironment == :production
-        response = RestClient.get @@SERVICE_URL_PRODUCTION + '/CreditCard/' + buyer_key + '/BuyerKey', headers=@@SERVICE_HEADERS
+        response = getRequest(@@SERVICE_URL_PRODUCTION + '/CreditCard/' + buyer_key + '/BuyerKey')
+
+        # se for sandbox, faz a chamada por aqui
+      elsif @serviceEnvironment == :sandbox
+        response = getRequest(@@SERVICE_URL_SANDBOX + '/CreditCard/' + buyer_key + '/BuyerKey')
       end
 
-    # se der algum erro, trata aqui
-    rescue RestClient::ExceptionWithResponse => err
-      return err.response
+        # se der algum erro, trata aqui
+    rescue Exception => e
+      return e.message
     end
 
-    # se nao houver erros, trata o json e retorna o objeto
-    buyer_response = JSON.load response
-    buyer_response
+    # se nao houver erros, retorna o objeto
+    response
   end
 
   # funcao de post generica
@@ -378,7 +396,19 @@ class MundipaggApi
     begin
       response = RestClient.post(url, payload, headers=@@SERVICE_HEADERS)
     rescue RestClient::ExceptionWithResponse => err
-      return err.response #err.response
+      return err.response
+    end
+    json_response = JSON.load response
+    json_response
+  end
+
+  # funcao get generica
+  def getRequest(url)
+    response = nil
+    begin
+      response = RestClient.get(url, headers=@@SERVICE_HEADERS)
+    rescue RestClient::ExceptionWithResponse => err
+      return err.response
     end
     json_response = JSON.load response
     json_response

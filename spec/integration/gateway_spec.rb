@@ -2,7 +2,7 @@ require_relative '../../lib/mundipagg_api'
 require_relative 'test_helper'
 
 merchant_key = 'merchantKey'
-gateway = MundipaggApi.new(:production, merchant_key)
+gateway = MundipaggApi.new(:sandbox, merchant_key)
 
 RSpec.describe MundipaggApi do
   it 'should create a sale with boleto' do
@@ -173,6 +173,9 @@ RSpec.describe MundipaggApi do
     shoppingCartCollectionItem.ShoppingCartItemCollection << shoppingCartItem
 
     createSaleRequest = CreateSaleRequest.new
+
+    createSaleRequest.Buyer.AddressCollection = Array.new
+
     createSaleRequest.Buyer.Birthdate = Date.new(1990, 3, 3).strftime("%Y-%m-%dT%H:%M:%S")
     createSaleRequest.Buyer.DocumentNumber = '12345678901'
     createSaleRequest.Buyer.DocumentType = 'CPF'
@@ -514,28 +517,87 @@ RSpec.describe MundipaggApi do
     file_path = "C:\\Users\\Public\\Documents\\"
     gateway.TransactionReportFileDownloader(date, file_name, file_path)
 
-    file_path = file_path +  file_name + '.txt'
+    file_path = file_path + file_name + '.txt'
     file_exist = File.exist?(file_path)
     expect(file_exist).to eq true
   end
 
   it 'should consult transaction with instant buy key' do
-    response = gateway.InstantBuyKey('2B2894E2-6767-4FE4-9A37-5F3E60EF9814')
+    credit_card_transaction = CreditCardTransaction.new
+    credit_card_transaction.CreditCard.CreditCardNumber = '4111111111111111'
+    credit_card_transaction.CreditCard.CreditCardBrand = 'Visa'
+    credit_card_transaction.CreditCard.ExpMonth = 10
+    credit_card_transaction.CreditCard.ExpYear = 2018
+    credit_card_transaction.CreditCard.SecurityCode = '123'
+    credit_card_transaction.CreditCard.HolderName = 'Luke Skywalker'
+    credit_card_transaction.AmountInCents = 100
+
+    sale_request = CreateSaleRequest.new
+    sale_request.CreditCardTransactionCollection << credit_card_transaction
+
+    sale_response = gateway.CreateSale(sale_request)
+
+    expect(sale_response['ErrorReport']).to eq nil
+
+    instant_buy_key = sale_response['CreditCardTransactionResultCollection'][0]['CreditCard']['InstantBuyKey']
+
+    response = gateway.InstantBuyKey(instant_buy_key)
 
     expect(response['ErrorReport']).to eq nil
   end
 
   it 'should consult transaction with buyer key' do
-    response = gateway.BuyerKey('EF42EDE1-D482-4A13-84F2-637A201AA4F2')
-    
+
+    credit_card_transaction = CreditCardTransaction.new
+    credit_card_transaction.CreditCard.CreditCardNumber = '4111111111111111'
+    credit_card_transaction.CreditCard.CreditCardBrand = 'Visa'
+    credit_card_transaction.CreditCard.ExpMonth = 10
+    credit_card_transaction.CreditCard.ExpYear = 2018
+    credit_card_transaction.CreditCard.SecurityCode = '123'
+    credit_card_transaction.CreditCard.HolderName = 'Luke Skywalker'
+    credit_card_transaction.AmountInCents = 100
+
+    sale_request = CreateSaleRequest.new
+    sale_request.Buyer.Name = 'Anakin Skywalker'
+    sale_request.Buyer.Birthdate = Date.new(1994, 9, 26).strftime("%Y-%m-%dT%H:%M:%S")
+    sale_request.Buyer.DocumentNumber = '12345678901'
+    sale_request.Buyer.DocumentType = 'CPF'
+    sale_request.Buyer.PersonType = 'Person'
+    sale_request.Buyer.Gender = 'M'
+    sale_request.CreditCardTransactionCollection << credit_card_transaction
+
+    sale_response = gateway.CreateSale(sale_request)
+
+    expect(sale_response['ErrorReport']).to eq nil
+
+    response = gateway.BuyerKey(sale_response['BuyerKey'])
+
     expect(response['ErrorReport']).to eq nil
   end
 
   it 'should do a credit card transaction with instant buy key' do
+    credit_card_transaction = CreditCardTransaction.new
+    credit_card_transaction.CreditCard.CreditCardNumber = '4111111111111111'
+    credit_card_transaction.CreditCard.CreditCardBrand = 'Visa'
+    credit_card_transaction.CreditCard.ExpMonth = 10
+    credit_card_transaction.CreditCard.ExpYear = 2018
+    credit_card_transaction.CreditCard.SecurityCode = '123'
+    credit_card_transaction.CreditCard.HolderName = 'Luke Skywalker'
+    credit_card_transaction.AmountInCents = 100
+
+    sale_request = CreateSaleRequest.new
+    sale_request.CreditCardTransactionCollection << credit_card_transaction
+
+    sale_response = gateway.CreateSale(sale_request)
+
+    expect(sale_response['ErrorReport']).to eq nil
+
+    instant_buy_key = sale_response['CreditCardTransactionResultCollection'][0]['CreditCard']['InstantBuyKey']
+
     # coleta dados do cartao
     creditCardTransaction = CreditCardTransaction.new
     creditCardTransaction.AmountInCents = 100
-    creditCardTransaction.CreditCard.InstantBuyKey = '1A045F96-B640-44E6-95F3-FFFC5A2F7D18'
+    creditCardTransaction.CreditCard.InstantBuyKey = instant_buy_key
 
     # cria a transacao
     createSaleRequest = CreateSaleRequest.new
