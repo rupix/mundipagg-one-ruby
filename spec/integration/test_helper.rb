@@ -1,4 +1,4 @@
-require_relative '../../lib/mundipagg_api'
+require_relative '../../lib/mundipagg_sdk'
 require 'gyoku'
 class TestHelper
 
@@ -8,7 +8,7 @@ class TestHelper
   end
 
   def self.CreateFakePostNotification(create_order_result, manage_order_result)
-    xml = '<StatusNotification xmlns="http://schemas.datacontract.org/2004/07/MundiPagg.NotificationService.DataContract"
+    xml = '<StatusNotification xmlns="http://schemas.datacontract.org/2004/07/Gateway.NotificationService.DataContract"
 									xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
 				<AmountInCents>?</AmountInCents>
 				<AmountPaidInCents>?</AmountPaidInCents>

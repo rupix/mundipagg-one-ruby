@@ -1,8 +1,8 @@
 Gem::Specification.new do |s|
-  s.name = 'mundipagg_api'
+  s.name = 'mundipagg_sdk'
   s.summary = 'MundiPagg Ruby Client Library'
   s.description = 'Ruby library for integrating with the MundiPagg payment web services'
-  s.version = '1.3.1' # Major.Minor.Revision
+  s.version = '1.0.0' # Major.Minor.Revision
   s.author = 'MundiPagg'
   s.email = 'github@mundipagg.com'
   s.homepage = 'http://www.mundipagg.com/'
