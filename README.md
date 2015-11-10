@@ -1,14 +1,14 @@
 # mundipagg-one-ruby
 
 ### Mundipagg Gem Download
-https://rubygems.org/gems/mundipagg_api
+https://rubygems.org/gems/mundipagg_sdk
 
 ```ruby
-$ gem install mundipagg_api
+$ gem install mundipagg_sdk
 ```
 
 ```ruby
-require 'mundipagg_api'
+require 'mundipagg_sdk'
 ```
 
 Ruby DevKit is required.
@@ -17,8 +17,6 @@ Ruby DevKit is required.
 The recommended Windows version of Ruby is Ruby 2.1.
 For gems work correctly it'll be necessary run the following commands:
 
-No Windows a versão do Ruby recomendada é a 2.1.
-Para que todas as gemas funcionem corretamente é necessário realizar o seguinte processo:
 ```ruby
 $ gem install rubygems-update
 $ update_rubygems

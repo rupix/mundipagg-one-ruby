@@ -1,11 +1,11 @@
 require 'nori'
 
-# Class who handles Mundipagg post notification XML
+# Class who handles Gateway post notification XML
 class PostNotification
 
-  # This method parse the Xml sent by Mundipagg when notify a change in a transaction.
+  # This method parse the Xml sent by Gateway when notify a change in a transaction.
   #
-  # @param request [String] XML received in the Mundipagg POST request.
+  # @param request [String] XML received in the Gateway POST request.
   # @return [Hash<Symbol, String>] A hash collection containing the XML data parsed.
   def self.ParseNotification(xml)
 

@@ -1,10 +1,10 @@
-require_relative '../../lib/mundipagg_api'
+require_relative '../../lib/mundipagg_sdk'
 require_relative 'test_helper'
 
 merchant_key = 'merchantKey'
-gateway = MundipaggApi.new(:sandbox, merchant_key)
+gateway = Gateway.new(:sandbox, merchant_key)
 
-RSpec.describe MundipaggApi do
+RSpec.describe Gateway do
   it 'should create a sale with boleto' do
     createSaleRequest = CreateSaleRequest.new
 
@@ -441,9 +441,9 @@ RSpec.describe MundipaggApi do
   end
 
   it 'should do a parse on online debit xml' do
-    xml = '<StatusNotification xmlns="http://schemas.datacontract.org/2004/07/MundiPagg.NotificationService.DataContract"
+    xml = '<StatusNotification xmlns="http://schemas.datacontract.org/2004/07/Gateway.NotificationService.DataContract"
                     xmlns:i="http://www.w3.org/2001/XMLSchema-instance"
-                    i:schemaLocation="http://schemas.datacontract.org/2004/07/MundiPagg.NotificationService.DataContract StatusNotificationXmlSchema.xsd">
+                    i:schemaLocation="http://schemas.datacontract.org/2004/07/Gateway.NotificationService.DataContract StatusNotificationXmlSchema.xsd">
   <AmountInCents>500</AmountInCents>
   <AmountPaidInCents>0</AmountPaidInCents>
   <BoletoTransaction>
