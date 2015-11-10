@@ -1,7 +1,7 @@
 require_relative '../../lib/mundipagg_sdk'
 require_relative 'test_helper'
 
-merchant_key = '8A2DD57F-1ED9-4153-B4CE-69683EFADAD5'
+merchant_key = 'merchantKey'
 gateway = Gateway.new(:sandbox, merchant_key)
 
 RSpec.describe Gateway do
