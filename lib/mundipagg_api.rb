@@ -64,7 +64,7 @@ require_relative 'gateway/ShoppingCart/shopping_cart_item'
 
 require_relative 'gateway/SalesOption'
 require_relative 'gateway/post_notification'
-require_relative 'gateway/MundipaggApi'
+require_relative 'gateway/Gateway'
 require_relative 'gateway/header'
 require_relative 'gateway/Trailer'
 require_relative 'gateway/transaction_report_file'
