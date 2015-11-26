@@ -1,4 +1,4 @@
-# mundipagg-one-ruby
+# mundipagg-one-ruby [![Build Status](https://travis-ci.org/mundipagg/mundipagg-one-ruby.svg?branch=master)](https://travis-ci.org/mundipagg/mundipagg-one-ruby)
 
 ### Mundipagg Gem Download
 https://rubygems.org/gems/mundipagg_sdk
