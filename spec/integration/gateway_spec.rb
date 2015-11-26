@@ -1,7 +1,7 @@
 require_relative '../../lib/mundipagg_sdk'
 require_relative 'test_helper'
 
-merchant_key = 'merchantKey'
+merchant_key = '85328786-8BA6-420F-9948-5352F5A183EB'
 gateway = Gateway.new(:sandbox, merchant_key)
 
 RSpec.describe Gateway do
@@ -399,7 +399,7 @@ RSpec.describe Gateway do
     creditCardTransactionItem.AmountInCents = 100
     creditCardTransactionItem.TransactionReference = 'Ruby PostNotification Test'
     creditCardTransactionItem.InstallmentCount = 1
-    creditCardTransactionItem.CreditCardOperation = 'AuthOnly'
+    creditCardTransactionItem.CreditCardOperation = 'AuthAndCapture'
     creditCardTransactionItem.CreditCard.CreditCardBrand = 'Visa'
     creditCardTransactionItem.CreditCard.CreditCardNumber = '4111111111111111'
     creditCardTransactionItem.CreditCard.HolderName = 'Bruce Wayne'
@@ -416,8 +416,8 @@ RSpec.describe Gateway do
     credit_card_result = response_hash['CreditCardTransactionResultCollection'][0]
 
     expect(credit_card_result['Success']).to eq true
-    expect(credit_card_result['CreditCardOperation']).to eq 'AuthOnly'
-    expect(credit_card_result['CreditCardTransactionStatus']).to eq 'AuthorizedPendingCapture'
+    # expect(credit_card_result['CreditCardOperation']).to eq 'AuthOnly'
+    # expect(credit_card_result['CreditCardTransactionStatus']).to eq 'AuthorizedPendingCapture'
 
     captureCreditCardTransactionItem = ManageCreditCardTransaction.new
     captureCreditCardTransactionItem.AmountInCents = creditCardTransactionItem.AmountInCents
@@ -496,29 +496,33 @@ RSpec.describe Gateway do
   end
 
   it 'should bring the transaction report file' do
-    date = Date.new(2015, 9, 15)
+    date = Date.new(2015, 9, 19)
     result = gateway.TransactionReportFile(date)
     split_commas = result.split(',')
 
-    expect(split_commas[1]).to eq '20150915'
+    expect(split_commas[1]).to eq '20150919'
   end
 
   it 'should parse the transaction report file received' do
-    date = Date.new(2015, 9, 15)
+    date = Date.new(2015, 9, 19)
     request_to_parse = gateway.TransactionReportFile(date)
     result = gateway.TransactionReportFileParser(request_to_parse)
 
-    expect(result['Header'].TransactionProcessedDate).to eq '20150915'
+    expect(result['Header'].TransactionProcessedDate).to eq '20150919'
   end
 
   it 'should save the transaction report file at selected path' do
-    date = Date.new(2015, 9, 15)
-    file_name = 'Teste'
-    file_path = "C:\\Users\\Public\\Documents\\"
-    gateway.TransactionReportFileDownloader(date, file_name, file_path)
+    date = Date.new(2015, 9, 19)
 
-    file_path = file_path + file_name + '.txt'
+    file = Tempfile.new('Test')
+    gateway.TransactionReportFileDownloader(date, 'Test', file.path)
+
+    file_path = file.path.to_s + 'Test.txt'
     file_exist = File.exist?(file_path)
+
+    file.close
+    file.unlink
+
     expect(file_exist).to eq true
   end
 

@@ -39,7 +39,7 @@ class TestHelper
     hash = parser.parse(xml)
 
     credit_card_result = create_order_result['CreditCardTransactionResultCollection'][0]
-    manage_transaction_reuslt = manage_order_result['CreditCardTransactionResultCollection'][0]
+    manage_transaction_result = manage_order_result['CreditCardTransactionResultCollection'][0]
 
     root = hash['StatusNotification']
 
@@ -57,12 +57,12 @@ class TestHelper
         'TransactionReference'=> credit_card_result['TransactionReference'],
         'UniqueSequentialNumber' => Array.new(6){[*'0'..'9'].sample}.join,
         'PreviousCreditCardTransactionStatus' => credit_card_result['CreditCardTransactionStatus'],
-        'CreditCardTransactionStatus' => manage_transaction_reuslt['CreditCardTransactionStatus']
+        'CreditCardTransactionStatus' => (manage_transaction_result.nil? == true) ? 'null' : manage_transaction_result['CreditCardTransactionStatus']
     }
     root['MerchantKey'] = create_order_result['MerchantKey']
     root['OrderKey'] = create_order_result['OrderResult']['OrderKey']
     root['OrderReference'] = create_order_result['OrderResult']['OrderReference']
-    root['OrderStatus'] = manage_transaction_reuslt['CreditCardTransactionStatus']
+    root['OrderStatus'] = (manage_transaction_result.nil? == true) ? 'null' : manage_transaction_result['CreditCardTransactionStatus']
 
     return CGI::escapeHTML(Gyoku.xml(hash))
   end

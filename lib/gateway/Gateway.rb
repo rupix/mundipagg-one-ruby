@@ -21,6 +21,12 @@ class Gateway
   # URL de sandbox
   @@SERVICE_URL_SANDBOX = 'https://sandbox.mundipaggone.com'
 
+  # URL do postnotification de producao
+  @@SERVICE_URL_NOTIFICATION_PRODUCTION = 'https://api.mundipaggone.com/TransactionReportFile/GetStream?fileDate='
+
+  # URL do postnotification de sandbox
+  @@SERVICE_URL_NOTIFICATION_SANDBOX = 'https://apisandbox.mundipaggone.com/TransactionReportFile/GetStream?fileDate='
+
   # permite que o integrador adicione uma busca por transacoes utilizando alguns criterios
   def Query(querySaleRequestEnum, key)
     # try, tenta fazer o request
@@ -310,7 +316,18 @@ class Gateway
   # faz uma requisicao e retorna uma string com o transaction report file
   def TransactionReportFile(date)
     begin
-      response = RestClient.get('https://api.mundipaggone.com/TransactionReportFile/GetStream?fileDate=' + date.strftime("%Y%m%d"), headers={:MerchantKey => "#{@merchantKey}"})
+      #response = RestClient.get('https://api.mundipaggone.com/TransactionReportFile/GetStream?fileDate=' + date.strftime("%Y%m%d"), headers={:MerchantKey => "#{@merchantKey}"})
+
+      if @serviceEnvironment == :staging
+        url = @@SERVICE_URL_NOTIFICATION_PRODUCTION + date.strftime("%Y%m%d")
+      elsif @serviceEnvironment == :production
+        url = @@SERVICE_URL_NOTIFICATION_PRODUCTION + date.strftime("%Y%m%d")
+      elsif @serviceEnvironment == :sandbox
+        url = @@SERVICE_URL_NOTIFICATION_SANDBOX + date.strftime("%Y%m%d")
+      end
+
+      response = getReportFile(url)
+
     rescue RestClient::ExceptionWithResponse => err
       return err.response
     end
@@ -321,7 +338,10 @@ class Gateway
   def TransactionReportFileDownloader(date, file_name, path)
     begin
       path = path + file_name + '.txt'
-      response = RestClient.get('https://api.mundipaggone.com/TransactionReportFile/GetStream?fileDate=' + date.strftime("%Y%m%d"), headers={:MerchantKey => "#{@merchantKey}"})
+      #response = RestClient.get('https://api.mundipaggone.com/TransactionReportFile/GetStream?fileDate=' + date.strftime("%Y%m%d"), headers={:MerchantKey => "#{@merchantKey}"})
+
+      response = TransactionReportFile(date)
+
       File.write(path, response)
     rescue RestClient::ExceptionWithResponse => err
       return err.response
@@ -412,5 +432,14 @@ class Gateway
     end
     json_response = JSON.load response
     json_response
+  end
+
+  def getReportFile(url)
+    begin
+      response = RestClient.get(url, headers={:MerchantKey => "#{@merchantKey}"})
+    rescue RestClient::ExceptionWithResponse => err
+      return err.response
+    end
+    return response
   end
 end
