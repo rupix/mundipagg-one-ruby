@@ -142,9 +142,9 @@ class Gateway
           end
 
           if shoppingCart.ShoppingCartItemCollection.any?
-            shoppingCart.ShoppingCartItemCollection.each do |cartItem|
+            shoppingCart.ShoppingCartItemCollection.each_with_index do |cartItem, cartIndex|
               item = cartItem.to_json
-              saleHash['ShoppingCartCollection'][index]['ShoppingCartItemCollection'] << item
+              saleHash['ShoppingCartCollection'][index]['ShoppingCartItemCollection'][cartIndex] = item
             end
           else
             saleHash['ShoppingCartCollection'][index]['ShoppingCartItemCollection'] = nil
@@ -315,8 +315,6 @@ class Gateway
   # faz uma requisicao e retorna uma string com o transaction report file
   def TransactionReportFile(date)
     begin
-      #response = RestClient.get('https://api.mundipaggone.com/TransactionReportFile/GetStream?fileDate=' + date.strftime("%Y%m%d"), headers={:MerchantKey => "#{@merchantKey}"})
-
       if @serviceEnvironment == :staging
         url = @@SERVICE_URL_NOTIFICATION_PRODUCTION + date.strftime("%Y%m%d")
       elsif @serviceEnvironment == :production
@@ -337,7 +335,6 @@ class Gateway
   def TransactionReportFileDownloader(date, file_name, path)
     begin
       path = path + file_name + '.txt'
-      #response = RestClient.get('https://api.mundipaggone.com/TransactionReportFile/GetStream?fileDate=' + date.strftime("%Y%m%d"), headers={:MerchantKey => "#{@merchantKey}"})
 
       response = TransactionReportFile(date)
 
