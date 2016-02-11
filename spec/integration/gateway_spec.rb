@@ -716,7 +716,7 @@ RSpec.describe Gateway do
     create_instant_buy_data.BillingAddress.Street = 'Av. General Justo'
     create_instant_buy_data.BillingAddress.ZipCode = '20270004'
 
-    response = gateway.CreditCard(create_instant_buy_data)
+    response = gateway.CreateCreditCard(create_instant_buy_data)
 
     expect(response['ErrorReport']).to eq nil
   end
@@ -730,9 +730,58 @@ RSpec.describe Gateway do
     create_instant_buy_data.HolderName = 'Luke Skywalker'
     create_instant_buy_data.CreditCardBrand = 'Visa'
 
-    response = gateway.CreditCard(create_instant_buy_data)
+    response = gateway.CreateCreditCard(create_instant_buy_data)
 
     expect(response['ErrorReport']).to eq nil
+  end
+
+  it 'should update the credit card' do
+    create_instant_buy_data = Gateway::CreateInstantBuyData.new
+    create_instant_buy_data.CreditCardNumber = '4111111111111111'
+    create_instant_buy_data.ExpMonth = 10
+    create_instant_buy_data.ExpYear = 2018
+    create_instant_buy_data.SecurityCode = '123'
+    create_instant_buy_data.HolderName = 'Luke Skywalker'
+    create_instant_buy_data.CreditCardBrand = 'Visa'
+    create_instant_buy_data.IsOneDollarAuthEnabled = true
+    create_instant_buy_data.BillingAddress.City = 'Rio de Janeiro'
+    create_instant_buy_data.BillingAddress.Complement = 'Em frente ao Aeroporto'
+    create_instant_buy_data.BillingAddress.Country = 'Brazil'
+    create_instant_buy_data.BillingAddress.District = 'Centro'
+    create_instant_buy_data.BillingAddress.Number = '123'
+    create_instant_buy_data.BillingAddress.State = 'RJ'
+    create_instant_buy_data.BillingAddress.Street = 'Av. General Justo'
+    create_instant_buy_data.BillingAddress.ZipCode = '20270004'
+
+    create_credit_card = gateway.CreateCreditCard(create_instant_buy_data)
+
+    credit_card_transaction = Gateway::CreditCardTransaction.new
+    credit_card_transaction.CreditCard.CreditCardNumber = '4111111111111111'
+    credit_card_transaction.CreditCard.CreditCardBrand = 'Visa'
+    credit_card_transaction.CreditCard.ExpMonth = 10
+    credit_card_transaction.CreditCard.ExpYear = 2018
+    credit_card_transaction.CreditCard.SecurityCode = '123'
+    credit_card_transaction.CreditCard.HolderName = 'Luke Skywalker'
+    credit_card_transaction.AmountInCents = 100
+
+    sale_request = Gateway::CreateSaleRequest.new
+    sale_request.Buyer.Name = 'Anakin Skywalker'
+    sale_request.Buyer.Birthdate = Date.new(1994, 9, 26).strftime("%Y-%m-%dT%H:%M:%S")
+    sale_request.Buyer.DocumentNumber = '12345678901'
+    sale_request.Buyer.DocumentType = 'CPF'
+    sale_request.Buyer.PersonType = 'Person'
+    sale_request.Buyer.Gender = 'M'
+    sale_request.CreditCardTransactionCollection << credit_card_transaction
+
+    sale_response = gateway.CreateSale(sale_request)
+
+    instant_buy_key = create_credit_card['InstantBuyKey']
+
+    buyer_key = sale_response['BuyerKey']
+
+    response = gateway.UpdateCreditCard(instant_buy_key, buyer_key)
+
+    expect(response['Success']).to eq true
   end
 
   it 'should do a credit card transaction with instant buy key' do

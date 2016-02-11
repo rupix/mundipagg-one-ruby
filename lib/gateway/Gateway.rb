@@ -407,7 +407,7 @@ module Gateway
       response
     end
 
-    def CreditCard(create_instant_buy_data)
+    def CreateCreditCard(create_instant_buy_data)
       sale_hash = create_instant_buy_data.to_json
       begin
         if create_instant_buy_data.BillingAddress.to_json.any?
@@ -439,11 +439,48 @@ module Gateway
       response
     end
 
+    def UpdateCreditCard(instant_buy_key, buyer_key)
+      begin
+        sale_hash = {'BuyerKey' => buyer_key}
+
+        # se for homologacao faz a chamada por aqui
+        if @serviceEnvironment == :staging
+          url = @@SERVICE_URL_STAGING + '/CreditCard/' + instant_buy_key
+
+          # se for producao, faz a chamada por aqui
+        elsif @serviceEnvironment == :production
+          url = @@SERVICE_URL_PRODUCTION + '/CreditCard/' + instant_buy_key
+
+          # se for sandbox, faz a chamada por aqui
+        elsif @serviceEnvironment == :sandbox
+          url = @@SERVICE_URL_SANDBOX + '/CreditCard/' + instant_buy_key
+        end
+
+        response = patchRequest(sale_hash.to_json, url)
+          # se der algum erro, trata aqui
+      rescue Exception => e
+        return e.message
+      end
+      # se nao houver erros, retorna o objeto
+      response
+    end
+
     # funcao de post generica
     def postRequest(payload, url)
       response = nil
       begin
         response = RestClient.post(url, payload, headers=@@SERVICE_HEADERS)
+      rescue RestClient::ExceptionWithResponse => err
+        return err.response
+      end
+      json_response = JSON.load response
+      json_response
+    end
+
+    # funcao patch generica
+    def patchRequest(payload, url)
+      begin
+        response = RestClient.patch(url, payload, headers=@@SERVICE_HEADERS)
       rescue RestClient::ExceptionWithResponse => err
         return err.response
       end
