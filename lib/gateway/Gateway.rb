@@ -2,6 +2,7 @@ require_relative '../../lib/mundipagg_sdk'
 module Gateway
 
   class Gateway
+    extend Gem::Deprecate
 
     attr_reader :serviceEnvironment
 
@@ -356,29 +357,11 @@ module Gateway
       return response
     end
 
-    # faz uma requisicao com instant buy key
+    # DEPRECATED
     def InstantBuyKey(instant_buy_key)
-      # try, tenta fazer o request
-      begin
-
-        # se for homologacao faz a chamada por aqui
-        if @serviceEnvironment == :staging
-          getRequest(@@SERVICE_URL_STAGING + '/CreditCard/' + instant_buy_key)
-
-          # se for producao, faz a chamada por aqui
-        elsif @serviceEnvironment == :production
-          getRequest(@@SERVICE_URL_PRODUCTION + '/CreditCard/' + instant_buy_key)
-
-          # se for sandbox
-        elsif @serviceEnvironment == :sandbox
-          getRequest(@@SERVICE_URL_SANDBOX + '/CreditCard/' + instant_buy_key)
-        end
-
-          # se der algum erro, trata aqui
-      rescue Exception => e
-        return e.message
-      end
+      GetCreditCard(instant_buy_key)
     end
+    deprecate :InstantBuyKey, :GetCreditCard, 2016, 04
 
     # faz uma requisicao com buyer key
     def BuyerKey(buyer_key)
@@ -405,6 +388,30 @@ module Gateway
 
       # se nao houver erros, retorna o objeto
       response
+    end
+
+    # Faz um get no cartão de crédito
+    def GetCreditCard(instant_buy_key)
+      # try, tenta fazer o request
+      begin
+
+        # se for homologacao faz a chamada por aqui
+        if @serviceEnvironment == :staging
+          getRequest(@@SERVICE_URL_STAGING + '/CreditCard/' + instant_buy_key)
+
+          # se for producao, faz a chamada por aqui
+        elsif @serviceEnvironment == :production
+          getRequest(@@SERVICE_URL_PRODUCTION + '/CreditCard/' + instant_buy_key)
+
+          # se for sandbox
+        elsif @serviceEnvironment == :sandbox
+          getRequest(@@SERVICE_URL_SANDBOX + '/CreditCard/' + instant_buy_key)
+        end
+
+          # se der algum erro, trata aqui
+      rescue Exception => e
+        return e.message
+      end
     end
 
     def CreateCreditCard(create_instant_buy_data)

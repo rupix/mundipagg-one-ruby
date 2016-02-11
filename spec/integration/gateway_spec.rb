@@ -645,7 +645,7 @@ RSpec.describe Gateway do
     expect(file_exist).to eq true
   end
 
-  it 'should consult transaction with instant buy key' do
+  it 'should get credit card instant buy key deprecated' do
     credit_card_transaction = Gateway::CreditCardTransaction.new
     credit_card_transaction.CreditCard.CreditCardNumber = '4111111111111111'
     credit_card_transaction.CreditCard.CreditCardBrand = 'Visa'
@@ -665,6 +665,30 @@ RSpec.describe Gateway do
     instant_buy_key = sale_response['CreditCardTransactionResultCollection'][0]['CreditCard']['InstantBuyKey']
 
     response = gateway.InstantBuyKey(instant_buy_key)
+
+    expect(response['ErrorReport']).to eq nil
+  end
+
+  it 'should get credit card instant buy key' do
+    credit_card_transaction = Gateway::CreditCardTransaction.new
+    credit_card_transaction.CreditCard.CreditCardNumber = '4111111111111111'
+    credit_card_transaction.CreditCard.CreditCardBrand = 'Visa'
+    credit_card_transaction.CreditCard.ExpMonth = 10
+    credit_card_transaction.CreditCard.ExpYear = 2018
+    credit_card_transaction.CreditCard.SecurityCode = '123'
+    credit_card_transaction.CreditCard.HolderName = 'Luke Skywalker'
+    credit_card_transaction.AmountInCents = 100
+
+    sale_request = Gateway::CreateSaleRequest.new
+    sale_request.CreditCardTransactionCollection << credit_card_transaction
+
+    sale_response = gateway.CreateSale(sale_request)
+
+    expect(sale_response['ErrorReport']).to eq nil
+
+    instant_buy_key = sale_response['CreditCardTransactionResultCollection'][0]['CreditCard']['InstantBuyKey']
+
+    response = gateway.GetCreditCard(instant_buy_key)
 
     expect(response['ErrorReport']).to eq nil
   end
