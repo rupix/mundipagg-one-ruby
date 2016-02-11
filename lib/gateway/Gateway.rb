@@ -394,7 +394,6 @@ module Gateway
     def GetCreditCard(instant_buy_key)
       # try, tenta fazer o request
       begin
-
         # se for homologacao faz a chamada por aqui
         if @serviceEnvironment == :staging
           getRequest(@@SERVICE_URL_STAGING + '/CreditCard/' + instant_buy_key)
@@ -472,6 +471,28 @@ module Gateway
       response
     end
 
+    def DeleteCreditCard(instant_buy_key)
+      # try, tenta fazer o request
+      begin
+        # se for homologacao faz a chamada por aqui
+        if @serviceEnvironment == :staging
+          deleteRequest(@@SERVICE_URL_STAGING + '/CreditCard/' + instant_buy_key)
+
+          # se for producao, faz a chamada por aqui
+        elsif @serviceEnvironment == :production
+          deleteRequest(@@SERVICE_URL_PRODUCTION + '/CreditCard/' + instant_buy_key)
+
+          # se for sandbox
+        elsif @serviceEnvironment == :sandbox
+          deleteRequest(@@SERVICE_URL_SANDBOX + '/CreditCard/' + instant_buy_key)
+        end
+
+          # se der algum erro, trata aqui
+      rescue Exception => e
+        return e.message
+      end
+    end
+
     # funcao de post generica
     def postRequest(payload, url)
       response = nil
@@ -488,6 +509,17 @@ module Gateway
     def patchRequest(payload, url)
       begin
         response = RestClient.patch(url, payload, headers=@@SERVICE_HEADERS)
+      rescue RestClient::ExceptionWithResponse => err
+        return err.response
+      end
+      json_response = JSON.load response
+      json_response
+    end
+
+    # funcao de delete generica
+    def deleteRequest(url)
+      begin
+        response = RestClient.delete(url, headers=@@SERVICE_HEADERS)
       rescue RestClient::ExceptionWithResponse => err
         return err.response
       end
