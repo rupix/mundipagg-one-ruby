@@ -363,8 +363,14 @@ module Gateway
     end
     deprecate :InstantBuyKey, :GetCreditCard, 2016, 04
 
-    # faz uma requisicao com buyer key
+    # DEPRECATED
     def BuyerKey(buyer_key)
+      GetCreditCardWithBuyerKey(buyer_key)
+    end
+    deprecate :BuyerKey, :GetCreditCardWithBuyerKey, 2016, 04
+
+    # faz um get credit card com buyer key
+    def GetCreditCardWithBuyerKey(buyer_key)
       # try, tenta fazer o request
       begin
 

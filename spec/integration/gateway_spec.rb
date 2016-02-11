@@ -717,7 +717,7 @@ RSpec.describe Gateway do
     expect(response['Success']).to eq true
   end
 
-  it 'should consult transaction with buyer key' do
+  it 'should consult get credit card with buyer key deprecated' do
 
     credit_card_transaction = Gateway::CreditCardTransaction.new
     credit_card_transaction.CreditCard.CreditCardNumber = '4111111111111111'
@@ -742,6 +742,35 @@ RSpec.describe Gateway do
     expect(sale_response['ErrorReport']).to eq nil
 
     response = gateway.BuyerKey(sale_response['BuyerKey'])
+
+    expect(response['ErrorReport']).to eq nil
+  end
+
+  it 'should consult get credit card with buyer key' do
+
+    credit_card_transaction = Gateway::CreditCardTransaction.new
+    credit_card_transaction.CreditCard.CreditCardNumber = '4111111111111111'
+    credit_card_transaction.CreditCard.CreditCardBrand = 'Visa'
+    credit_card_transaction.CreditCard.ExpMonth = 10
+    credit_card_transaction.CreditCard.ExpYear = 2018
+    credit_card_transaction.CreditCard.SecurityCode = '123'
+    credit_card_transaction.CreditCard.HolderName = 'Luke Skywalker'
+    credit_card_transaction.AmountInCents = 100
+
+    sale_request = Gateway::CreateSaleRequest.new
+    sale_request.Buyer.Name = 'Anakin Skywalker'
+    sale_request.Buyer.Birthdate = Date.new(1994, 9, 26).strftime("%Y-%m-%dT%H:%M:%S")
+    sale_request.Buyer.DocumentNumber = '12345678901'
+    sale_request.Buyer.DocumentType = 'CPF'
+    sale_request.Buyer.PersonType = 'Person'
+    sale_request.Buyer.Gender = 'M'
+    sale_request.CreditCardTransactionCollection << credit_card_transaction
+
+    sale_response = gateway.CreateSale(sale_request)
+
+    expect(sale_response['ErrorReport']).to eq nil
+
+    response = gateway.GetCreditCardWithBuyerKey(sale_response['BuyerKey'])
 
     expect(response['ErrorReport']).to eq nil
   end
