@@ -1,9 +1,10 @@
 require_relative '../../lib/mundipagg_sdk'
 require_relative 'test_helper'
 
-merchant_key = '85328786-8BA6-420F-9948-5352F5A183EB'
+#merchant_key = '85328786-8BA6-420F-9948-5352F5A183EB'
+merchant_key = '8A2DD57F-1ED9-4153-B4CE-69683EFADAD5'
 
-gateway = Gateway::Gateway.new(:sandbox, merchant_key)
+gateway = Gateway::Gateway.new(:staging, merchant_key)
 
 RSpec.describe Gateway do
   it 'should create a sale with boleto' do
@@ -693,6 +694,29 @@ RSpec.describe Gateway do
     expect(sale_response['ErrorReport']).to eq nil
 
     response = gateway.BuyerKey(sale_response['BuyerKey'])
+
+    expect(response['ErrorReport']).to eq nil
+  end
+
+  it 'should create a credit card' do
+    create_instant_buy_data = Gateway::CreateInstantBuyData.new
+    create_instant_buy_data.CreditCardNumber = '4111111111111111'
+    create_instant_buy_data.ExpMonth = 10
+    create_instant_buy_data.ExpYear = 2018
+    create_instant_buy_data.SecurityCode = '123'
+    create_instant_buy_data.HolderName = 'Luke Skywalker'
+    create_instant_buy_data.CreditCardBrand = 'Visa'
+    create_instant_buy_data.IsOneDollarAuthEnabled = true
+    create_instant_buy_data.BillingAddress.City = 'Rio de Janeiro'
+    create_instant_buy_data.BillingAddress.Complement = 'Em frente ao Aeroporto'
+    create_instant_buy_data.BillingAddress.Country = 'Brazil'
+    create_instant_buy_data.BillingAddress.District = 'Centro'
+    create_instant_buy_data.BillingAddress.Number = '123'
+    create_instant_buy_data.BillingAddress.State = 'RJ'
+    create_instant_buy_data.BillingAddress.Street = 'Av. General Justo'
+    create_instant_buy_data.BillingAddress.ZipCode = '20270004'
+
+    response = gateway.CreditCard(create_instant_buy_data)
 
     expect(response['ErrorReport']).to eq nil
   end

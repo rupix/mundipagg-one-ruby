@@ -387,15 +387,15 @@ module Gateway
 
         # se for homologacao faz a chamada por aqui
         if @serviceEnvironment == :staging
-          response = getRequest(@@SERVICE_URL_STAGING + '/CreditCard/' + buyer_key + '/BuyerKey')
+          response = getRequest(@@SERVICE_URL_STAGING + '/CreditCard/BuyerKey=' + buyer_key)
 
           # se for producao, faz a chamada por aqui
         elsif @serviceEnvironment == :production
-          response = getRequest(@@SERVICE_URL_PRODUCTION + '/CreditCard/' + buyer_key + '/BuyerKey')
+          response = getRequest(@@SERVICE_URL_PRODUCTION + '/CreditCard/BuyerKey=' + buyer_key)
 
           # se for sandbox, faz a chamada por aqui
         elsif @serviceEnvironment == :sandbox
-          response = getRequest(@@SERVICE_URL_SANDBOX + '/CreditCard/' + buyer_key + '/BuyerKey')
+          response = getRequest(@@SERVICE_URL_SANDBOX + '/CreditCard/BuyerKey=' + buyer_key)
         end
 
           # se der algum erro, trata aqui
@@ -403,6 +403,38 @@ module Gateway
         return e.message
       end
 
+      # se nao houver erros, retorna o objeto
+      response
+    end
+
+    def CreditCard(create_instant_buy_data)
+      sale_hash = create_instant_buy_data.to_json
+      begin
+        if create_instant_buy_data.BillingAddress.to_json.any?
+          sale_hash['BillingAddress'] = create_instant_buy_data.BillingAddress.to_json
+        else
+          sale_hash['BillingAddress'] = nil
+        end
+
+        # se for homologacao faz a chamada por aqui
+        if @serviceEnvironment == :staging
+          url = @@SERVICE_URL_STAGING + '/CreditCard/'
+
+          # se for producao, faz a chamada por aqui
+        elsif @serviceEnvironment == :production
+          url = @@SERVICE_URL_PRODUCTION + '/CreditCard/'
+
+          # se for sandbox, faz a chamada por aqui
+        elsif @serviceEnvironment == :sandbox
+          url = @@SERVICE_URL_SANDBOX + '/CreditCard/'
+        end
+
+        response = postRequest(sale_hash.to_json, url)
+
+        # se der algum erro, trata aqui
+      rescue Exception => e
+        return e.message
+      end
       # se nao houver erros, retorna o objeto
       response
     end
