@@ -721,6 +721,20 @@ RSpec.describe Gateway do
     expect(response['ErrorReport']).to eq nil
   end
 
+  it 'should create a credit card without billing address' do
+    create_instant_buy_data = Gateway::CreateInstantBuyData.new
+    create_instant_buy_data.CreditCardNumber = '4111111111111111'
+    create_instant_buy_data.ExpMonth = 10
+    create_instant_buy_data.ExpYear = 2018
+    create_instant_buy_data.SecurityCode = '123'
+    create_instant_buy_data.HolderName = 'Luke Skywalker'
+    create_instant_buy_data.CreditCardBrand = 'Visa'
+
+    response = gateway.CreditCard(create_instant_buy_data)
+
+    expect(response['ErrorReport']).to eq nil
+  end
+
   it 'should do a credit card transaction with instant buy key' do
     credit_card_transaction = Gateway::CreditCardTransaction.new
     credit_card_transaction.CreditCard.CreditCardNumber = '4111111111111111'
