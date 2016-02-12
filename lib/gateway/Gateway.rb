@@ -499,6 +499,32 @@ module Gateway
       end
     end
 
+    def GetBuyer(buyer_key)
+      # try, tenta fazer o request
+      begin
+
+        # se for homologacao faz a chamada por aqui
+        if @serviceEnvironment == :staging
+          response = getRequest(@@SERVICE_URL_STAGING + '/Buyer/' + buyer_key)
+
+          # se for producao, faz a chamada por aqui
+        elsif @serviceEnvironment == :production
+          response = getRequest(@@SERVICE_URL_PRODUCTION + '/Buyer/' + buyer_key)
+
+          # se for sandbox, faz a chamada por aqui
+        elsif @serviceEnvironment == :sandbox
+          response = getRequest(@@SERVICE_URL_SANDBOX + '/Buyer/' + buyer_key)
+        end
+
+          # se der algum erro, trata aqui
+      rescue Exception => e
+        return e.message
+      end
+
+      # se nao houver erros, retorna o objeto
+      response
+    end
+
     # funcao de post generica
     def postRequest(payload, url)
       response = nil
