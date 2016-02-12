@@ -923,4 +923,41 @@ RSpec.describe Gateway do
     expect(response['ErrorReport']).to eq nil
   end
 
+  it 'should create buyer with buyer request' do
+    address = Gateway::BuyerAddress.new
+    address.AddressType = 'Residential'
+    address.City = 'Tatooine'
+    address.Complement = ''
+    address.Country = 'Brazil'
+    address.District = 'Mos Eisley'
+    address.Number = '123'
+    address.State = 'RJ'
+    address.Street = 'Mos Eisley Cantina'
+    address.ZipCode = '20001000'
+
+    buyer_request = Gateway::BuyerRequest.new
+    buyer_request.AddressCollection << address
+    buyer_request.Birthdate = DateTime.new(1990,8,20,0,0,0).strftime("%Y-%m-%dT%H:%M:%S")
+    buyer_request.BuyerCategory = 'Normal'
+    buyer_request.BuyerReference = 'C3PO'
+    buyer_request.CreateDateInMerchant = DateTime.new(2015,12,11,18,36,45).strftime("%Y-%m-%dT%H:%M:%S")
+    buyer_request.DocumentNumber = '12345678901'
+    buyer_request.DocumentType = 'CPF'
+    buyer_request.Email = 'lskywalker@r2d2.com'
+    buyer_request.EmailType = 'Personal'
+    buyer_request.FacebookId = 'lukeskywalker8917'
+    buyer_request.Gender = 'M'
+    buyer_request.HomePhone = '(21)123456789'
+    buyer_request.IpAddress = '192.168.1.1'
+    buyer_request.LastBuyerUpdateInMerchant = DateTime.now.strftime("%Y-%m-%dT%H:%M:%S")
+    buyer_request.MobilePhone = '(21)987654321'
+    buyer_request.Name = 'Luke Skywalker'
+    buyer_request.PersonType = 'Person'
+    buyer_request.TwitterId = '@lukeskywalker8917'
+    buyer_request.WorkPhone = '(21)28467902'
+
+    response = gateway.CreateBuyer(buyer_request)
+
+    expect(response['Success']).to eq true
+  end
 end

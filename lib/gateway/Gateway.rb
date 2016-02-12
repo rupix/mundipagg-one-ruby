@@ -525,6 +525,39 @@ module Gateway
       response
     end
 
+    def CreateBuyer(buyer_request)
+      sale_hash = buyer_request.to_json
+      sale_hash['AddressCollection'] = []
+      begin
+        if buyer_request.AddressCollection.any? == false || buyer_request.AddressCollection.nil?
+          sale_hash['AddressCollection'] = nil
+        else
+          buyer_request.AddressCollection.each do |address|
+            a = address.to_json
+            sale_hash['AddressCollection'] << a
+          end
+        end
+
+        # se for homologacao faz a chamada por aqui
+        if @serviceEnvironment == :staging
+          url = @@SERVICE_URL_STAGING + '/Buyer/'
+
+          # se for producao, faz a chamada por aqui
+        elsif @serviceEnvironment == :production
+          url = @@SERVICE_URL_PRODUCTION + '/Buyer/'
+
+          # se for sandbox, faz a chamada por aqui
+        elsif @serviceEnvironment == :sandbox
+          url = @@SERVICE_URL_SANDBOX + '/Buyer/'
+        end
+
+        response = postRequest(sale_hash.to_json, url)
+      rescue Exception => e
+        return e.message
+      end
+      response
+    end
+
     # funcao de post generica
     def postRequest(payload, url)
       response = nil
