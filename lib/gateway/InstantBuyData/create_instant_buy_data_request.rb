@@ -1,5 +1,5 @@
 module Gateway
-  class CreateInstantBuyData
+  class CreateInstantBuyDataRequest
     attr_accessor :IsOneDollarAuthEnabled
 
     attr_accessor :CreditCardNumber

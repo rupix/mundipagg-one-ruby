@@ -776,7 +776,7 @@ RSpec.describe Gateway do
   end
 
   it 'should create a credit card' do
-    create_instant_buy_data = Gateway::CreateInstantBuyData.new
+    create_instant_buy_data = Gateway::CreateInstantBuyDataRequest.new
     create_instant_buy_data.CreditCardNumber = '4111111111111111'
     create_instant_buy_data.ExpMonth = 10
     create_instant_buy_data.ExpYear = 2018
@@ -799,7 +799,7 @@ RSpec.describe Gateway do
   end
 
   it 'should create a credit card without billing address' do
-    create_instant_buy_data = Gateway::CreateInstantBuyData.new
+    create_instant_buy_data = Gateway::CreateInstantBuyDataRequest.new
     create_instant_buy_data.CreditCardNumber = '4111111111111111'
     create_instant_buy_data.ExpMonth = 10
     create_instant_buy_data.ExpYear = 2018
@@ -813,7 +813,7 @@ RSpec.describe Gateway do
   end
 
   it 'should update the credit card' do
-    create_instant_buy_data = Gateway::CreateInstantBuyData.new
+    create_instant_buy_data = Gateway::CreateInstantBuyDataRequest.new
     create_instant_buy_data.CreditCardNumber = '4111111111111111'
     create_instant_buy_data.ExpMonth = 10
     create_instant_buy_data.ExpYear = 2018
@@ -935,7 +935,7 @@ RSpec.describe Gateway do
     address.Street = 'Mos Eisley Cantina'
     address.ZipCode = '20001000'
 
-    buyer_request = Gateway::BuyerRequest.new
+    buyer_request = Gateway::CreateBuyerRequest.new
     buyer_request.AddressCollection << address
     buyer_request.Birthdate = DateTime.new(1990,8,20,0,0,0).strftime("%Y-%m-%dT%H:%M:%S")
     buyer_request.BuyerCategory = 'Normal'
