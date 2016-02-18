@@ -16,6 +16,8 @@ module Gateway
 
     attr_accessor :BillingAddress
 
+    attr_accessor :BuyerKey
+
     def initialize
       @BillingAddress = BillingAddress.new
     end
