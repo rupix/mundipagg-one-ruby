@@ -1,10 +1,9 @@
 require_relative '../../lib/mundipagg_sdk'
 require_relative 'test_helper'
 
-#merchant_key = '85328786-8BA6-420F-9948-5352F5A183EB'
-merchant_key = '8A2DD57F-1ED9-4153-B4CE-69683EFADAD5'
+merchant_key = '85328786-8BA6-420F-9948-5352F5A183EB'
 
-gateway = Gateway::Gateway.new(:staging, merchant_key)
+gateway = Gateway::Gateway.new(:sandbox, merchant_key)
 
 RSpec.describe Gateway do
   it 'should create a sale with boleto' do
@@ -783,7 +782,7 @@ RSpec.describe Gateway do
     create_instant_buy_data.SecurityCode = '123'
     create_instant_buy_data.HolderName = 'Luke Skywalker'
     create_instant_buy_data.CreditCardBrand = 'Visa'
-    create_instant_buy_data.IsOneDollarAuthEnabled = true
+    create_instant_buy_data.IsOneDollarAuthEnabled = false
     create_instant_buy_data.BillingAddress.City = 'Rio de Janeiro'
     create_instant_buy_data.BillingAddress.Complement = 'Em frente ao Aeroporto'
     create_instant_buy_data.BillingAddress.Country = 'Brazil'
@@ -823,7 +822,6 @@ RSpec.describe Gateway do
     buyer_request.FacebookId = 'lukeskywalker8917'
     buyer_request.Gender = 'M'
     buyer_request.HomePhone = '(21)123456789'
-    buyer_request.IpAddress = '192.168.1.1'
     buyer_request.LastBuyerUpdateInMerchant = DateTime.now.strftime("%Y-%m-%dT%H:%M:%S")
     buyer_request.MobilePhone = '(21)987654321'
     buyer_request.Name = 'Luke Skywalker'
@@ -841,7 +839,7 @@ RSpec.describe Gateway do
     create_instant_buy_data.SecurityCode = '123'
     create_instant_buy_data.HolderName = 'Luke Skywalker'
     create_instant_buy_data.CreditCardBrand = 'Visa'
-    create_instant_buy_data.IsOneDollarAuthEnabled = true
+    create_instant_buy_data.IsOneDollarAuthEnabled = false
     create_instant_buy_data.BuyerKey = buyer_key
     create_instant_buy_data.BillingAddress.City = 'Rio de Janeiro'
     create_instant_buy_data.BillingAddress.Complement = 'Em frente ao Aeroporto'
@@ -879,7 +877,7 @@ RSpec.describe Gateway do
     create_instant_buy_data.SecurityCode = '123'
     create_instant_buy_data.HolderName = 'Luke Skywalker'
     create_instant_buy_data.CreditCardBrand = 'Visa'
-    create_instant_buy_data.IsOneDollarAuthEnabled = true
+    create_instant_buy_data.IsOneDollarAuthEnabled = false
     create_instant_buy_data.BillingAddress.City = 'Rio de Janeiro'
     create_instant_buy_data.BillingAddress.Complement = 'Em frente ao Aeroporto'
     create_instant_buy_data.BillingAddress.Country = 'Brazil'
@@ -1010,7 +1008,6 @@ RSpec.describe Gateway do
     buyer_request.FacebookId = 'lukeskywalker8917'
     buyer_request.Gender = 'M'
     buyer_request.HomePhone = '(21)123456789'
-    buyer_request.IpAddress = '192.168.1.1'
     buyer_request.LastBuyerUpdateInMerchant = DateTime.now.strftime("%Y-%m-%dT%H:%M:%S")
     buyer_request.MobilePhone = '(21)987654321'
     buyer_request.Name = 'Luke Skywalker'
