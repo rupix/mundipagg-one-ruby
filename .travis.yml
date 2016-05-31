@@ -2,3 +2,11 @@ language: ruby
 rvm:
 - "2.2.3"
 - "2.1.7"
+deploy:
+  provider: rubygems
+  api_key:
+    secure: cvkP1ULq6nmDUSxfR6Nl0mhJzA7Z77BC64B1Z30+61/ZGseDe+Oz3EahIxSR64obnYa1CLswVpkB246h7uQLuA2aegDErmOgUA+J630hY7tK7jLtMu4lYn3FZmPGKNfXfWdIWftRB+jpQ05lfsUeVz7cAymUjrojwpRx4ZGf9ywYANFYufKG8ENH4i3CL/etcQSpB7Fn4165o6Slg3jITcdBS9xv+YtpcXh9brlfto+HkwkfxK2Pofsx6JwDo1PNXgVMdNf6M/a3yjmN7bOnsSWNhR7VIkaV0Yu5mPW0ZZKp4dqVCzR6ZBEyPiSLmj8RbqhLwCRTTCtmwye9V9Kz3w6UCHpWSSIV83fUB5iARluvyct8EpWukdkR3JRVBpJE7QrtAXU9PBC9p17rQDm0YaaeATr5vzcaIyqa1NIZ8Ngo7SDtpFhfftUJrvKphQ6j6GbTmmdFLxJ2Z0qgO169agHUe6tiRXvBsPNEevwRq5FAZ8PAwZybY6O7ZlriyqcXzauZ7kBm3XUk+off834cLP6JDbGRDGkjsLOqOP4RCqOP7/gUL1bd8IKAAlzJzLQPwrEQvzzmoY899SfG1R9Zgkf1WcuZ3Cof+oAwwEMpK01QzygZaejg3gu0Gpi+llbSMgibRiZOHrKeFmS1Trs6wEVFixRSdAbTdjVMQ1RShRM=
+  gem: mundipagg_sdk
+  on:
+    tags: true
+    branch: master
