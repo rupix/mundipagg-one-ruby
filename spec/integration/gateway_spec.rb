@@ -3,7 +3,7 @@ require_relative 'test_helper'
 
 merchant_key = '85328786-8BA6-420F-9948-5352F5A183EB'
 
-gateway = Gateway::Gateway.new(:sandbox, merchant_key)
+gateway = Gateway::Gateway.new('https://sandbox.mundipaggone.com', 'https://apisandbox.mundipaggone.com', merchant_key)
 
 RSpec.describe Gateway do
   it 'should create a sale with boleto' do
