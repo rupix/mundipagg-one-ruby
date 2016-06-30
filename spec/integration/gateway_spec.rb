@@ -620,7 +620,7 @@ RSpec.describe Gateway do
 
     expect(split_commas[1]).to eq '20150919'
   end
-
+  
   it 'should parse the transaction report file received' do
     date = Date.new(2015, 9, 19)
     request_to_parse = gateway.TransactionReportFile(date)

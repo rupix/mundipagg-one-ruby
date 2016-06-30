@@ -4,9 +4,9 @@ module Gateway
   class Gateway
     extend Gem::Deprecate
 
-    attr_reader :serviceEnvironment
+    attr_reader :service_environment
 
-    attr_reader :merchantKey
+    attr_reader :merchant_key
 
     # URL de producao
     @@SERVICE_URL_PRODUCTION = 'https://transactionv2.mundipaggone.com'
@@ -18,41 +18,43 @@ module Gateway
     @@SERVICE_URL_SANDBOX = 'https://sandbox.mundipaggone.com'
 
     # URL do postnotification de producao
-    @@SERVICE_URL_NOTIFICATION_PRODUCTION = 'https://api.mundipaggone.com/TransactionReportFile/GetStream?fileDate='
+    @@SERVICE_URL_REPORT_FILE_PRODUCTION = 'https://api.mundipaggone.com'
 
     # URL do postnotification de sandbox
-    @@SERVICE_URL_NOTIFICATION_SANDBOX = 'https://apisandbox.mundipaggone.com/TransactionReportFile/GetStream?fileDate='
+    @@SERVICE_URL_REPORT_FILE_SANDBOX = 'https://apisandbox.mundipaggone.com'
 
     # Service Url
     @@SERVICE_URL = ''
 
     # Service Url Notification
-    @@SERVICE_URL_NOTIFICATION = ''
+    @@SERVICE_URL_REPORT_FILE = ''
 
-    def initialize(environment=:sandbox, service_url_notification=@@SERVICE_URL_NOTIFICATION_SANDBOX, merchantKey)
-      @serviceEnvironment = environment
+    def initialize(environment=:sandbox, merchant_key)
+      @service_environment = environment
 
-      if @serviceEnvironment == :staging
+      if @service_environment == :staging
         @@SERVICE_URL = @@SERVICE_URL_STAGING
-        @@SERVICE_URL_NOTIFICATION = @@SERVICE_URL_NOTIFICATION_PRODUCTION
+        @@SERVICE_URL_REPORT_FILE = @@SERVICE_URL_REPORT_FILE_PRODUCTION
 
         # se for producao, faz a chamada por aqui
-      elsif @serviceEnvironment == :production
+      elsif @service_environment == :production
         @@SERVICE_URL = @@SERVICE_URL_PRODUCTION
-        @@SERVICE_URL_NOTIFICATION = @@SERVICE_URL_NOTIFICATION_PRODUCTION
+        @@SERVICE_URL_REPORT_FILE = @@SERVICE_URL_REPORT_FILE_PRODUCTION
 
         # se for sandbox
-      elsif @serviceEnvironment == :sandbox
+      elsif @service_environment == :sandbox
         @@SERVICE_URL = @@SERVICE_URL_SANDBOX
-        @@SERVICE_URL_NOTIFICATION = @@SERVICE_URL_NOTIFICATION_SANDBOX
-
-      else
-        @@SERVICE_URL = environment
-        @@SERVICE_URL_NOTIFICATION = service_url_notification + '/TransactionReportFile/GetStream?fileDate='
+        @@SERVICE_URL_REPORT_FILE = @@SERVICE_URL_REPORT_FILE_SANDBOX
       end
 
-      @merchantKey = merchantKey
-      @@SERVICE_HEADERS = {:MerchantKey => "#{@merchantKey}", :Accept => 'application/json', :"Content-Type" => 'application/json'}
+      @merchant_key = merchant_key
+      @@SERVICE_HEADERS = {:MerchantKey => "#{@merchant_key}", :Accept => 'application/json', :"Content-Type" => 'application/json'}
+    end
+
+    def self.new_with_urls (environment_url=@@SERVICE_URL_SANDBOX, report_file_url=@@SERVICE_URL_REPORT_FILE_SANDBOX, merchant_key)
+      @@SERVICE_URL = environment_url
+      @@SERVICE_URL_REPORT_FILE = report_file_url
+      self.new(nil, merchant_key)
     end
 
     # permite que o integrador adicione uma busca por transacoes utilizando alguns criterios
@@ -307,7 +309,7 @@ module Gateway
     # faz uma requisicao e retorna uma string com o transaction report file
     def TransactionReportFile(date)
       begin
-        response = getReportFile(@@SERVICE_URL_NOTIFICATION + date.strftime("%Y%m%d"))
+        response = getReportFile(@@SERVICE_URL_REPORT_FILE + '/TransactionReportFile/GetStream?fileDate=' + date.strftime("%Y%m%d"))
       rescue RestClient::ExceptionWithResponse => err
         return err.response
       end
@@ -513,7 +515,7 @@ module Gateway
 
     def getReportFile(url)
       begin
-        response = RestClient.get(url, headers={:MerchantKey => "#{@merchantKey}"})
+        response = RestClient.get(url, headers={:MerchantKey => "#{@merchant_key}"})
       rescue RestClient::ExceptionWithResponse => err
         return err.response
       end
