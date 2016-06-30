@@ -1,5 +1,6 @@
 require_relative '../../lib/mundipagg_sdk'
 require_relative 'test_helper'
+require 'date'
 
 merchant_key = '85328786-8BA6-420F-9948-5352F5A183EB'
 
@@ -699,7 +700,7 @@ RSpec.describe Gateway do
     credit_card_transaction.CreditCard.ExpMonth = 10
     credit_card_transaction.CreditCard.ExpYear = 2018
     credit_card_transaction.CreditCard.SecurityCode = '123'
-    credit_card_transaction.CreditCard.HolderName = 'Luke Skywalker'
+    credit_card_transaction.CreditCard.HolderName = 'Luke Skywalker' + DateTime.now().to_s
     credit_card_transaction.AmountInCents = 100
 
     sale_request = Gateway::CreateSaleRequest.new
