@@ -7,6 +7,9 @@ module Gateway
     # Moeda. Opções: BRL, EUR, USD, ARS, BOB, CLP, COP, UYU, MXN, PYG
     attr_accessor :CurrencyIso
 
+    # URL de notificação
+    attr_accessor :NotificationUrl
+
     def to_json
       hash = {}
       instance_variables.each { |var| hash[var.to_s.delete('@')] = instance_variable_get(var) }

@@ -103,6 +103,7 @@ RSpec.describe Gateway do
     boletoTransaction.Instructions = 'Pagar antes do vencimento'
     boletoTransaction.Options.CurrencyIso = 'BRL'
     boletoTransaction.Options.DaysToAddInBoletoExpirationDate = 5
+    boletoTransaction.Options.NotificationUrl = 'http://www.mundi.com.br/sales'
     boletoTransaction.TransactionReference = 'NumeroDaTransacao'
 
 
